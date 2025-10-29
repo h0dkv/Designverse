@@ -1,0 +1,145 @@
+<?php
+session_start();
+
+// --- Country/Currency map ---
+$country_currency = [
+  'BG' => ['name'=>'Bulgaria','currency'=>'BGN','symbol'=>'лв'],
+  'US' => ['name'=>'United States','currency'=>'USD','symbol'=>'$'],
+  'GB' => ['name'=>'United Kingdom','currency'=>'GBP','symbol'=>'£'],
+  'DE' => ['name'=>'Germany','currency'=>'EUR','symbol'=>'€'],
+  'IN' => ['name'=>'India','currency'=>'INR','symbol'=>'₹']
+];
+
+// Set / persist selected country
+if(isset($_POST['country'])){
+  $selected = $_POST['country'];
+  $_SESSION['country'] = $selected;
+} elseif(isset($_SESSION['country'])) {
+  $selected = $_SESSION['country'];
+} else {
+  // try to detect via Accept-Language (basic)
+  $loc = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'en-US', 3, 2);
+  $selected = array_key_exists(strtoupper($loc), $country_currency) ? strtoupper($loc) : 'US';
+  $_SESSION['country'] = $selected;
+}
+
+$cc = $country_currency[$selected];
+
+// Load conversion rate from exchangerate.host (cached in session for 12h)
+$targetCurrency = $cc['currency'];
+$baseCurrency = 'USD'; // prices in data are stored in USD by convention
+
+if(!isset($_SESSION['rates_time']) || time() - $_SESSION['rates_time'] > 12*3600 || !isset($_SESSION['rates'][$targetCurrency])) {
+  $apiUrl = "https://api.exchangerate.host/latest?base={$baseCurrency}&symbols={$targetCurrency}";
+  // Use file_get_contents (allow_url_fopen must be enabled) or fallback to cURL
+  $rate = 1.0;
+  $json = @file_get_contents($apiUrl);
+  if($json !== false){
+    $data = json_decode($json, true);
+    if(isset($data['rates'][$targetCurrency])){
+      $rate = (float)$data['rates'][$targetCurrency];
+    }
+  } else {
+    // try cURL
+    if(function_exists('curl_version')){
+      $ch = curl_init($apiUrl);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+      $json = curl_exec($ch);
+      curl_close($ch);
+      if($json !== false){
+        $data = json_decode($json, true);
+        if(isset($data['rates'][$targetCurrency])){
+          $rate = (float)$data['rates'][$targetCurrency];
+        }
+      }
+    }
+  }
+  $_SESSION['rates_time'] = time();
+  $_SESSION['rates'][$targetCurrency] = $rate;
+} else {
+  $rate = $_SESSION['rates'][$targetCurrency];
+}
+
+// Pass PHP values to JS later
+?>
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DesignVerse — 3D модели</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- model-viewer CDN -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <img src="assets/images/logo.png" alt="DesignVerse logo" class="logo" onerror="this.style.display='none'">
+      <div class="brand">
+        <div class="brand-title">DesignVerse</div>
+        <div class="brand-sub">Модерни 3D модели</div>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.php">Начало</a>
+      <a href="products.php">Модели</a>
+      <a href="about.php">За създателите</a>
+      <a href="contact.php">Контакти</a>
+      <a href="login.php" class="btn">Вход</a>
+    </nav>
+
+    <form method="post" class="country-form" id="countryForm">
+      <label for="country-select" class="visually-hidden">Държава</label>
+      <select id="country-select" name="country" onchange="document.getElementById('countryForm').submit()">
+        <?php foreach($country_currency as $code => $info): ?>
+          <option value="<?= $code ?>" <?= $code === $selected ? 'selected' : '' ?>><?= htmlspecialchars($info['name']) ?> (<?= $info['currency'] ?>)</option>
+        <?php endforeach; ?>
+      </select>
+      <div class="currency">Валута: <span id="currencySymbol"><?= $cc['symbol'] ?></span> (<?= $cc['currency'] ?>)</div>
+    </form>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Добре дошли в DesignVerse</h1>
+        <p>Открий модерни и разнообразни 3D модели — разглеждай, търси и визуализирай. Цените се показват според избраната държава и валута.</p>
+        <a href="products.php" class="cta">Разгледай модели</a>
+      </div>
+      <div class="hero-preview">
+        <div class="preview-box">3D Preview</div>
+      </div>
+    </section>
+
+    <section class="featured">
+      <h2>Популярни модели</h2>
+      <div id="product-grid" class="grid"></div>
+    </section>
+
+    <section class="search-panel">
+      <input id="search-input" placeholder="Търси 3D модел..." />
+      <button id="search-btn" class="btn">Търси</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <?= date('Y') ?> DesignVerse — Всички права запазени.</p>
+  </footer>
+
+  <script>
+    // Data from PHP
+    window.DESIGNVERSE = {
+      country: '<?= $selected ?>',
+      currency: '<?= $cc['currency'] ?>',
+      symbol: '<?= addslashes($cc['symbol']) ?>',
+      rate: <?= json_encode($rate) ?>,
+      baseCurrency: '<?= $baseCurrency ?>'
+    };
+  </script>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
