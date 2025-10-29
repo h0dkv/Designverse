@@ -143,3 +143,281 @@ if(!isset($_SESSION['rates_time']) || time() - $_SESSION['rates_time'] > 12*3600
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+<?php
+session_start();
+if(!isset($_SESSION['country'])) $_SESSION['country'] = 'US';
+$country = $_SESSION['country'];
+?>
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Модели — DesignVerse</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header class="site-header small">
+    <a class="logo-link" href="index.php">DesignVerse</a>
+    <nav class="main-nav">
+      <a href="index.php">Начало</a>
+      <a href="products.php" class="active">Модели</a>
+      <a href="about.php">За създателите</a>
+      <a href="contact.php">Контакти</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>3D модели</h1>
+
+    <div class="controls">
+      <input id="search-input" placeholder="Търси (име, категория)..." />
+      <select id="sort-select">
+        <option value="popular">По-популярни</option>
+        <option value="new">Нови</option>
+        <option value="price">По цена</option>
+      </select>
+    </div>
+
+    <div id="product-grid" class="grid" style="margin-top:16px"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <?= date('Y') ?> DesignVerse</p>
+  </footer>
+
+  <script>
+    window.DESIGNVERSE = { country: '<?= $country ?>' };
+  </script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+<?php
+// search.php
+header('Content-Type: application/json; charset=utf-8');
+
+$q = isset($_GET['q']) ? mb_strtolower(trim($_GET['q'])) : '';
+$productsFile = __DIR__ . '/assets/data/products.json';
+if(!file_exists($productsFile)){
+  echo json_encode(['products'=>[]]); exit;
+}
+$products = json_decode(file_get_contents($productsFile), true);
+$filtered = [];
+
+foreach($products as $p){
+  if($q === '' || mb_stripos($p['title'] . ' ' . $p['category'], $q) !== false){
+    $filtered[] = $p;
+  }
+}
+
+// optional: sort param
+$sort = $_GET['sort'] ?? '';
+if($sort === 'price'){
+  usort($filtered, function($a,$b){ return $a['price'] <=> $b['price']; });
+} elseif($sort === 'new'){
+  usort($filtered, function($a,$b){ return $b['id'] <=> $a['id']; });
+} else {
+  // keep as is or sort by popularity if you have that field
+}
+
+echo json_encode(['products'=>$filtered], JSON_UNESCAPED_UNICODE);
+[
+  {"id":1,"title":"Modern Chair","category":"Furniture","price":12.50,"thumb":"assets/images/prod-chair.jpg","model":"assets/models/chair.glb"},
+  {"id":2,"title":"Futuristic Drone","category":"Vehicles","price":35.00,"thumb":"assets/images/prod-drone.jpg","model":"assets/models/drone.glb"},
+  {"id":3,"title":"Smartphone Mockup","category":"Electronics","price":6.00,"thumb":"assets/images/prod-phone.jpg","model":"assets/models/phone.glb"},
+  {"id":4,"title":"Plant Pot","category":"Decor","price":4.20,"thumb":"assets/images/prod-pot.jpg","model":"assets/models/pot.glb"},
+  {"id":5,"title":"Mechanical Gear","category":"Parts","price":8.75,"thumb":"assets/images/prod-gear.jpg","model":"assets/models/gear.glb"}
+]
+:root{ --bg:#f5f6f8; --card:#fff; --accent:#111; --muted:#666; --accent-2:#0b84ff }
+*{box-sizing:border-box}
+body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--accent);margin:0}
+.container{max-width:1100px;margin:28px auto;padding:16px}
+.site-header{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:transparent}
+.logo{height:48px}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.brand-title{font-weight:700}
+.brand-sub{font-size:0.85rem;color:var(--muted)}
+.main-nav a{margin-left:16px;text-decoration:none;color:var(--accent)}
+.country-form{display:flex;align-items:center;gap:8px}
+.currency{font-size:0.95rem;color:var(--muted)}
+.hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center;background:linear-gradient(180deg,white,transparent);padding:24px;border-radius:14px;box-shadow:0 6px 24px rgba(16,24,40,0.06)}
+.preview-box{height:220px;border-radius:12px;background:linear-gradient(135deg,#eceef1,#f7f8fa);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+.cta{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:10px;background:var(--accent);color:white;text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+.card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 4px 14px rgba(16,24,40,0.06)}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+.card h4{margin:8px 0 4px}
+.card p{color:var(--muted);margin:0}
+.search-panel{display:flex;gap:8px;margin-top:14px}
+.search-panel input{flex:1;padding:10px;border-radius:10px;border:1px solid #e7e9ec}
+.btn{padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;border:none;cursor:pointer}
+.site-footer{text-align:center;padding:20px;color:var(--muted);font-size:0.9rem}
+.controls{display:flex;gap:8px;align-items:center;margin-top:12px}
+.controls input{flex:1;padding:8px;border-radius:8px;border:1px solid #e7e9ec}
+.controls select{padding:8px;border-radius:8px;border:1px solid #e7e9ec}
+.auth{max-width:420px;margin:48px auto;padding:24px;background:var(--card);border-radius:12px}
+.error{color:#a00}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.logo{height:40px}}
+// main.js - общ фронтенд за index.php и products.php
+
+// Helper: fetch products
+async function fetchProducts(q='', sort=''){
+  const url = new URL(window.location.origin + '/search.php');
+  if(q) url.searchParams.set('q', q);
+  if(sort) url.searchParams.set('sort', sort);
+  const resp = await fetch(url);
+  const json = await resp.json();
+  return json.products || [];
+}
+
+// Format price using PHP-provided rate and symbol (window.DESIGNVERSE)
+function formatPriceUSDtoLocal(usd) {
+  const info = window.DESIGNVERSE || {};
+  const rate = parseFloat(info.rate) || 1.0;
+  const symbol = info.symbol || '$';
+  const converted = (parseFloat(usd) * rate);
+  return `${symbol} ${converted.toFixed(2)}`;
+}
+
+// Render grid into #product-grid
+async function renderGrid(q='') {
+  const sortSelect = document.getElementById('sort-select');
+  const sort = sortSelect ? sortSelect.value : '';
+  const products = await fetchProducts(q, sort);
+  const gridNodes = document.querySelectorAll('#product-grid');
+  gridNodes.forEach(grid => {
+    grid.innerHTML = '';
+    if(products.length === 0){
+      grid.innerHTML = '<div style="color:#666">Няма намерени резултати.</div>';
+      return;
+    }
+    products.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const img = document.createElement('img');
+      img.src = p.thumb || 'assets/images/placeholder.png';
+      img.alt = p.title;
+      img.onerror = function(){ this.src = 'data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"240\"><rect width=\"100%\" height=\"100%\" fill=\"%23eceef1\"/><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%23666\" font-size=\"18\">Без изображение</text></svg>' };
+      card.appendChild(img);
+
+      const h4 = document.createElement('h4'); h4.textContent = p.title; card.appendChild(h4);
+      const cat = document.createElement('p'); cat.textContent = p.category; card.appendChild(cat);
+      const price = document.createElement('p'); price.style.marginTop='8px'; price.style.fontWeight='700';
+      price.textContent = formatPriceUSDtoLocal(p.price); card.appendChild(price);
+
+      // actions: preview (model-viewer) + download
+      const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='8px'; actions.style.marginTop='10px';
+      const previewBtn = document.createElement('button'); previewBtn.className='btn'; previewBtn.textContent='Preview';
+      previewBtn.onclick = ()=> openPreviewModal(p);
+      const dlBtn = document.createElement('button'); dlBtn.className='btn'; dlBtn.style.background='#0b84ff'; dlBtn.textContent='Download';
+      dlBtn.onclick = ()=> { alert('Download demo — добавете backend логика за истински файлове.'); };
+      actions.appendChild(previewBtn); actions.appendChild(dlBtn);
+      card.appendChild(actions);
+
+      grid.appendChild(card);
+    });
+  });
+}
+
+// Preview modal using <model-viewer>
+function openPreviewModal(product) {
+  // create overlay if not exists
+  let overlay = document.getElementById('dv-preview-overlay');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.id = 'dv-preview-overlay';
+    Object.assign(overlay.style, {position:'fixed',inset:0,background:'rgba(10,10,10,0.6)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999});
+    document.body.appendChild(overlay);
+  }
+  overlay.innerHTML = '';
+  const box = document.createElement('div');
+  box.style.background = '#fff'; box.style.borderRadius='10px'; box.style.maxWidth='900px'; box.style.width='90%'; box.style.padding='12px';
+  box.style.boxShadow='0 12px 40px rgba(0,0,0,0.4)';
+  const title = document.createElement('h3'); title.textContent = product.title;
+  const viewerWrapper = document.createElement('div'); viewerWrapper.style.display='flex'; viewerWrapper.style.gap='12px'; viewerWrapper.style.flexWrap='wrap';
+  // model-viewer element
+  const mv = document.createElement('model-viewer');
+  mv.setAttribute('src', product.model || '');
+  mv.setAttribute('alt', product.title);
+  mv.setAttribute('camera-controls', '');
+  mv.setAttribute('auto-rotate', '');
+  mv.style.width = '100%';
+  mv.style.height = '480px';
+  mv.style.background = '#f3f4f6';
+  // if no model, show placeholder message
+  if(!product.model){
+    const msg = document.createElement('div');
+    msg.style.padding='48px'; msg.style.color='#666'; msg.textContent = 'Няма 3D файл за визуализация.';
+    viewerWrapper.appendChild(msg);
+  } else {
+    viewerWrapper.appendChild(mv);
+  }
+
+  const closeBtn = document.createElement('button'); closeBtn.textContent='Затвори'; closeBtn.className='btn';
+  closeBtn.style.marginTop='8px'; closeBtn.onclick = ()=> { overlay.remove(); };
+
+  box.appendChild(title);
+  box.appendChild(viewerWrapper);
+  box.appendChild(closeBtn);
+  overlay.appendChild(box);
+}
+
+// Connect UI
+document.addEventListener('DOMContentLoaded', ()=>{
+  const searchInput = document.getElementById('search-input');
+  const searchBtn = document.getElementById('search-btn');
+  const filterInput = document.getElementById('filter-input');
+
+  // initial render
+  renderGrid();
+
+  if(searchBtn && searchInput){
+    searchBtn.addEventListener('click', ()=> renderGrid(searchInput.value.trim()));
+    searchInput.addEventListener('keyup', (e)=> { if(e.key === 'Enter') renderGrid(searchInput.value.trim()); });
+  }
+
+  if(filterInput){
+    filterInput.addEventListener('keyup', (e)=> { if(e.key === 'Enter') renderGrid(filterInput.value.trim()); });
+  }
+
+  // sort (if exists)
+  const sortSelect = document.getElementById('sort-select');
+  if(sortSelect) sortSelect.addEventListener('change', ()=> renderGrid(searchInput ? searchInput.value.trim() : ''));
+
+});
+<?php
+session_start();
+?>
+<!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>За създателите — DesignVerse</title><link rel="stylesheet" href="assets/css/style.css"></head><body>
+<header class="site-header small"><a href="index.php">DesignVerse</a></header>
+<main class="container">
+  <h1>За създателите</h1>
+  <p>DesignVerse е създадено от екип дизайнери и 3D артисти. Тук ще намерите информация за авторите, лицензи и правила за използване.</p>
+  <section class="creators">
+    <article style="background:#fff;padding:12px;border-radius:8px;margin-top:12px">
+      <h3>Иван Иванов</h3><p style="color:#666">3D артист – специализация в продукти и прототипи.</p>
+    </article>
+    <article style="background:#fff;padding:12px;border-radius:8px;margin-top:12px">
+      <h3>Мария Петрова</h3><p style="color:#666">Frontend разработчик — UX, визуален дизайн и анимации.</p>
+    </article>
+  </section>
+</main>
+</body></html>
+<?php
+session_start();
+?>
+<!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Контакти — DesignVerse</title><link rel="stylesheet" href="assets/css/style.css"></head><body>
+<header class="site-header small"><a href="index.php">DesignVerse</a></header>
+<main class="container">
+  <h1>Контакти</h1>
+  <p>Пиши ни: <a href="mailto:hello@designverse.example">hello@designverse.example</a></p>
+  <form method="post" action="contact_submit.php" style="max-width:640px;margin-top:12px">
+    <input name="name" placeholder="Име" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e7e9ec;margin-bottom:8px">
+    <input name="email" placeholder="Email" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e7e9ec;margin-bottom:8px">
+    <textarea name="message" placeholder="Съобщение" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e7e9ec;margin-bottom:8px;height:120px"></textarea>
+    <button class="btn" type="submit">Изпрати</button>
+  </form>
+</main>
+</body></html>
