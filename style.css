@@ -1,0 +1,130 @@
+:root {
+  --charcoal: #2E5266;
+  --slate-gray: #6E8898;
+  --cadet-gray: #9FB1BC;
+  --timberwolf: #D3D0CB;
+  --old-gold: #FFCC00;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--timberwolf);
+  color: var(--charcoal);
+}
+
+header {
+  background-color: var(--charcoal);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+header .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+
+nav a.active {
+  color: var(--old-gold);
+  font-weight: bold;
+}
+
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero {
+  background-image: url("images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 2rem;
+  border-radius: 1rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--old-gold);
+  color: var(--charcoal);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--slate-gray);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--slate-gray);
+  color: white;
+  margin-top: 2rem;
+}
+
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    background-color: var(--charcoal);
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  #menu-toggle {
+    display: block;
+  }
+}
