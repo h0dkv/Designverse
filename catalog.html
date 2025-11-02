@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Каталог | DesignVerse</title> 
+  <title>Каталог | DesignVerse</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <div class="logo">DesignVerse</div>
+    <div class="logo">
+      <img src="images/logo.png" alt="DesignVerse Logo" class="logo-img">
+      <span>DesignVerse</span>
+    </div>
     <nav>
       <a href="index.html">Начало</a>
       <a href="catalog.html" class="active">Каталог</a>
@@ -17,36 +20,41 @@
       <a href="about.html">За нас</a>
       <a href="contact.html">Контакти</a>
     </nav>
+    <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
-  <main>
-    <h1>Каталог</h1>
-    <div class="catalog">
+  <main class="catalog">
+    <h2>Каталог с 3D дизайни</h2>
+    <p>Разгледай някои от нашите уникални модели, създадени с внимание към детайла.</p>
+
+    <div class="grid">
       <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Продукт 1">
-        <h3>Продукт 1</h3>
-        <p>Описание на продукта.</p>
+        <img src="https://images.unsplash.com/photo-1601841162543-9800b66e8f02" alt="Саксия">
+        <h3>Геометрична саксия</h3>
+        <p>Модерен 3D модел, подходящ за принтиране.</p>
+        <a href="files/pot.stl" download class="btn">Изтегли STL</a>
       </div>
+
       <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Продукт 2">
-        <h3>Продукт 2</h3>
-        <p>Описание на продукта.</p>
+        <img src="https://images.unsplash.com/photo-1603052875120-b5b1b4e7ce1e" alt="Свещник">
+        <h3>Свещник</h3>
+        <p>Елегантен дизайн за домашна декорация.</p>
+        <a href="files/candleholder.stl" download class="btn">Изтегли STL</a>
       </div>
+
       <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Продукт 3">
-        <h3>Продукт 3</h3>
-        <p>Описание на продукта.</p>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Продукт 4">
-        <h3>Продукт 4</h3>
-        <p>Описание на продукта.</p>
+        <img src="https://images.unsplash.com/photo-1602872029406-6b7f2f9a6fda" alt="Дрон">
+        <h3>Футуристичен дрон</h3>
+        <p>Колекционерски модел с детайлна геометрия.</p>
+        <a href="files/drone.stl" download class="btn">Изтегли STL</a>
       </div>
     </div>
   </main>
 
   <footer>
-    <p>© 2025 DesignVerse. Всички права запазени</p>
+    <p>© 2025 DesignVerse. Всички права запазени.</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

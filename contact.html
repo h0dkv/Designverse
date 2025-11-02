@@ -9,7 +9,13 @@
 </head>
 <body>
   <header>
-    <div class="logo">DesignVerse</div>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="DesignVerse Logo">
+        <span>DesignVerse</span>
+      </a>
+    </div>
+
     <nav>
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
@@ -17,10 +23,14 @@
       <a href="about.html">За нас</a>
       <a href="contact.html" class="active">Контакти</a>
     </nav>
+
+    <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
-  <main>
+  <main class="contact-page">
     <h1>Свържете се с нас</h1>
+    <p>Имаш въпрос, предложение или просто искаш да ни поздравиш? Изпрати ни съобщение 👇</p>
+
     <form class="contact-form">
       <input type="text" placeholder="Вашето име" required>
       <input type="email" placeholder="Имейл" required>
@@ -32,5 +42,7 @@
   <footer>
     <p>© 2025 DesignVerse. Всички права запазени.</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

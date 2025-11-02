@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Контакти | DesignVerse</title> 
+  <title>Блог | DesignVerse</title> 
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <div class="logo">DesignVerse</div>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="DesignVerse Logo">
+        <span>DesignVerse</span>
+      </a>
+    </div>
+
     <nav>
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
@@ -17,8 +23,43 @@
       <a href="about.html">За нас</a>
       <a href="contact.html">Контакти</a>
     </nav>
+
     <button id="menu-toggle">☰</button>
+    <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
-  <main>
-  	<h1>Блог</h1>
+  <main class="blog">
+    <h1>Блог</h1>
+    <p>Последни новини, идеи и вдъхновения от света на 3D дизайна ✨</p>
+
+    <div class="blog-grid">
+      <article class="post">
+        <img src="images/3dprinter.jpg" alt="3D принтиране">
+        <h2>Как да започнеш с 3D принтиране</h2>
+        <p>Научи основите на 3D принтирането и как да подготвяш моделите си за успешен печат.</p>
+        <a href="#" class="btn">Прочети повече</a>
+      </article>
+
+      <article class="post">
+        <img src="images/christmasdesigns.jpg" alt="Коледни 3D дизайни">
+        <h2>Коледни 3D дизайни, които можеш да принтираш</h2>
+        <p>Елхи, елени и звезди — направи дома си по-празничен с 3D декорации!</p>
+        <a href="#" class="btn">Прочети повече</a>
+      </article>
+
+      <article class="post">
+        <img src="images/future3d.jpg" alt="Бъдещето на 3D дизайна">
+        <h2>Бъдещето на 3D дизайна</h2>
+        <p>Как новите технологии ще променят начина, по който създаваме и споделяме модели.</p>
+        <a href="#" class="btn">Прочети повече</a>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 DesignVerse. Всички права запазени.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
