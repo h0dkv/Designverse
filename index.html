@@ -23,6 +23,7 @@
     <a href="blog.html">Блог</a>
     <a href="about.html">За нас</a>
     <a href="contact.html">Контакти</a>
+    <a href="login.html">Вход</a>
   </nav>
 
   <button id="menu-toggle">☰</button>
@@ -30,15 +31,56 @@
 </header>
 
   <main>
-    <section class="hero">
-      <h1>Добре дошли!</h1>
-      <p>Открийте нашата колекция от продукти и вдъхновение.</p>
-      <a href="catalog.html" class="btn">Разгледай каталога</a>
+   <section class="hero">
+  <h1>Добре дошли в DesignVerse</h1>
+  <p>Мястото, където идеите оживяват в 3D.</p>
+  <a href="catalog.html" class="btn">Разгледай моделите</a>
     </section>
   </main>
 
-  <footer>
+<section class="featured">
+  <h2>Популярни 3D модели</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/vase.jpg" alt="3D Ваза">
+      <h3>3D Ваза</h3>
+    </div>
+    <div class="card">
+      <img src="images/deer.jpg" alt="Коледен елен">
+      <h3>Елен за декорация</h3>
+    </div>
+    <div class="card">
+      <img src="images/snowman.jpg" alt="Снежен човек">
+      <h3>Снежен човек</h3>
+    </div>
+  </div>
+</section>
+
+<section class="news">
+  <h2>От блога</h2>
+  <div class="blog-grid">
+    <div class="post">
+      <img src="images/3dprinters.jpg" alt="3D принтери">
+      <h3>Новите 3D принтери в училище</h3>
+      <a href="post3.html" class="btn">Прочети</a>
+    </div>
+    <div class="post">
+      <img src="images/christmas-designs.jpg" alt="Коледна колекция">
+      <h3>Коледна колекция 2025 🎄</h3>
+      <a href="post2.html" class="btn">Виж повече</a>
+    </div>
+  </div>
+</section>
+
+<div id="countdown"></div>
+
+   <footer>  
     <p>© 2025 DesignVerse. Всички права запазени.</p>
+  <div class="social">
+    <a href="#"><img src="images/facebook.svg" alt="Facebook"></a>
+    <a href="#"><img src="images/instagram.svg" alt="Instagram"></a>
+    <a href="#"><img src="images/youtube.svg" alt="YouTube"></a>
+  </div>
     <script src="script.js"></script>
   </footer>
 </body>

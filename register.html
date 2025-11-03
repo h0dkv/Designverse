@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация | DesignVerse</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="DesignVerse Logo">
+        <span>DesignVerse</span>
+      </a>
+    </div>
+
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">За нас</a>
+      <a href="contact.html">Контакти</a>
+      <a href="login.html">Вход</a>
+    </nav>
+
+    <button id="menu-toggle">☰</button>
+    <button id="theme-toggle">🎄 Коледен режим</button>
+  </header>
+
+  <main class="contact-page">
+    <h1>Регистрация</h1>
+    <p>Създай своя акаунт в DesignVerse и се присъедини към нашата общност!</p>
+
+    <form class="register-form">
+      <input type="text" id="username" placeholder="Потребителско име" required>
+      <input type="email" id="email" placeholder="Имейл" required>
+      <input type="password" id="password" placeholder="Парола" required>
+      <input type="password" id="confirm-password" placeholder="Повтори паролата" required>
+      <button type="submit" class="btn">Регистрирай се</button>
+    </form>
+
+    <p>Вече имаш акаунт? <a href="login.html">Влез тук</a>.</p>
+  </main>
+
+  <footer>
+    <p>© 2025 DesignVerse. Всички права запазени.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.querySelector('.register-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm-password').value;
+      
+      if (pass !== confirm) {
+        alert('❌ Паролите не съвпадат!');
+      } else {
+        alert('🎉 Регистрацията е успешна! Добре дошъл в DesignVerse!');
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
+</body>
+</html>

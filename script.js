@@ -57,3 +57,49 @@ window.addEventListener('load', () => {
     isChristmas = true;
   }
 });
+
+const loginForm = document.querySelector('.login-form');
+if (loginForm) {
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('🎉 Добре дошъл обратно в DesignVerse!');
+  });
+}
+
+const search = document.getElementById('search');
+search.addEventListener('input', e => {
+  const term = e.target.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(card => {
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    card.style.display = title.includes(term) ? '' : 'none';
+  });
+});
+
+document.querySelectorAll('.fav-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const model = e.target.closest('.card').querySelector('h3').textContent;
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    if (!favorites.includes(model)) favorites.push(model);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    alert(`✅ "${model}" е добавен в Любими!`);
+  });
+});
+
+function updateCountdown() {
+  const christmas = new Date('December 25, 2025');
+  const now = new Date();
+  const diff = christmas - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById('countdown').textContent = 
+    `🎄 Остават ${days} дни до Коледа!`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+document.getElementById('randomModel').addEventListener('click', () => {
+  const cards = document.querySelectorAll('.card');
+  const random = Math.floor(Math.random() * cards.length);
+  cards[random].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  cards[random].style.boxShadow = '0 0 20px gold';
+  setTimeout(() => (cards[random].style.boxShadow = ''), 1500);
+});
