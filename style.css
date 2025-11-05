@@ -1,5 +1,6 @@
 :root {
-  --charcoal: #2E5266;
+  --sky-blue: #87CEEB;
+  --charcoal: #36454F;
   --slate-gray: #6E8898;
   --cadet-gray: #9FB1BC;
   --timberwolf: #D3D0CB;
@@ -14,7 +15,7 @@ body {
 }
 
 header {
-  background-color: var(--charcoal);
+  background-color: var(--sky-blue);
   color: black;
   display: flex;
   justify-content: space-between;
@@ -44,7 +45,7 @@ main {
 }
 
 .hero {
-  background-image: url("images/hero.jpg");
+  background-image: url("images/logo.jpg");
   background-size: cover;
   background-position: center;
   color: lightblue;
@@ -779,4 +780,69 @@ body.christmas .register-form input {
 body.christmas .register-form .btn {
   background: #FFC145;
   color: #5B5F97;
+}
+
+/* Hero секция с grid оформление */
+.hero {
+  background: linear-gradient(to right, #87CEEB, #b0e0e6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.hero-text h1 {
+  font-size: 2.8rem;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  color: #f9f9f9;
+  margin: 15px 0 25px;
+}
+
+.hero-text .btn {
+  background: #fff;
+  color: #007FFF;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.hero-text .btn:hover {
+  background: #007FFF;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Hero изображение */
+.hero-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Респонсивност */
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-image {
+    order: -1;
+  }
 }
