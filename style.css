@@ -895,3 +895,76 @@ body.christmas #theme-toggle {
   background: linear-gradient(135deg, #b71c1c, #388e3c);
   color: #fff;
 }
+
+/* 🎯 Търсачка */
+.search-bar {
+  display: block;
+  width: 80%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 2rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.search-bar:focus {
+  border-color: #ff4444;
+  box-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
+}
+
+/* 🎲 Бутон „Случаен модел“ */
+#randomModel {
+  display: block;
+  margin: 10px auto 30px auto;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2rem;
+  background: linear-gradient(45deg, #ff0000, #ff9900);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.4s ease;
+}
+
+#randomModel:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+}
+
+#randomModel:active {
+  transform: scale(0.97);
+}
+
+/* 🎄 Коледен режим — малка промяна в цветовете */
+body.christmas .search-bar {
+  border-color: gold;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+body.christmas #randomModel {
+  background: linear-gradient(45deg, #c00000, #008000);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+body.christmas #randomModel:hover {
+  background: linear-gradient(45deg, #ff3333, #00cc00);
+}
+
+/* 📱 Responsive подравняване */
+@media (max-width: 600px) {
+  .search-bar {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+
+  #randomModel {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+  }
+}

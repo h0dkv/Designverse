@@ -10,16 +10,23 @@ if (menuBtn && nav) {
 
 // 🎅 Смяна на тема (Коледен / Нормален режим)
 const btn = document.getElementById('theme-toggle');
+const audio = document.getElementById('christmas-audio');
 let isChristmas = false;
 
 if (btn) {
   btn.addEventListener('click', () => {
-    document.body.classList.toggle('christmas');
     isChristmas = !isChristmas;
+    document.body.classList.toggle('christmas', isChristmas);
     btn.textContent = isChristmas ? '☀️ Нормален режим' : '🎄 Коледен режим';
 
-    if (isChristmas) startSnow();
-    else stopSnow();
+    if (isChristmas) {
+      startSnow();
+      audio.play();
+    } else {
+      stopSnow();
+      audio.pause();
+      audio.currentTime = 0;
+    }
 
     // Запазваме състоянието
     localStorage.setItem('theme', isChristmas ? 'christmas' : 'normal');
@@ -30,7 +37,7 @@ if (btn) {
 let snowInterval;
 
 function startSnow() {
-  stopSnow(); // спиране, ако вече има сняг
+  stopSnow();
   snowInterval = setInterval(() => {
     const snowflake = document.createElement('div');
     snowflake.textContent = '❄';
@@ -54,10 +61,12 @@ window.addEventListener('load', () => {
     document.body.classList.add('christmas');
     if (btn) btn.textContent = '☀️ Нормален режим';
     startSnow();
+    if (audio) audio.play();
     isChristmas = true;
   }
 });
 
+// 🎁 Примерно останалите функции
 const loginForm = document.querySelector('.login-form');
 if (loginForm) {
   loginForm.addEventListener('submit', e => {
@@ -67,13 +76,15 @@ if (loginForm) {
 }
 
 const search = document.getElementById('search');
-search.addEventListener('input', e => {
-  const term = e.target.value.toLowerCase();
-  document.querySelectorAll('.card').forEach(card => {
-    const title = card.querySelector('h3').textContent.toLowerCase();
-    card.style.display = title.includes(term) ? '' : 'none';
+if (search) {
+  search.addEventListener('input', e => {
+    const term = e.target.value.toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      card.style.display = title.includes(term) ? '' : 'none';
+    });
   });
-});
+}
 
 document.querySelectorAll('.fav-btn').forEach(btn => {
   btn.addEventListener('click', e => {
@@ -96,10 +107,13 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-document.getElementById('randomModel').addEventListener('click', () => {
-  const cards = document.querySelectorAll('.card');
-  const random = Math.floor(Math.random() * cards.length);
-  cards[random].scrollIntoView({ behavior: 'smooth', block: 'center' });
-  cards[random].style.boxShadow = '0 0 20px gold';
-  setTimeout(() => (cards[random].style.boxShadow = ''), 1500);
-});
+const randomBtn = document.getElementById('randomModel');
+if (randomBtn) {
+  randomBtn.addEventListener('click', () => {
+    const cards = document.querySelectorAll('.card');
+    const random = Math.floor(Math.random() * cards.length);
+    cards[random].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    cards[random].style.boxShadow = '0 0 20px gold';
+    setTimeout(() => (cards[random].style.boxShadow = ''), 1500);
+  });
+}

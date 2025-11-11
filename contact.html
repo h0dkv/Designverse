@@ -28,18 +28,21 @@
     <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
+  <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
+  
   <main class="contact-page">
     <h1>Свържете се с нас</h1>
     <p>Имаш въпрос, предложение или просто искаш да ни поздравиш? Изпрати ни съобщение 👇</p>
 
     <form class="contact-form">
-      <input type="text" placeholder="Вашето име" required>
-      <input type="email" placeholder="Имейл" required>
-      <textarea placeholder="Вашето съобщение" required></textarea>
+      <input type="text" name="name" placeholder="Вашето име" required>
+      <input type="email" name="email" placeholder="Имейл" required>
+      <textarea name="message" placeholder="Вашето съобщение" required></textarea>
       <button type="submit" class="btn">Изпрати</button>
     </form>
   </main>
-
+   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+   <script src="contact.js"></script>
   <footer>
     <p>© 2025 DesignVerse. Всички права запазени.</p>
   </footer>
