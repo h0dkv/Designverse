@@ -968,3 +968,365 @@ body.christmas #randomModel:hover {
     padding: 8px 20px;
   }
 }
+
+/* 🕒 Countdown стил */
+#countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #ff4b1f, #1fddff);
+  border-radius: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  padding: 20px 50px;
+  margin: 50px auto;
+  width: fit-content;
+  font-size: 1.8rem;
+  text-align: center;
+  animation: glowPulse 3s infinite;
+}
+
+#countdown span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+#countdown span strong {
+  font-size: 3rem;
+  color: #fff;
+}
+
+/* ✨ Пулсиращ ефект */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+  50% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.9); }
+}
+
+/* 🎄 Коледен режим */
+body.christmas #countdown {
+  background: linear-gradient(90deg, #c00000, #008000);
+  color: gold;
+  text-shadow: 0 0 10px white;
+}
+/* 🎅 Countdown секция */
+.countdown-section {
+  text-align: center;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.countdown-section h2 {
+  font-size: 2rem;
+  color: #ff4444;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* 🕒 Countdown блок */
+#countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #ff4b1f, #1fddff);
+  border-radius: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  padding: 20px 50px;
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 1.8rem;
+  animation: glowPulse 3s infinite;
+}
+
+#countdown span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+#countdown span strong {
+  font-size: 3rem;
+  color: #fff;
+}
+
+/* ✨ Пулсиращ ефект */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+  50% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.9); }
+}
+
+/* 🎄 Коледен режим */
+body.christmas .countdown-section h2 {
+  color: gold;
+  text-shadow: 0 0 15px red;
+}
+
+body.christmas #countdown {
+  background: linear-gradient(90deg, #c00000, #008000);
+  color: gold;
+  text-shadow: 0 0 10px white;
+}
+/* 🎅 Анимиран текст за countdown */
+.countdown-title {
+  font-size: 2rem;
+  color: #ff4444;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  animation: fadeIn 2s ease-out, pulseGlow 3s infinite ease-in-out;
+}
+
+/* 🌟 Плавно появяване */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 💫 Пулсиращ неонов ефект */
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 68, 68, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                 0 0 40px rgba(255, 68, 68, 1);
+  }
+}
+
+/* 🎄 Коледен режим */
+body.christmas .countdown-title {
+  color: gold;
+  animation: fadeIn 2s ease-out, pulseGlowChristmas 3s infinite ease-in-out;
+}
+
+@keyframes pulseGlowChristmas {
+  0%, 100% {
+    text-shadow: 0 0 10px red, 0 0 20px green, 0 0 30px gold;
+  }
+  50% {
+    text-shadow: 0 0 25px gold, 0 0 40px red, 0 0 60px green;
+  }
+}
+/* 💖 Модерен бутон „Добави в любими“ */
+.fav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border: none;
+  border-radius: 2rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 🌈 Ефект при задържане */
+.fav-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 15px rgba(255, 65, 108, 0.6);
+}
+
+/* 💥 Ефект при натискане */
+.fav-btn:active {
+  transform: scale(0.95);
+}
+
+/* ❤️ Ефект на пулсиране при натискане */
+.fav-btn.added {
+  background: linear-gradient(45deg, #00b09b, #96c93d);
+  box-shadow: 0 0 15px rgba(150, 201, 61, 0.7);
+  animation: pulseHeart 1s ease;
+}
+
+@keyframes pulseHeart {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* 🎄 Коледен режим */
+body.christmas .fav-btn {
+  background: linear-gradient(45deg, #c00000, #008000);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+body.christmas .fav-btn.added {
+  background: linear-gradient(45deg, #00cc00, #ff3333);
+  box-shadow: 0 0 20px gold;
+}
+
+/* 💚 Любими страница */
+.favorites-page {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.favorites-page h1 {
+  font-size: 2rem;
+  color: #ff416c;
+  margin-bottom: 10px;
+}
+
+.favorites-page p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+#favorites-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 30px;
+}
+
+#favorites-list .card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 250px;
+  transition: transform 0.3s ease;
+}
+
+#favorites-list .card:hover {
+  transform: translateY(-5px);
+}
+
+.remove-btn {
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-btn:hover {
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  transform: scale(1.05);
+}
+
+.danger-btn {
+  background: linear-gradient(45deg, #b30000, #ff0000);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.danger-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+/* 🎄 Коледен режим */
+body.christmas .favorites-page h1 {
+  color: gold;
+  text-shadow: 0 0 10px red;
+}
+
+body.christmas .remove-btn {
+  background: linear-gradient(45deg, #c00000, #008000);
+}
+
+body.christmas .danger-btn {
+  background: linear-gradient(45deg, #ff0000, #006600);
+}
+
+/* 📱 Базов стил за навигацията */
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+#menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* 🧱 За мобилни устройства */
+@media (max-width: 768px) {
+  nav {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 200px;
+    height: calc(100vh - 70px);
+    background-color: rgba(30, 30, 30, 0.95);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 15px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  nav.show {
+    transform: translateX(0);
+  }
+
+  #menu-toggle {
+    display: block;
+  }
+
+  header {
+    justify-content: space-between;
+  }
+
+  /* скриваме бутоните за тема, ако е нужно */
+  #theme-toggle {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}
+
+/* 🖋️ Ефект при hover на меню */
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: gold;
+}
+
+/* ✨ Анимация при отваряне */
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}

@@ -96,24 +96,74 @@ document.querySelectorAll('.fav-btn').forEach(btn => {
   });
 });
 
-function updateCountdown() {
-  const christmas = new Date('December 25, 2025');
-  const now = new Date();
-  const diff = christmas - now;
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById('countdown').textContent = 
-    `🎄 Остават ${days} дни до Коледа!`;
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
+// 🎅 Countdown до Коледа 2025
+const countdown = document.getElementById("countdown");
+if (countdown) {
+  const targetDate = new Date("December 25, 2025 00:00:00").getTime();
 
-const randomBtn = document.getElementById('randomModel');
-if (randomBtn) {
-  randomBtn.addEventListener('click', () => {
-    const cards = document.querySelectorAll('.card');
-    const random = Math.floor(Math.random() * cards.length);
-    cards[random].scrollIntoView({ behavior: 'smooth', block: 'center' });
-    cards[random].style.boxShadow = '0 0 20px gold';
-    setTimeout(() => (cards[random].style.boxShadow = ''), 1500);
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      countdown.innerHTML = "🎄 Весела Коледа! 🎁";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML = `
+      <span><strong>${days}</strong> дни</span>
+      <span><strong>${hours}</strong> ч.</span>
+      <span><strong>${minutes}</strong> мин.</span>
+      <span><strong>${seconds}</strong> сек.</span>
+    `;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+}
+
+// 💖 Добавяне в любими с визуален ефект
+document.querySelectorAll('.fav-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const model = e.target.closest('.card').querySelector('h3').textContent;
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (!favorites.includes(model)) {
+      favorites.push(model);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+
+      // Промени стила на бутона
+      btn.classList.add('added');
+      btn.innerHTML = '💚 В Любими!';
+      setTimeout(() => {
+        btn.innerHTML = '❤️ Добави в любими';
+        btn.classList.remove('added');
+      }, 2000);
+
+      alert(`✅ "${model}" е добавен в Любими!`);
+    } else {
+      alert(`💡 "${model}" вече е в Любими.`);
+    }
+  });
+});
+
+// 🎯 Responsive меню (работещо навсякъде)
+if (menuBtn && nav) {
+  menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("show");
+    menuBtn.textContent = nav.classList.contains("show") ? "✖" : "☰";
+  });
+
+  // Затваряне на менюто при натискане на линк
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("show");
+      menuBtn.textContent = "☰";
+    });
   });
 }

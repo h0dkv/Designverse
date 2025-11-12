@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Любими модели | DesignVerse</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="DesignVerse Logo">
+        <span>DesignVerse</span>
+      </a>
+    </div>
+    <nav>
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">За нас</a>
+      <a href="contact.html">Контакти</a>
+      <a href="favorites.html" class="active">Любими</a>
+      <a href="login.html">Вход</a>
+    </nav>
+    <button id="theme-toggle">🎄 Коледен режим</button>
+  </header>
+
+  <main class="favorites-page">
+    <h1>💚 Моите любими модели</h1>
+    <p>Тук са запазените ти 3D модели. Можеш да ги разгледаш или премахнеш от списъка.</p>
+
+    <div id="favorites-list" class="grid"></div>
+
+    <button id="clearFavorites" class="btn danger-btn">🗑️ Изчисти всички</button>
+  </main>
+
+  <footer>
+    <p>© 2025 DesignVerse. Всички права запазени.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // 💚 Зареждане на любими модели
+    const favoritesList = document.getElementById('favorites-list');
+    const clearBtn = document.getElementById('clearFavorites');
+
+    function loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favoritesList.innerHTML = '';
+
+      if (favorites.length === 0) {
+        favoritesList.innerHTML = '<p>😢 Нямаш добавени любими модели.</p>';
+        clearBtn.style.display = 'none';
+        return;
+      }
+
+      favorites.forEach(model => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+          <img src="images/default-model.jpg" alt="${model}">
+          <h3>${model}</h3>
+          <button class="remove-btn">❌ Премахни</button>
+        `;
+        favoritesList.appendChild(card);
+      });
+
+      clearBtn.style.display = 'inline-block';
+    }
+
+    // 🗑️ Премахване на отделен модел
+    favoritesList.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-btn')) {
+        const modelName = e.target.closest('.card').querySelector('h3').textContent;
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        favorites = favorites.filter(item => item !== modelName);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        loadFavorites();
+      }
+    });
+
+    // 🧹 Изчистване на всички любими
+    clearBtn.addEventListener('click', () => {
+      if (confirm('Наистина ли искаш да изчистиш всички любими модели?')) {
+        localStorage.removeItem('favorites');
+        loadFavorites();
+      }
+    });
+
+    // Зареждане при стартиране
+    loadFavorites();
+  </script>
+</body>
+</html>
