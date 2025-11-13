@@ -1330,3 +1330,22 @@ nav a:hover {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
 }
+
+#user-info {
+  color: white;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-logout {
+  margin-left: 10px;
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-logout:hover {
+  background: darkred;
+}

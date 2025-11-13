@@ -24,6 +24,7 @@
       <a href="contact.html">Контакти</a>
       <a href="favorites.html">Любими</a>
       <a href="login.html">Вход</a>
+      <span id="user-info"></span>
     </nav>
 
     <button id="menu-toggle">☰</button>
@@ -37,6 +38,27 @@
     <p>Открий вдъхновение, идеи и новини от света на 3D дизайна ✨</p>
 
     <div class="blog-grid">
+      <article class="post">
+        <img src="images/3dprint.jpg" alt="3D принтиране">
+        <h2>Как да започнеш с 3D принтиране</h2>
+        <p>Научи основите на 3D принтирането и как да подготвяш моделите си за успешен печат.</p>
+        <a href="post1.html" class="btn">Прочети повече</a>
+      </article>
+
+      <article class="post">
+        <img src="images/christmas-designs.jpg" alt="Коледни 3D дизайни">
+        <h2>Коледни 3D дизайни, които можеш да принтираш</h2>
+        <p>Елхи, елени и звезди — направи дома си по-празничен с 3D декорации!</p>
+        <a href="post2.html" class="btn">Прочети повече</a>
+      </article>
+
+      <article class="post">
+        <img src="images/3dprinters.jpg" alt="Бъдещето на 3D дизайна">
+        <h2>Бъдещето на 3D дизайна</h2>
+        <p>Как биопластмасите и рециклираните филаменти правят 3D печата по-устойчив и природосъобразен.</p>
+        <a href="post3.html" class="btn">Прочети повече</a>
+      </article>
+
       <article class="post">
         <img src="images/eco-materials.jpg" alt="Еко материали за 3D принтиране">
         <h2>🌱 Еко материали в 3D принтирането</h2>
@@ -86,5 +108,27 @@
   </footer>
 
   <script src="script.js"></script>
+  <script type="module">
+  import { auth, onAuthStateChanged, signOut } from "./firebase-config.js";
+
+  const userInfo = document.getElementById('user-info');
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userInfo.innerHTML = `
+        👤 Влязъл като: <strong>${user.email}</strong>
+        <button id="logout-btn" class="btn-logout">Изход</button>
+      `;
+      document.getElementById('logout-btn').addEventListener('click', async () => {
+        await signOut(auth);
+        alert("🚪 Излезе успешно!");
+        location.reload();
+      });
+    } else {
+      userInfo.innerHTML = `<a href="login.html">🔑 Вход</a>`;
+    }
+  });
+</script>
+
 </body>
 </html>
