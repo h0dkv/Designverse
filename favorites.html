@@ -23,7 +23,6 @@
       <a href="contact.html">Контакти</a>
       <a href="favorites.html" class="active">Любими</a>
       <a href="login.html">Вход</a>
-      <span id="user-info"></span>
     </nav>
     <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
@@ -32,7 +31,6 @@
     <h1>💚 Моите любими модели</h1>
     <p>Тук са запазените ти 3D модели. Можеш да ги разгледаш или премахнеш от списъка.</p>
 
-    <div id="favorites-list" class="grid"></div>
 
     <button id="clearFavorites" class="btn danger-btn">🗑️ Изчисти всички</button>
   </main>
@@ -42,56 +40,21 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    // 💚 Зареждане на любими модели
-    const favoritesList = document.getElementById('favorites-list');
-    const clearBtn = document.getElementById('clearFavorites');
+ <script>
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+const list = document.getElementById("favorites-list");
 
-    function loadFavorites() {
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      favoritesList.innerHTML = '';
+if (favorites.length === 0) {
+  list.innerHTML = "<p>Нямате добавени любими модели.</p>";
+} else {
+  favorites.forEach(name => {
+    const item = document.createElement("p");
+    item.textContent = "💚 " + name;
+    list.appendChild(item);
+  });
+}
 
-      if (favorites.length === 0) {
-        favoritesList.innerHTML = '<p>😢 Нямаш добавени любими модели.</p>';
-        clearBtn.style.display = 'none';
-        return;
-      }
+ </script>
 
-      favorites.forEach(model => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-          <img src="images/default-model.jpg" alt="${model}">
-          <h3>${model}</h3>
-          <button class="remove-btn">❌ Премахни</button>
-        `;
-        favoritesList.appendChild(card);
-      });
-
-      clearBtn.style.display = 'inline-block';
-    }
-
-    // 🗑️ Премахване на отделен модел
-    favoritesList.addEventListener('click', e => {
-      if (e.target.classList.contains('remove-btn')) {
-        const modelName = e.target.closest('.card').querySelector('h3').textContent;
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        favorites = favorites.filter(item => item !== modelName);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        loadFavorites();
-      }
-    });
-
-    // 🧹 Изчистване на всички любими
-    clearBtn.addEventListener('click', () => {
-      if (confirm('Наистина ли искаш да изчистиш всички любими модели?')) {
-        localStorage.removeItem('favorites');
-        loadFavorites();
-      }
-    });
-
-    // Зареждане при стартиране
-    loadFavorites();
-  </script>
 </body>
 </html>

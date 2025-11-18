@@ -86,15 +86,6 @@ if (search) {
   });
 }
 
-document.querySelectorAll('.fav-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    const model = e.target.closest('.card').querySelector('h3').textContent;
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    if (!favorites.includes(model)) favorites.push(model);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    alert(`✅ "${model}" е добавен в Любими!`);
-  });
-});
 
 // 🎅 Countdown до Коледа 2025
 const countdown = document.getElementById("countdown");
@@ -127,30 +118,32 @@ if (countdown) {
   updateCountdown();
 }
 
-// 💖 Добавяне в любими с визуален ефект
+
+// 💖 Добавяне в любими
 document.querySelectorAll('.fav-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    const model = e.target.closest('.card').querySelector('h3').textContent;
+  btn.addEventListener('click', () => {
+
+    const card = btn.closest('.card');
+
+    const item = {
+      title: card.querySelector('h3').textContent,
+      img: card.querySelector('img').src,
+      file: card.querySelector('a[download]')?.getAttribute('href') || null
+    };
+
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-    if (!favorites.includes(model)) {
-      favorites.push(model);
+    if (!favorites.some(f => f.title === item.title)) {
+      favorites.push(item);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-
-      // Промени стила на бутона
-      btn.classList.add('added');
-      btn.innerHTML = '💚 В Любими!';
-      setTimeout(() => {
-        btn.innerHTML = '❤️ Добави в любими';
-        btn.classList.remove('added');
-      }, 2000);
-
-      alert(`✅ "${model}" е добавен в Любими!`);
+      alert(`Добавено: ${item.title}`);
     } else {
-      alert(`💡 "${model}" вече е в Любими.`);
+      alert(`"${item.title}" вече е в Любими.`);
     }
   });
 });
+
+
 
 // 🎯 Responsive меню (работещо навсякъде)
 if (menuBtn && nav) {
@@ -167,3 +160,44 @@ if (menuBtn && nav) {
     });
   });
 }
+    
+    // ⭐ Зареждане на любими модели (красиви карти)
+if (window.location.pathname.includes("favorites.html")) {
+    const list = document.getElementById("favorites-list");
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (favorites.length === 0) {
+        list.innerHTML = "<p>Нямате добавени любими модели.</p>";
+    } else {
+        favorites.forEach(item => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.title}">
+                <h3>${item.title}</h3>
+                <a href="${item.file}" download class="btn">Изтегли STL</a>
+                <button class="remove-btn">🗑 Премахни</button>
+            `;
+
+            // Премахване от любими
+            card.querySelector(".remove-btn").addEventListener("click", () => {
+                removeFavorite(item.title);
+                card.remove();
+                if (document.querySelectorAll(".card").length === 0) {
+                    list.innerHTML = "<p>Нямате добавени любими модели.</p>";
+                }
+            });
+
+            list.appendChild(card);
+        });
+    }
+}
+
+// ❌ Функция за премахване
+function removeFavorite(title) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites = favorites.filter(f => f.title !== title);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+  

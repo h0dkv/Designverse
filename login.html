@@ -43,58 +43,5 @@
     <p>© 2025 DesignVerse | Всички права запазени</p>
   </footer>
   <script src="script.js"></script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } 
-      from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-
-    // Тук слагаш твоя Firebase конфигурация от конзолата
-    const firebaseConfig = {
-      apiKey: "AIzaSyD9VSwW66iz3ik4zT6TgsHqcbPWfjbIIhk",
-      authDomain: "designverse-volov.firebaseapp.com",
-      projectId: "designverse-volov",
-      storageBucket: "designverse-volov.firebasestorage.app",
-      messagingSenderId: "389183836506",
-      appId: "1:389183836506:web:298471c27c27763abce363"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const form = document.getElementById("login-form");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = form.email.value;
-      const password = form.password.value;
-
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert("🎉 Успешен вход!");
-        window.location.href = "index.html"; // Пренасочване
-      } catch (error) {
-        alert("❌ Грешка: " + error.message);
-      }
-    });
-  <script type="module">
-  import { auth, signInWithEmailAndPassword, onAuthStateChanged } from "./firebase-config.js";
-
-  const form = document.querySelector('.login-form');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value.trim();
-    const pass = document.getElementById('password').value;
-
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, pass);
-      const user = userCredential.user;
-      alert(`🎉 Добре дошъл обратно, ${user.email}!`);
-      window.location.href = "index.html"; // пренасочваме след вход
-    } catch (error) {
-      alert(`⚠️ Грешка при вход: ${error.message}`);
-    }
-  });
-  </script>
 </body>
 </html>
