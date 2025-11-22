@@ -31,6 +31,8 @@
     <h1>💚 Моите любими модели</h1>
     <p>Тук са запазените ти 3D модели. Можеш да ги разгледаш или премахнеш от списъка.</p>
 
+    <!-- ТУК ЛИПСВАШЕ! -->
+    <div id="favorites-list" class="grid"></div>
 
     <button id="clearFavorites" class="btn danger-btn">🗑️ Изчисти всички</button>
   </main>
@@ -40,21 +42,5 @@
   </footer>
 
   <script src="script.js"></script>
- <script>
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-const list = document.getElementById("favorites-list");
-
-if (favorites.length === 0) {
-  list.innerHTML = "<p>Нямате добавени любими модели.</p>";
-} else {
-  favorites.forEach(name => {
-    const item = document.createElement("p");
-    item.textContent = "💚 " + name;
-    list.appendChild(item);
-  });
-}
-
- </script>
-
 </body>
 </html>
