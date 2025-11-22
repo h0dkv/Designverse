@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -25,12 +27,33 @@
     <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
-<input type="text" id="search" placeholder="Търси модел..." class="search-bar">
+  <div class="search-container">
+    <div class="input-wrapper">
 
-<button id="randomModel">🎲 Случаен модел</button>
+      <div class="effect-layer outer-glow"></div>
+      <div class="effect-layer dark-layer"></div>
+      <div class="effect-layer bright-layer"></div>
+      <div class="effect-layer primary-border"></div>
+
+      <div class="button-border-effect"></div>
+
+      <input type="text" class="search-field" placeholder="Търси модел..." id="catalogSearch">
+
+      <div class="pink-hint"></div>
+      <div class="gradient-mask"></div>
+
+      <button class="search-button" id="searchBtn">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="8" stroke="#ffffff" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="22" y2="22" stroke="#ffffff" stroke-width="2" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
 
   <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
-  
+
   <main class="catalog">
     <h2>Каталог с 3D дизайни</h2>
     <p>Разгледай някои от нашите уникални модели, създадени с внимание към детайла.</p>
@@ -38,8 +61,8 @@
     <div class="grid">
       <div class="card">
         <img src="https://images.unsplash.com/photo-1601841162543-9800b66e8f02" alt="Саксия">
-        <h3>Геометрична саксия</h3>
-        <p>Модерен 3D модел, подходящ за принтиране.</p>
+        <h3>Самолет (Airplane Toy)</h3>
+        <p>Прост модел на играчка самолет, лесен за принтиране.</p>
         <a href="files/pot.stl" download class="btn">Изтегли STL</a>
         <button class="fav-btn">❤️ Добави в любими</button>
       </div>
@@ -69,4 +92,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

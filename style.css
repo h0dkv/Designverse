@@ -14,7 +14,9 @@ body {
 }
 
 header {
-  background-color: var(--charcoal);
+  background-color: var(--cadet-gray) !important;
+  position: relative;
+  z-index: 999;
   color: black;
   display: flex;
   justify-content: space-between;
@@ -29,7 +31,7 @@ header .logo {
 
 nav a {
   color: black;
-  text-decoration: none; 
+  text-decoration: none;
   margin-left: 1.5rem;
 }
 
@@ -55,7 +57,7 @@ main {
   align-items: center;
   text-align: center;
   border-radius: 1rem;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .btn {
@@ -95,14 +97,14 @@ main {
 .card {
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
@@ -188,7 +190,8 @@ footer {
 }
 
 .logo img {
-  height: 40px; /* можеш да промениш на 50px или 60px */
+  height: 40px;
+  /* можеш да промениш на 50px или 60px */
   width: auto;
 }
 
@@ -196,7 +199,8 @@ footer {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: var(--light); /* според твоята цветова палитра */
+  color: var(--light);
+  /* според твоята цветова палитра */
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -212,7 +216,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* --- LOGO --- */
@@ -316,8 +320,15 @@ nav a.active {
 }
 
 @keyframes fall {
-  0% { transform: translateY(-10px); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+  0% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
 .about {
@@ -328,7 +339,8 @@ nav a.active {
   text-align: center;
 }
 
-.about h1, .about h2 {
+.about h1,
+.about h2 {
   color: #5B5F97;
   margin-bottom: 1rem;
 }
@@ -348,7 +360,7 @@ nav a.active {
 .member {
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 220px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -356,7 +368,7 @@ nav a.active {
 
 .member:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .member img {
@@ -410,7 +422,7 @@ body.christmas .member {
   background: #FFFFFB;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form input,
@@ -483,7 +495,7 @@ body.christmas .contact-form .btn {
 .post {
   background: #FFFFFB;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   text-align: left;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -491,7 +503,7 @@ body.christmas .contact-form .btn {
 
 .post:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .post img {
@@ -535,6 +547,7 @@ body.christmas .post .btn {
   background: #FFC145;
   color: #5B5F97;
 }
+
 .snowflake {
   position: fixed;
   top: 0;
@@ -546,8 +559,15 @@ body.christmas .post .btn {
 }
 
 @keyframes fall {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
 /* 🎅 Текстът в header да е бял в коледен режим */
@@ -559,7 +579,8 @@ body.christmas header span {
 
 body.christmas nav a:hover,
 body.christmas nav a.active {
-  color: #FFC145 !important; /* златисто за акцент */
+  color: #FFC145 !important;
+  /* златисто за акцент */
 }
 
 /* ✨ Коледен ефект за логото */
@@ -572,6 +593,7 @@ body.christmas .logo img {
   from {
     filter: drop-shadow(0 0 6px #FFC145) brightness(1.1);
   }
+
   to {
     filter: drop-shadow(0 0 16px #FFFA9E) brightness(1.3);
   }
@@ -583,7 +605,7 @@ body.christmas .logo img {
   padding: 2rem;
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
@@ -667,7 +689,7 @@ body.christmas nav a:hover {
   background: #fff;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .login-form input {
@@ -732,7 +754,7 @@ body.christmas .login-form .btn {
   border-radius: 1rem;
   max-width: 400px;
   margin: 2rem auto;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .register-form input {
@@ -780,6 +802,7 @@ body.christmas .register-form .btn {
   background: #FFC145;
   color: #5B5F97;
 }
+
 /* Hero секция с grid оформление */
 .hero {
   background: linear-gradient(to right, #87CEEB, #b0e0e6);
@@ -801,7 +824,7 @@ body.christmas .register-form .btn {
 .hero-text h1 {
   font-size: 2.8rem;
   color: #fff;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-text p {
@@ -830,7 +853,7 @@ body.christmas .register-form .btn {
 .hero-image img {
   width: 100%;
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Респонсивност */
@@ -875,7 +898,7 @@ body.christmas .register-form .btn {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
   opacity: 0.9;
 }
@@ -883,7 +906,7 @@ body.christmas .register-form .btn {
 #theme-toggle:hover {
   transform: scale(1.07);
   opacity: 1;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 body.christmas #theme-toggle {
@@ -911,44 +934,11 @@ body.christmas #theme-toggle {
   box-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
 }
 
-/* 🎲 Бутон „Случаен модел“ */
-#randomModel {
-  display: block;
-  margin: 10px auto 30px auto;
-  padding: 10px 25px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 2rem;
-  background: linear-gradient(45deg, #ff0000, #ff9900);
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.4s ease;
-}
-
-#randomModel:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
-  background: linear-gradient(45deg, #ff6600, #ffcc00);
-}
-
-#randomModel:active {
-  transform: scale(0.97);
-}
 
 /* 🎄 Коледен режим — малка промяна в цветовете */
 body.christmas .search-bar {
   border-color: gold;
   background-color: rgba(255, 255, 255, 0.9);
-}
-
-body.christmas #randomModel {
-  background: linear-gradient(45deg, #c00000, #008000);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-}
-
-body.christmas #randomModel:hover {
-  background: linear-gradient(45deg, #ff3333, #00cc00);
 }
 
 /* 📱 Responsive подравняване */
@@ -998,8 +988,15 @@ body.christmas #randomModel:hover {
 
 /* ✨ Пулсиращ ефект */
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
-  50% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.9); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
+  }
 }
 
 /* 🎄 Коледен режим */
@@ -1008,6 +1005,7 @@ body.christmas #countdown {
   color: gold;
   text-shadow: 0 0 10px white;
 }
+
 /* 🎅 Countdown секция */
 .countdown-section {
   text-align: center;
@@ -1056,8 +1054,15 @@ body.christmas #countdown {
 
 /* ✨ Пулсиращ ефект */
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
-  50% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.9); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
+  }
 }
 
 /* 🎄 Коледен режим */
@@ -1071,6 +1076,7 @@ body.christmas #countdown {
   color: gold;
   text-shadow: 0 0 10px white;
 }
+
 /* 🎅 Анимиран текст за countdown */
 .countdown-title {
   font-size: 2rem;
@@ -1087,6 +1093,7 @@ body.christmas #countdown {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1095,13 +1102,16 @@ body.christmas #countdown {
 
 /* 💫 Пулсиращ неонов ефект */
 @keyframes pulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px rgba(255, 68, 68, 0.8);
+      0 0 20px rgba(255, 68, 68, 0.8);
   }
+
   50% {
     text-shadow: 0 0 20px rgba(255, 255, 255, 1),
-                 0 0 40px rgba(255, 68, 68, 1);
+      0 0 40px rgba(255, 68, 68, 1);
   }
 }
 
@@ -1112,13 +1122,17 @@ body.christmas .countdown-title {
 }
 
 @keyframes pulseGlowChristmas {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 10px red, 0 0 20px green, 0 0 30px gold;
   }
+
   50% {
     text-shadow: 0 0 25px gold, 0 0 40px red, 0 0 60px green;
   }
 }
+
 /* 💖 Модерен бутон „Добави в любими“ */
 .fav-btn {
   display: inline-flex;
@@ -1158,9 +1172,17 @@ body.christmas .countdown-title {
 }
 
 @keyframes pulseHeart {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* 🎄 Коледен режим */
@@ -1322,8 +1344,13 @@ nav a:hover {
 
 /* ✨ Анимация при отваряне */
 @keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 #user-info {
@@ -1341,6 +1368,7 @@ nav a:hover {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .btn-logout:hover {
   background: darkred;
 }
@@ -1357,4 +1385,274 @@ nav a:hover {
 
 .remove-btn:hover {
   background: #c9302c;
+}
+
+/* ===== Neon Search Bar ===== */
+.search-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 314px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --spin-duration: 4s;
+}
+
+.search-field {
+  width: 301px;
+  height: 56px;
+  background: #ffffff !important;
+  /* БЯЛО */
+  border: none;
+  border-radius: 10px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  color: #000000 !important;
+  /* Черен текст */
+  position: relative;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+
+.search-field::placeholder {
+  color: #777;
+}
+
+
+.search-field:focus {
+  outline: none;
+  box-shadow: 0 0 20px rgba(207, 48, 170, 0.2);
+}
+
+.effect-layer {
+  position: absolute;
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.outer-glow {
+  width: 354px;
+  height: 130px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(32px);
+  opacity: 0.6;
+  overflow: hidden;
+}
+
+.outer-glow::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(from 60deg at 50% 50%,
+      transparent 0deg,
+      #4d3fd0 15deg,
+      transparent 145deg,
+      transparent 180deg,
+      #e830ba 215deg,
+      transparent 325deg);
+  animation: spin-effect var(--spin-duration, 4s) linear infinite;
+}
+
+.dark-layer {
+  width: 312px;
+  height: 65px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(2.5px);
+  overflow: hidden;
+}
+
+.dark-layer::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(from 82deg at 50% 50%,
+      transparent 0deg,
+      #2018a0 25deg,
+      transparent 75deg,
+      transparent 180deg,
+      #8d2580 205deg,
+      transparent 255deg);
+  animation: spin-effect var(--spin-duration, 4s) linear infinite;
+}
+
+.bright-layer {
+  width: 307px;
+  height: 63px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(1.8px);
+  overflow: hidden;
+}
+
+.bright-layer::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(from 83deg at 50% 50%,
+      transparent 0deg,
+      #b5a5e8 20deg,
+      transparent 60deg,
+      transparent 180deg,
+      #f0b0e5 200deg,
+      transparent 240deg);
+  filter: brightness(1.6);
+  animation: spin-effect var(--spin-duration, 4s) linear infinite;
+}
+
+.primary-border {
+  width: 303px;
+  height: 59px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(0.4px);
+  overflow: hidden;
+}
+
+.primary-border::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(from 70deg at 50% 50%,
+      transparent 0deg,
+      #5040d5 20deg,
+      transparent 80deg,
+      transparent 180deg,
+      #e540c0 210deg,
+      transparent 270deg);
+  filter: brightness(1.5);
+  animation: spin-effect var(--spin-duration, 4s) 0.15s linear infinite;
+}
+
+.pink-hint {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  background: radial-gradient(circle, #cf30aa 0%, transparent 70%);
+  top: 18px;
+  left: 20px;
+  filter: blur(18px);
+  opacity: 0.75;
+  z-index: 4;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.input-wrapper:hover .pink-hint {
+  opacity: 0;
+}
+
+.gradient-mask {
+  position: absolute;
+  width: 95px;
+  height: 18px;
+  background: linear-gradient(to right, transparent 0%, #010201 100%);
+  top: 20px;
+  left: 20px;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.search-field:focus~.gradient-mask {
+  opacity: 0;
+}
+
+.search-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 40px;
+  background-color: black;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.search-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.button-border-effect {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 42px;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.button-border-effect::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(from 90deg at 50% 50%,
+      transparent 0deg,
+      #3c394d 85deg,
+      transparent 95deg,
+      transparent 180deg,
+      #3c394d 265deg,
+      transparent 275deg);
+  filter: brightness(1.4);
+  animation: spin-effect var(--spin-duration, 4s) linear infinite;
+}
+
+@keyframes spin-effect {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 400px) {
+  .input-wrapper {
+    width: 90vw;
+  }
+
+  .search-field {
+    width: calc(90vw - 13px);
+  }
 }

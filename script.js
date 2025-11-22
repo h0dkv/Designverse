@@ -160,44 +160,129 @@ if (menuBtn && nav) {
     });
   });
 }
-    
-    // ⭐ Зареждане на любими модели (красиви карти)
+
+// ⭐ Зареждане на любими модели (красиви карти)
 if (window.location.pathname.includes("favorites.html")) {
-    const list = document.getElementById("favorites-list");
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const list = document.getElementById("favorites-list");
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-    if (favorites.length === 0) {
-        list.innerHTML = "<p>Нямате добавени любими модели.</p>";
-    } else {
-        favorites.forEach(item => {
-            const card = document.createElement("div");
-            card.classList.add("card");
+  if (favorites.length === 0) {
+    list.innerHTML = "<p>Нямате добавени любими модели.</p>";
+  } else {
+    favorites.forEach(item => {
+      const card = document.createElement("div");
+      card.classList.add("card");
 
-            card.innerHTML = `
+      card.innerHTML = `
                 <img src="${item.img}" alt="${item.title}">
                 <h3>${item.title}</h3>
                 <a href="${item.file}" download class="btn">Изтегли STL</a>
                 <button class="remove-btn">🗑 Премахни</button>
             `;
 
-            // Премахване от любими
-            card.querySelector(".remove-btn").addEventListener("click", () => {
-                removeFavorite(item.title);
-                card.remove();
-                if (document.querySelectorAll(".card").length === 0) {
-                    list.innerHTML = "<p>Нямате добавени любими модели.</p>";
-                }
-            });
+      // Премахване от любими
+      card.querySelector(".remove-btn").addEventListener("click", () => {
+        removeFavorite(item.title);
+        card.remove();
+        if (document.querySelectorAll(".card").length === 0) {
+          list.innerHTML = "<p>Нямате добавени любими модели.</p>";
+        }
+      });
 
-            list.appendChild(card);
-        });
-    }
+      list.appendChild(card);
+    });
+  }
 }
 
 // ❌ Функция за премахване
 function removeFavorite(title) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    favorites = favorites.filter(f => f.title !== title);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  favorites = favorites.filter(f => f.title !== title);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 }
-  
+
+const inputWrapper = document.querySelector('.input-wrapper');
+const searchField = document.querySelector('.search-field');
+const searchButton = document.querySelector('.search-button');
+let currentDuration = 4000;
+let targetDuration = 4000;
+let animationFrame = null;
+let isTyping = false;
+let isSearching = false;
+
+function smoothTransition() {
+  const diff = targetDuration - currentDuration;
+
+  if (Math.abs(diff) > 10) {
+    currentDuration += diff * 0.015;
+
+    inputWrapper.style.setProperty('--spin-duration', `${currentDuration}ms`);
+
+    animationFrame = requestAnimationFrame(smoothTransition);
+  } else {
+    currentDuration = targetDuration;
+    inputWrapper.style.setProperty('--spin-duration', `${currentDuration}ms`);
+    animationFrame = null;
+  }
+}
+
+searchField.addEventListener('input', () => {
+  if (!isTyping && !isSearching) {
+    isTyping = true;
+    targetDuration = 60000;
+    if (!animationFrame) {
+      smoothTransition();
+    }
+  }
+});
+
+searchField.addEventListener('focus', () => {
+  if (!isTyping && !searchField.value) {
+    targetDuration = 4000;
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+    currentDuration = 4000;
+    inputWrapper.style.setProperty('--spin-duration', `${currentDuration}ms`);
+  }
+});
+
+searchField.addEventListener('blur', () => {
+  if (!isSearching) {
+    isTyping = false;
+    targetDuration = 4000;
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+
+    smoothTransition();
+  }
+});
+
+searchButton.addEventListener('click', () => {
+  isSearching = true;
+
+  if (animationFrame) {
+    cancelAnimationFrame(animationFrame);
+    animationFrame = null;
+  }
+
+  targetDuration = 2500;
+  smoothTransition();
+
+  setTimeout(() => {
+    isSearching = false;
+    isTyping = false;
+    targetDuration = 4000;
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+
+    smoothTransition();
+  }, 1500);
+});
