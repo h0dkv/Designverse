@@ -5,8 +5,8 @@
   --timberwolf: #D3D0CB;
   --old-gold: #FFCC00;
   --black: #000000;
-  --midnight-violet: #320A28;
-  --crimson-violet: #511730;
+  --midnight-violet: #521d44;
+  --crimson-violet: #a86683;
   --white: #ffffff;
 }
 
@@ -825,7 +825,7 @@ body.christmas .register-form .btn {
 
 /* Hero секция с grid оформление */
 .hero {
-  background: linear-gradient(to right, #160C28, #511730);
+  background: linear-gradient(to right,var(--black),var(--crimson-violet));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -910,7 +910,7 @@ body.christmas .register-form .btn {
 }
 
 #theme-toggle {
-  background: linear-gradient(135deg, #5B5F97, #FFC145);
+  background: linear-gradient(135deg, #b71c1c, #388e3c);
   color: white;
   border: none;
   border-radius: 50px;
@@ -921,6 +921,8 @@ body.christmas .register-form .btn {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
   opacity: 0.9;
+  filter: drop-shadow(0 0 8px #ffffff) brightness(1.2);
+
 }
 
 #theme-toggle:hover {
@@ -930,8 +932,9 @@ body.christmas .register-form .btn {
 }
 
 body.christmas #theme-toggle {
-  background: linear-gradient(135deg, #b71c1c, #388e3c);
+  background: linear-gradient(135deg,var(--black), var(--midnight-violet));
   color: #fff;
+   filter: drop-shadow(0 0 8px #ffffff) brightness(1.2);
 }
 
 /* 🎯 Търсачка */
