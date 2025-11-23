@@ -4,20 +4,24 @@
   --cadet-gray: #9FB1BC;
   --timberwolf: #D3D0CB;
   --old-gold: #FFCC00;
+  --black: #000000;
+  --midnight-violet: #320A28;
+  --crimson-violet: #511730;
+  --white: #ffffff;
 }
 
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: var(--timberwolf);
-  color: var(--charcoal);
+  background-color: var(--midnight-violet);
+  color: var(--white);
 }
 
 header {
-  background-color: var(--cadet-gray) !important;
+  background-color: var(--crimson-violet) !important;
   position: relative;
   z-index: 999;
-  color: black;
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,7 +34,7 @@ header .logo {
 }
 
 nav a {
-  color: black;
+  color: white;
   text-decoration: none;
   margin-left: 1.5rem;
 }
@@ -49,7 +53,7 @@ main {
   background-image: url("images/hero.jpg");
   background-size: cover;
   background-position: center;
-  color: lightblue;
+  color: violet;
   height: 70vh;
   display: flex;
   flex-direction: column;
@@ -60,6 +64,10 @@ main {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
+.post h3{
+  color: var(--black);
+  margin-bottom: 1rem;
+}
 .btn {
   display: inline-block;
   background-color: var(--old-gold);
@@ -80,11 +88,12 @@ main {
 .catalog h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: var(--white);
 }
 
 .catalog p {
   font-size: 1.1rem;
-  color: #555;
+  color: var(--white);
 }
 
 .grid {
@@ -154,7 +163,7 @@ body.christmas .btn {
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: var(--slate-gray);
+  background-color: var(--crimson-violet);
   color: white;
   margin-top: 2rem;
 }
@@ -348,6 +357,7 @@ nav a.active {
 .about p {
   line-height: 1.6;
   margin-bottom: 2rem;
+  color: var(--white);
 }
 
 .team-grid {
@@ -411,7 +421,7 @@ body.christmas .member {
 }
 
 .contact-page p {
-  color: #333;
+  color: #ffffff;
   margin-bottom: 2rem;
 }
 
@@ -485,6 +495,11 @@ body.christmas .contact-form .btn {
   margin: 0 auto;
 }
 
+.blog h1 {
+  color: #5B5F97;
+  margin-bottom: 1rem;
+}
+
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -507,7 +522,7 @@ body.christmas .contact-form .btn {
 }
 
 .post img {
-  width: 100%;
+  width: 50%;
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
@@ -729,6 +744,11 @@ body.christmas nav a:hover {
   text-decoration: underline;
 }
 
+.login-form p {
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
 /* 🎄 Коледен режим */
 body.christmas .login-form {
   background: #FF6B6C;
@@ -805,7 +825,7 @@ body.christmas .register-form .btn {
 
 /* Hero секция с grid оформление */
 .hero {
-  background: linear-gradient(to right, #87CEEB, #b0e0e6);
+  background: linear-gradient(to right, #160C28, #511730);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1211,7 +1231,7 @@ body.christmas .fav-btn.added {
 .favorites-page p {
   font-size: 1.1rem;
   margin-bottom: 30px;
-  color: #555;
+  color: var(--white);
 }
 
 #favorites-list {
