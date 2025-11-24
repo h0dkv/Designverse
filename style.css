@@ -122,6 +122,7 @@ body.christmas  .catalog p {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
+  padding: 0.5rem;
 }
 
 .card:hover {
@@ -380,6 +381,9 @@ nav a.active {
   margin-bottom: 2rem;
   color: var(--white);
 }
+body.christmas .about p {
+  color: var(--black);
+}
 
 .team-grid {
   display: flex;
@@ -520,6 +524,12 @@ body.christmas .contact-form .btn {
   color: var(--gold);
   margin-bottom: 1rem;
 }
+body.christmas .blog h1 {
+  color: var(--crimson-violet);
+}
+body.christmas .blog p {
+  color: var(--black);
+}
 
 .blog-grid {
   display: grid;
@@ -581,7 +591,7 @@ body.christmas .post {
 }
 
 body.christmas .post .btn {
-  background: #FFC145;
+  background: var();
   color: #5B5F97;
 }
 

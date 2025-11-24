@@ -162,6 +162,7 @@ if (menuBtn && nav) {
 }
 
 // ⭐ Зареждане на любими модели (красиви карти)
+// ⭐ Зареждане на любими модели (красиви карти)
 if (window.location.pathname.includes("favorites.html")) {
   const list = document.getElementById("favorites-list");
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -174,17 +175,18 @@ if (window.location.pathname.includes("favorites.html")) {
       card.classList.add("card");
 
       card.innerHTML = `
-                <img src="${item.img}" alt="${item.title}">
-                <h3>${item.title}</h3>
-                <a href="${item.file}" download class="btn">Изтегли STL</a>
-                <button class="remove-btn">🗑 Премахни</button>
-            `;
+        <img src="${item.img}" alt="${item.title}">
+        <h3>${item.title}</h3>
+        <a href="${item.file}" download class="btn">Изтегли STL</a>
+        <button class="remove-btn">🗑 Премахни</button>
+      `;
 
-      // Премахване от любими
+      // Работещo премахване
       card.querySelector(".remove-btn").addEventListener("click", () => {
-        removeFavorite(item.title);
-        card.remove();
-        if (document.querySelectorAll(".card").length === 0) {
+        removeFavorite(item.title);    // ← премахва от localStorage
+        card.remove();                 // ← премахва от екрана
+
+        if (document.querySelectorAll("#favorites-list .card").length === 0) {
           list.innerHTML = "<p>Нямате добавени любими модели.</p>";
         }
       });
@@ -200,6 +202,7 @@ function removeFavorite(title) {
   favorites = favorites.filter(f => f.title !== title);
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
+
 
 const inputWrapper = document.querySelector('.input-wrapper');
 const searchField = document.querySelector('.search-field');
