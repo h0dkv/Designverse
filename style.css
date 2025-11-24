@@ -9,6 +9,7 @@
   --crimson-violet: #a86683;
   --white: #ffffff;
   --lavender-blush: #fff0f6;
+  --baby-blue: #89CFF0;
 }
 
 body {
@@ -79,7 +80,7 @@ main {
   font-weight: bold;
 }
 .news h2 {
-  color: var(--gold);
+  color: var(--baby-blue);
   margin-bottom: 1rem;
   text-align: center ;
 }
@@ -97,10 +98,15 @@ main {
   margin-bottom: 1rem;
   color: var(--gold);
 }
-
+body.christmas  .catalog h2 {
+  color: var(--crimson-violet);
+}
 .catalog p {
   font-size: 1.1rem;
   color: var(--white);
+}
+body.christmas  .catalog p {
+  color: var(--black);
 }
 
 .grid {
@@ -555,7 +561,7 @@ body.christmas .contact-form .btn {
 
 .post .btn {
   display: inline-block;
-  background: #5B5F97;
+  background: var(--crimson-violet);
   color: white;
   text-decoration: none;
   padding: 0.6rem 1rem;
@@ -564,7 +570,7 @@ body.christmas .contact-form .btn {
 }
 
 .post .btn:hover {
-  background: #FFC145;
+  background: var(--baby-blue);
   color: #000;
 }
 
@@ -844,7 +850,7 @@ body.christmas .register-form .btn {
 
 /* Hero секция с grid оформление */
 .hero {
-  background: linear-gradient(to right,var(--lavender-blush),var(--crimson-violet));
+  background: linear-gradient(to right,var(--baby-blue),var(--crimson-violet));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -997,51 +1003,6 @@ body.christmas .search-bar {
   }
 }
 
-/* 🕒 Countdown стил */
-#countdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  color: white;
-  background: linear-gradient(90deg, #ff4b1f, #1fddff);
-  border-radius: 1.5rem;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  padding: 20px 50px;
-  margin: 50px auto;
-  width: fit-content;
-  font-size: 1.8rem;
-  text-align: center;
-  animation: glowPulse 3s infinite;
-}
-
-#countdown span {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-transform: uppercase;
-}
-
-#countdown span strong {
-  font-size: 3rem;
-  color: #fff;
-}
-
-/* ✨ Пулсиращ ефект */
-@keyframes glowPulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-  }
-
-  50% {
-    box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
-  }
-}
-
 /* 🎄 Коледен режим */
 body.christmas #countdown {
   background: linear-gradient(90deg, #c00000, #008000);
@@ -1092,7 +1053,7 @@ body.christmas #countdown {
 
 #countdown span strong {
   font-size: 3rem;
-  color: #fff;
+  color: #ffffff;
 }
 
 /* ✨ Пулсиращ ефект */
@@ -1100,11 +1061,11 @@ body.christmas #countdown {
 
   0%,
   100% {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(162, 0, 255, 0.7);
   }
 
   50% {
-    box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 35px rgba(162, 0, 255, 0.7);
   }
 }
 
@@ -1148,7 +1109,7 @@ body.christmas #countdown {
 
   0%,
   100% {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    text-shadow: 0 0 10px rgba(235, 7, 7, 0.8),
       0 0 20px rgba(255, 68, 68, 0.8);
   }
 

@@ -71,7 +71,7 @@ const loginForm = document.querySelector('.login-form');
 if (loginForm) {
   loginForm.addEventListener('submit', e => {
     e.preventDefault();
-    alert('🎉 Добре дошъл обратно в DesignVerse!');
+    alert('🎉 Добре дошъл обратно в DesignRealm!');
   });
 }
 
