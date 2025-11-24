@@ -8,6 +8,7 @@
   --midnight-violet: #521d44;
   --crimson-violet: #a86683;
   --white: #ffffff;
+  --lavender-blush: #fff0f6;
 }
 
 body {
@@ -76,6 +77,11 @@ main {
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
+}
+.news h2 {
+  color: var(--gold);
+  margin-bottom: 1rem;
+  text-align: center ;
 }
 
 /* Каталог */
@@ -838,7 +844,7 @@ body.christmas .register-form .btn {
 
 /* Hero секция с grid оформление */
 .hero {
-  background: linear-gradient(to right,var(--black),var(--crimson-violet));
+  background: linear-gradient(to right,var(--lavender-blush),var(--crimson-violet));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -867,8 +873,8 @@ body.christmas .register-form .btn {
 }
 
 .hero-text .btn {
-  background: #fff;
-  color: #007FFF;
+  background: var(--crimson-violet);
+  color: var(--white);
   padding: 12px 24px;
   border-radius: 50px;
   font-weight: 600;
@@ -1052,7 +1058,7 @@ body.christmas #countdown {
 
 .countdown-section h2 {
   font-size: 2rem;
-  color: #ff4444;
+  color: var(--white);
   margin-bottom: 20px;
   font-family: 'Poppins', sans-serif;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
