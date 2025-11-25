@@ -190,31 +190,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===== Countdown (ако съществува) =====
-  const countdown = document.getElementById('countdown');
-  if (countdown) {
-    const targetDate = new Date('December 25, 2025 00:00:00').getTime();
-    function updateCountdown() {
-      const now = Date.now();
-      const distance = targetDate - now;
-      if (distance < 0) {
-        countdown.innerHTML = '🎄 Весела Коледа! 🎁';
-        return;
-      }
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+const countdown = document.getElementById("countdown");
+if (countdown) {
+  const targetDate = new Date("December 25, 2025 00:00:00").getTime();
 
-      countdown.innerHTML = `
-        <span><strong>${days}</strong> дни</span>
-        <span><strong>${hours}</strong> ч.</span>
-        <span><strong>${minutes}</strong> мин.</span>
-        <span><strong>${seconds}</strong> сек.</span>
-      `;
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      countdown.innerHTML = "🎄 Весела Коледа! 🎁";
+      return;
     }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML = `
+      <span><strong>${days}</strong> дни</span>
+      <span><strong>${hours}</strong> ч.</span>
+      <span><strong>${minutes}</strong> мин.</span>
+      <span><strong>${seconds}</strong> сек.</span>
+    `;
   }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+ }
 
   // ===== Neon Search-bar animation handling (за .input-wrapper) =====
   const inputWrapper = document.querySelector('.input-wrapper');
