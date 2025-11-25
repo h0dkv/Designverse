@@ -930,8 +930,6 @@ body.christmas .register-form .btn {
 /* Hero изображение */
 .hero-image img {
   width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Респонсивност */
@@ -1245,6 +1243,7 @@ body.christmas .fav-btn.added {
   margin-bottom: 10px;
 }
 
+
 .favorites-page p {
   font-size: 1.1rem;
   margin-bottom: 30px;
@@ -1310,8 +1309,7 @@ body.christmas .favorites-page p {
 
 /* 🎄 Коледен режим */
 body.christmas .favorites-page h1 {
-  color: gold;
-  text-shadow: 0 0 10px red;
+  color: var(--crimson-violet);
 }
 
 body.christmas .remove-btn {
@@ -1711,7 +1709,7 @@ nav a:hover {
   #nav {
     display: none;
     flex-direction: column;
-    background: #111;
+    background: var(--crimson-violet) !important;
     padding: 15px;
     position: absolute;
     top: 70px;
