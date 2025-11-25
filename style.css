@@ -1251,6 +1251,12 @@ body.christmas .fav-btn.added {
   color: var(--white);
 }
 
+body.christmas .favorites-page p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: var(--black);
+}
+
 #favorites-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1314,6 +1320,7 @@ body.christmas .remove-btn {
 
 body.christmas .danger-btn {
   background: linear-gradient(45deg, #ff0000, #006600);
+  color: var(--white);
 }
 
 /* 📱 Базов стил за навигацията */
@@ -1691,5 +1698,38 @@ nav a:hover {
 
   .search-field {
     width: calc(90vw - 13px);
+  }
+}
+
+#nav {
+  display: flex;
+  gap: 1rem;
+}
+
+/* 📱 Мобилна версия */
+@media (max-width: 768px) {
+  #nav {
+    display: none;
+    flex-direction: column;
+    background: #111;
+    padding: 15px;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  }
+
+  #nav.show {
+    display: flex;
+  }
+
+  #menu-toggle {
+    cursor: pointer;
+    font-size: 26px;
+    background: transparent;
+    border: none;
+    color: white;
   }
 }
