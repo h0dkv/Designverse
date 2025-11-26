@@ -1,11 +1,54 @@
 // script.js - обединена и почистена версия
 // Всички селектори и логика са защитени с проверки за наличност на DOM елементи
 
-// Презареждане при връщане от back/forward cache (за да не изчезва брояча)
+// ===== Коледен брояч – ГЛОБАЛНО =====
+let countdownInterval = null;
+
+function initCountdown() {
+  const countdown = document.getElementById('countdown');
+  if (!countdown) return; // ако няма брояч на страницата, нищо не правим
+
+  const targetDate = new Date('December 25, 2025 00:00:00').getTime();
+
+  function updateCountdown() {
+    const now = Date.now();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+      countdown.innerHTML = '🎄 Весела Коледа! 🎁';
+      if (countdownInterval) clearInterval(countdownInterval);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML =
+      `<span><strong>${days}</strong> дни</span>` +
+      `<span><strong>${hours}</strong> ч.</span>` +
+      `<span><strong>${minutes}</strong> мин.</span>` +
+      `<span><strong>${seconds}</strong> сек.</span>`;
+  }
+
+  // чистим стар интервал (ако е имало такъв) и стартираме наново
+  if (countdownInterval) clearInterval(countdownInterval);
+  updateCountdown();
+  countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+// ✔ Броячът тръгва при първо зареждане
+document.addEventListener('DOMContentLoaded', initCountdown);
+
+// ✔ И при връщане от back/forward cache – не презареждаме страницата, а само брояча
 window.addEventListener('pageshow', (event) => {
-  if (event.persisted) window.location.reload();
+  if (event.persisted) {
+    initCountdown();
+  }
 });
 
+// ===== Останалият код, който вече имаш =====
 document.addEventListener('DOMContentLoaded', () => {
   // ===== Навигация (мобилно меню) =====
   const menuBtn = document.getElementById('menu-toggle');
@@ -89,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== Формат и помощни utilities за favorites (унифицирани) =====
   function loadFavoritesRaw() {
     const raw = JSON.parse(localStorage.getItem('favorites') || '[]');
+    // Поддържаме и стари версии: ако е масив от низове, превръщаме в обекти
     return raw.map(item => {
       if (typeof item === 'string') return { title: item, img: '', file: null };
       if (item && typeof item === 'object') return item;
@@ -118,14 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isFavorite(favorites, title)) {
         favorites.push({ title, img, file });
         saveFavorites(favorites);
-
+        // визуална обратна връзка
         favBtn.classList.add('added');
         favBtn.innerHTML = '💚 В любими';
         setTimeout(() => {
           favBtn.classList.remove('added');
           favBtn.innerHTML = '❤️ Добави в любими';
         }, 1600);
-
         alert(`✅ "${title}" е добавен в Любими!`);
       } else {
         alert(`💡 "${title}" вече е в Любими.`);
@@ -138,17 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const listEl = document.getElementById('favorites-list');
     const clearBtn = document.getElementById('clearFavorites');
 
-    function removeFavorite(title) {
-      let favorites = loadFavoritesRaw();
-      favorites = favorites.filter(f => f.title !== title);
-      saveFavorites(favorites);
-    }
-
     function renderFavoritesList() {
       if (!listEl) return;
       const favorites = loadFavoritesRaw();
       listEl.innerHTML = '';
-
       if (favorites.length === 0) {
         listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
         return;
@@ -165,18 +201,23 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const removeBtn = card.querySelector('.remove-btn');
-        if (removeBtn) {
-          removeBtn.addEventListener('click', () => {
-            removeFavorite(item.title);
-            card.remove();
-            if (listEl.querySelectorAll('.card').length === 0) {
-              listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
-            }
-          });
-        }
+        removeBtn?.addEventListener('click', () => {
+          removeFavorite(item.title);
+          card.remove();
+          // Ако няма повече карти, покажи съобщение
+          if (listEl.querySelectorAll('.card').length === 0) {
+            listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
+          }
+        });
 
         listEl.appendChild(card);
       });
+    }
+
+    function removeFavorite(title) {
+      let favorites = loadFavoritesRaw();
+      favorites = favorites.filter(f => f.title !== title);
+      saveFavorites(favorites);
     }
 
     if (clearBtn) {
@@ -187,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // първоначално рендиране
     renderFavoritesList();
   }
 
@@ -200,36 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.display = title.includes(term) ? '' : 'none';
       });
     });
-  }
-
-  // ===== Countdown (ако съществува) =====
-  const countdown = document.getElementById('countdown');
-  if (countdown) {
-    const targetDate = new Date('December 25, 2025 00:00:00').getTime();
-
-    function updateCountdown() {
-      const now = Date.now();
-      const distance = targetDate - now;
-
-      if (distance <= 0) {
-        countdown.innerHTML = '🎄 Весела Коледа! 🎁';
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML =
-        `<span><strong>${days}</strong> дни</span>` +
-        `<span><strong>${hours}</strong> ч.</span>` +
-        `<span><strong>${minutes}</strong> мин.</span>` +
-        `<span><strong>${seconds}</strong> сек.</span>`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
   }
 
   // ===== Neon Search-bar animation handling (за .input-wrapper) =====
@@ -303,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Demo login form handler =====
+  // ===== Други: demo login form handler (за да не прави submit) =====
   const loginForm = document.querySelector('.login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
