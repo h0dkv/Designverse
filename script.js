@@ -4,7 +4,6 @@
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) window.location.reload();
 });
-document.addEventListener('DOMContentLoaded', updateCountdown);
 
 
 document.addEventListener('DOMContentLoaded', () => {
