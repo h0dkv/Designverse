@@ -1,10 +1,10 @@
-
 // script.js - обединена и почистена версия
 // Всички селектори и логика са защитени с проверки за наличност на DOM елементи
+
+// Презареждане при връщане от back/forward cache (за да не изчезва брояча)
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) window.location.reload();
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   // ===== Навигация (мобилно меню) =====
@@ -18,10 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Затваряне на менюто при кликане на линк (mobile)
-    nav.querySelectorAll?.('a').forEach(link => {
+    const links = nav.querySelectorAll ? nav.querySelectorAll('a') : [];
+    links.forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('show');
-        if (menuBtn) menuBtn.textContent = '☰';
+        menuBtn.textContent = '☰';
       });
     });
   }
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnTheme = document.getElementById('theme-toggle');
   const audio = document.getElementById('christmas-audio');
   let isChristmas = false;
+
   if (btnTheme) {
     btnTheme.addEventListener('click', () => {
       isChristmas = !isChristmas;
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (isChristmas) {
         startSnow();
-        audio?.play();
+        if (audio) audio.play().catch(() => { });
       } else {
         stopSnow();
         if (audio) {
@@ -56,12 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('christmas');
     if (btnTheme) btnTheme.textContent = '☀️ Нормален режим';
     startSnow();
-    audio?.play();
+    if (audio) audio.play().catch(() => { });
     isChristmas = true;
   }
 
   // ===== Сняг (ефект) =====
   let snowInterval = null;
+
   function startSnow() {
     stopSnow();
     snowInterval = setInterval(() => {
@@ -74,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => snowflake.remove(), 11000);
     }, 200);
   }
+
   function stopSnow() {
     if (snowInterval) {
       clearInterval(snowInterval);
@@ -85,16 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== Формат и помощни utilities за favorites (унифицирани) =====
   function loadFavoritesRaw() {
     const raw = JSON.parse(localStorage.getItem('favorites') || '[]');
-    // Поддържаме и стари версии: ако е масив от низове, превръщаме в обекти
     return raw.map(item => {
       if (typeof item === 'string') return { title: item, img: '', file: null };
       if (item && typeof item === 'object') return item;
       return { title: String(item), img: '', file: null };
     });
   }
+
   function saveFavorites(favs) {
     localStorage.setItem('favorites', JSON.stringify(favs));
   }
+
   function isFavorite(favs, title) {
     return favs.some(f => f.title === title);
   }
@@ -113,13 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isFavorite(favorites, title)) {
         favorites.push({ title, img, file });
         saveFavorites(favorites);
-        // визуална обратна връзка
+
         favBtn.classList.add('added');
         favBtn.innerHTML = '💚 В любими';
         setTimeout(() => {
           favBtn.classList.remove('added');
           favBtn.innerHTML = '❤️ Добави в любими';
         }, 1600);
+
         alert(`✅ "${title}" е добавен в Любими!`);
       } else {
         alert(`💡 "${title}" вече е в Любими.`);
@@ -132,10 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const listEl = document.getElementById('favorites-list');
     const clearBtn = document.getElementById('clearFavorites');
 
+    function removeFavorite(title) {
+      let favorites = loadFavoritesRaw();
+      favorites = favorites.filter(f => f.title !== title);
+      saveFavorites(favorites);
+    }
+
     function renderFavoritesList() {
       if (!listEl) return;
       const favorites = loadFavoritesRaw();
       listEl.innerHTML = '';
+
       if (favorites.length === 0) {
         listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
         return;
@@ -152,23 +165,18 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const removeBtn = card.querySelector('.remove-btn');
-        removeBtn?.addEventListener('click', () => {
-          removeFavorite(item.title);
-          card.remove();
-          // Ако няма повече карти, покажи съобщение
-          if (listEl.querySelectorAll('.card').length === 0) {
-            listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
-          }
-        });
+        if (removeBtn) {
+          removeBtn.addEventListener('click', () => {
+            removeFavorite(item.title);
+            card.remove();
+            if (listEl.querySelectorAll('.card').length === 0) {
+              listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
+            }
+          });
+        }
 
         listEl.appendChild(card);
       });
-    }
-
-    function removeFavorite(title) {
-      let favorites = loadFavoritesRaw();
-      favorites = favorites.filter(f => f.title !== title);
-      saveFavorites(favorites);
     }
 
     if (clearBtn) {
@@ -179,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // първоначално рендиране
     renderFavoritesList();
   }
 
@@ -196,16 +203,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===== Countdown (ако съществува) =====
-  const countdown = document.getElementById("countdown");
+  const countdown = document.getElementById('countdown');
   if (countdown) {
-    const targetDate = new Date("December 25, 2025 00:00:00").getTime();
+    const targetDate = new Date('December 25, 2025 00:00:00').getTime();
 
     function updateCountdown() {
-      const now = new Date().getTime();
+      const now = Date.now();
       const distance = targetDate - now;
 
-      if (distance < 0) {
-        countdown.innerHTML = "🎄 Весела Коледа! 🎁";
+      if (distance <= 0) {
+        countdown.innerHTML = '🎄 Весела Коледа! 🎁';
         return;
       }
 
@@ -214,16 +221,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdown.innerHTML = `
-      <span><strong>${days}</strong> дни</span>
-      <span><strong>${hours}</strong> ч.</span>
-      <span><strong>${minutes}</strong> мин.</span>
-      <span><strong>${seconds}</strong> сек.</span>
-    `;
+      countdown.innerHTML =
+        `<span><strong>${days}</strong> дни</span>` +
+        `<span><strong>${hours}</strong> ч.</span>` +
+        `<span><strong>${minutes}</strong> мин.</span>` +
+        `<span><strong>${seconds}</strong> сек.</span>`;
     }
 
-    setInterval(updateCountdown, 1000);
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   }
 
   // ===== Neon Search-bar animation handling (за .input-wrapper) =====
@@ -297,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Други: demo login form handler (за да не прави submit) =====
+  // ===== Demo login form handler =====
   const loginForm = document.querySelector('.login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
