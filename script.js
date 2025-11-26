@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="remove-btn">🗑 Премахни</button>
       `;
 
-      const rmBtn = card.querySelector('.remove-fav-btn');
+      const rmBtn = card.querySelector('.remove-btn');
       rmBtn.addEventListener('click', () => {
         let favsNow = getFavorites();
         favsNow = favsNow.filter(f => f.title !== item.title);
