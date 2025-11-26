@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ${item.img ? `<img src="${item.img}" alt="${item.title}">` : ''}
         <h3>${item.title}</h3>
         ${item.file ? `<a href="${item.file}" download class="btn">Изтегли STL</a>` : ''}
-        <button class="remove-fav-btn">🗑 Премахни</button>
+        <button class="remove-btn">🗑 Премахни</button>
       `;
 
       const rmBtn = card.querySelector('.remove-fav-btn');
