@@ -490,6 +490,7 @@ body.christmas .contact-page p {
   resize: vertical;
   min-height: 120px;
   font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .contact-form .btn {
