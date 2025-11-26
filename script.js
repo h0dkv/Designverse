@@ -73,23 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== Тема (Коледен / Нормален) =====
   const btnTheme = document.getElementById('theme-toggle');
   const audio = document.getElementById('christmas-audio');
+  let isChristmas = false;
 
-  // 1) Четем какво има запазено
-  let isChristmas = localStorage.getItem('theme') === 'christmas';
-
-  // 2) При първоначално зареждане – прилагаме темата
-  if (isChristmas) {
-    document.body.classList.add('christmas');
-    if (btnTheme) btnTheme.textContent = '☀️ Нормален режим';
-    startSnow();
-    // Ако не искаш музиката да тръгва всеки път, просто коментирай следващия ред:
-    if (audio) audio.play().catch(() => { });
-  } else {
-    document.body.classList.remove('christmas');
-    if (btnTheme) btnTheme.textContent = '🎄 Коледен режим';
-  }
-
-  // 3) Клик на бутона – сменяме тема и записваме в localStorage
   if (btnTheme) {
     btnTheme.addEventListener('click', () => {
       isChristmas = !isChristmas;
@@ -106,12 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
           audio.currentTime = 0;
         }
       }
-
-      // ❗ тук записваме избора, за да важи за всички страници
       localStorage.setItem('theme', isChristmas ? 'christmas' : 'normal');
     });
   }
-
 
   // Старо състояние на тема при презареждане
   const savedTheme = localStorage.getItem('theme');
