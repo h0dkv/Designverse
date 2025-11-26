@@ -1,7 +1,4 @@
-// script.js - обединена и почистена версия
-// Всички селектори и логика са защитени с проверки за наличност на DOM елементи
-
-// ===== Коледен брояч – ГЛОБАЛНО =====
+// ===================== Коледен брояч – ГЛОБАЛНО =====================
 let countdownInterval = null;
 
 function initCountdown() {
@@ -32,23 +29,23 @@ function initCountdown() {
       `<span><strong>${seconds}</strong> сек.</span>`;
   }
 
-  // чистим стар интервал (ако е имало такъв) и стартираме наново
+  // чистим стар интервал и стартираме наново
   if (countdownInterval) clearInterval(countdownInterval);
   updateCountdown();
   countdownInterval = setInterval(updateCountdown, 1000);
 }
 
-// ✔ Броячът тръгва при първо зареждане
+// броячът тръгва при първо зареждане
 document.addEventListener('DOMContentLoaded', initCountdown);
 
-// ✔ И при връщане от back/forward cache – не презареждаме страницата, а само брояча
+// и при връщане от back/forward cache
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
     initCountdown();
   }
 });
 
-// ===== Останалият код, който вече имаш =====
+// ===================== Основен код =====================
 document.addEventListener('DOMContentLoaded', () => {
   // ===== Навигация (мобилно меню) =====
   const menuBtn = document.getElementById('menu-toggle');
@@ -68,6 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
         menuBtn.textContent = '☰';
       });
     });
+  }
+
+  // ===== Сняг (ефект) – ПЪРВО дефинираме променливата и функциите =====
+  let snowInterval = null;
+
+  function stopSnow() {
+    if (snowInterval) {
+      clearInterval(snowInterval);
+      snowInterval = null;
+    }
+    document.querySelectorAll('.snowflake').forEach(s => s.remove());
+  }
+
+  function startSnow() {
+    stopSnow();
+    snowInterval = setInterval(() => {
+      const snowflake = document.createElement('div');
+      snowflake.textContent = '❄';
+      snowflake.className = 'snowflake';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = 5 + Math.random() * 5 + 's';
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 11000);
+    }, 200);
   }
 
   // ===== Тема (Коледен / Нормален) =====
@@ -105,134 +126,120 @@ document.addEventListener('DOMContentLoaded', () => {
     isChristmas = true;
   }
 
-  // ===== Сняг (ефект) =====
-  let snowInterval = null;
+  // ===================== FAVORITES – минимален и стабилен вариант =====================
+  const LS_KEY_FAV = 'favorites';
 
-  function startSnow() {
-    stopSnow();
-    snowInterval = setInterval(() => {
-      const snowflake = document.createElement('div');
-      snowflake.textContent = '❄';
-      snowflake.className = 'snowflake';
-      snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.animationDuration = 5 + Math.random() * 5 + 's';
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 11000);
-    }, 200);
-  }
-
-  function stopSnow() {
-    if (snowInterval) {
-      clearInterval(snowInterval);
-      snowInterval = null;
+  function getFavorites() {
+    try {
+      const raw = localStorage.getItem(LS_KEY_FAV);
+      if (!raw) return [];
+      const data = JSON.parse(raw);
+      return Array.isArray(data) ? data : [];
+    } catch (e) {
+      console.error('Грешка при парсване на favorites:', e);
+      localStorage.removeItem(LS_KEY_FAV);
+      return [];
     }
-    document.querySelectorAll('.snowflake').forEach(s => s.remove());
   }
 
-  // ===== Формат и помощни utilities за favorites (унифицирани) =====
-  function loadFavoritesRaw() {
-    const raw = JSON.parse(localStorage.getItem('favorites') || '[]');
-    // Поддържаме и стари версии: ако е масив от низове, превръщаме в обекти
-    return raw.map(item => {
-      if (typeof item === 'string') return { title: item, img: '', file: null };
-      if (item && typeof item === 'object') return item;
-      return { title: String(item), img: '', file: null };
-    });
+  function setFavorites(arr) {
+    localStorage.setItem(LS_KEY_FAV, JSON.stringify(arr));
   }
 
-  function saveFavorites(favs) {
-    localStorage.setItem('favorites', JSON.stringify(favs));
+  function isFav(arr, title) {
+    return arr.some(f => f.title === title);
   }
 
-  function isFavorite(favs, title) {
-    return favs.some(f => f.title === title);
-  }
+  function addFavoriteFromCard(card, btn) {
+    const title = card.querySelector('h3')?.textContent?.trim() || 'Untitled';
+    const img = card.querySelector('img')?.src || '';
+    const file = card.querySelector('a[download]')?.getAttribute('href') || null;
 
-  // ===== Добавяне в любими от каталог (бутони .fav-btn) =====
-  document.querySelectorAll('.card').forEach(card => {
-    const favBtn = card.querySelector('.fav-btn');
-    if (!favBtn) return;
+    let favs = getFavorites();
+    if (!isFav(favs, title)) {
+      favs.push({ title, img, file });
+      setFavorites(favs);
 
-    favBtn.addEventListener('click', () => {
-      const title = card.querySelector('h3')?.textContent?.trim() || 'Untitled';
-      const img = card.querySelector('img')?.src || '';
-      const file = card.querySelector('a[download]')?.getAttribute('href') || null;
-
-      let favorites = loadFavoritesRaw();
-      if (!isFavorite(favorites, title)) {
-        favorites.push({ title, img, file });
-        saveFavorites(favorites);
-        // визуална обратна връзка
-        favBtn.classList.add('added');
-        favBtn.innerHTML = '💚 В любими';
+      if (btn) {
+        btn.classList.add('added');
+        btn.innerHTML = '💚 В любими';
         setTimeout(() => {
-          favBtn.classList.remove('added');
-          favBtn.innerHTML = '❤️ Добави в любими';
+          btn.classList.remove('added');
+          btn.innerHTML = '❤️ Добави в любими';
         }, 1600);
-        alert(`✅ "${title}" е добавен в Любими!`);
-      } else {
-        alert(`💡 "${title}" вече е в Любими.`);
       }
-    });
+
+      alert(`✅ "${title}" е добавен в Любими!`);
+      console.log('Favorites now:', favs);
+    } else {
+      alert(`💡 "${title}" вече е в Любими.`);
+    }
+  }
+
+  // Делегирано събитие – работи за всички .fav-btn навсякъде
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.fav-btn');
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const card = btn.closest('.card');
+    if (!card) return;
+
+    console.log('Клик по fav-btn за карта:', card);
+    addFavoriteFromCard(card, btn);
   });
 
-  // ===== Страница Favorites: зареждане карти, премахване, изчистване =====
-  if (window.location.pathname.includes('favorites.html') || document.getElementById('favorites-list')) {
-    const listEl = document.getElementById('favorites-list');
-    const clearBtn = document.getElementById('clearFavorites');
+  // ===== Favorites страница (favorites.html) =====
+  const favListEl = document.getElementById('favorites-list');
+  const favClearBtn = document.getElementById('clearFavorites');
 
-    function renderFavoritesList() {
-      if (!listEl) return;
-      const favorites = loadFavoritesRaw();
-      listEl.innerHTML = '';
-      if (favorites.length === 0) {
-        listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
-        return;
-      }
+  function renderFavorites() {
+    if (!favListEl) return;
+    const favs = getFavorites();
+    favListEl.innerHTML = '';
 
-      favorites.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          ${item.img ? `<img src="${item.img}" alt="${item.title}">` : ''}
-          <h3>${item.title}</h3>
-          ${item.file ? `<a href="${item.file}" download class="btn">Изтегли STL</a>` : ''}
-          <button class="remove-btn">🗑 Премахни</button>
-        `;
+    if (favs.length === 0) {
+      favListEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
+      return;
+    }
 
-        const removeBtn = card.querySelector('.remove-btn');
-        removeBtn?.addEventListener('click', () => {
-          removeFavorite(item.title);
-          card.remove();
-          // Ако няма повече карти, покажи съобщение
-          if (listEl.querySelectorAll('.card').length === 0) {
-            listEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
-          }
-        });
+    favs.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        ${item.img ? `<img src="${item.img}" alt="${item.title}">` : ''}
+        <h3>${item.title}</h3>
+        ${item.file ? `<a href="${item.file}" download class="btn">Изтегли STL</a>` : ''}
+        <button class="remove-fav-btn">🗑 Премахни</button>
+      `;
 
-        listEl.appendChild(card);
+      const rmBtn = card.querySelector('.remove-fav-btn');
+      rmBtn.addEventListener('click', () => {
+        let favsNow = getFavorites();
+        favsNow = favsNow.filter(f => f.title !== item.title);
+        setFavorites(favsNow);
+        renderFavorites();
       });
-    }
 
-    function removeFavorite(title) {
-      let favorites = loadFavoritesRaw();
-      favorites = favorites.filter(f => f.title !== title);
-      saveFavorites(favorites);
-    }
-
-    if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
-        if (!confirm('Сигурни ли сте, че искате да изтриете всички любими?')) return;
-        saveFavorites([]);
-        renderFavoritesList();
-      });
-    }
-
-    // първоначално рендиране
-    renderFavoritesList();
+      favListEl.appendChild(card);
+    });
   }
 
-  // ===== Search (каталог) - филтриране на .card по h3 =====
+  if (favListEl) {
+    renderFavorites();
+  }
+
+  if (favClearBtn && favListEl) {
+    favClearBtn.addEventListener('click', () => {
+      if (!confirm('Сигурни ли сте, че искате да изтриете всички любими?')) return;
+      setFavorites([]);
+      renderFavorites();
+    });
+  }
+
+  // ===================== Search (каталог) =====================
   const search = document.getElementById('search');
   if (search) {
     search.addEventListener('input', (e) => {
@@ -244,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Neon Search-bar animation handling (за .input-wrapper) =====
+  // ===================== Neon Search-bar animation =====================
   const inputWrapper = document.querySelector('.input-wrapper');
   const searchField = document.querySelector('.search-field');
   const searchButton = document.querySelector('.search-button');
@@ -315,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Други: demo login form handler (за да не прави submit) =====
+  // ===================== Demo login (да не праща форма) =====================
   const loginForm = document.querySelector('.login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
