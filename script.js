@@ -1,3 +1,7 @@
+// === Firebase Auth (зарежда се само в модулен скрипт) ===
+import { getAuth, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
 // ===================== Коледен брояч – ГЛОБАЛНО =====================
 let countdownInterval = null;
 
@@ -29,16 +33,12 @@ function initCountdown() {
       `<span><strong>${seconds}</strong> сек.</span>`;
   }
 
-  // чистим стар интервал и стартираме наново
   if (countdownInterval) clearInterval(countdownInterval);
   updateCountdown();
   countdownInterval = setInterval(updateCountdown, 1000);
 }
 
-// броячът тръгва при първо зареждане
-document.addEventListener('DOMContentLoaded', initCountdown);
-
-// и при връщане от back/forward cache
+// при връщане от back/forward cache
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
     initCountdown();
@@ -47,6 +47,9 @@ window.addEventListener('pageshow', (event) => {
 
 // ===================== Основен код =====================
 document.addEventListener('DOMContentLoaded', () => {
+  // стартираме брояча при зареждане
+  initCountdown();
+
   // ===== Навигация (мобилно меню) =====
   const menuBtn = document.getElementById('menu-toggle');
   const nav = document.getElementById('nav') || document.querySelector('nav');
@@ -57,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
       menuBtn.textContent = nav.classList.contains('show') ? '✖' : '☰';
     });
 
-    // Затваряне на менюто при кликане на линк (mobile)
     const links = nav.querySelectorAll ? nav.querySelectorAll('a') : [];
     links.forEach(link => {
       link.addEventListener('click', () => {
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Сняг (ефект) – ПЪРВО дефинираме променливата и функциите =====
+  // ===== Сняг (ефект) =====
   let snowInterval = null;
 
   function stopSnow() {
@@ -116,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Старо състояние на тема при презареждане
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'christmas') {
     document.body.classList.add('christmas');
@@ -126,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isChristmas = true;
   }
 
-  // ===================== FAVORITES – минимален и стабилен вариант =====================
+  // ===================== FAVORITES =====================
   const LS_KEY_FAV = 'favorites';
 
   function getFavorites() {
@@ -176,7 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Делегирано събитие – работи за всички .fav-btn навсякъде
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.fav-btn');
     if (!btn) return;
@@ -191,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
     addFavoriteFromCard(card, btn);
   });
 
-  // ===== Favorites страница (favorites.html) =====
   const favListEl = document.getElementById('favorites-list');
   const favClearBtn = document.getElementById('clearFavorites');
 
@@ -322,34 +321,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-});
-import { getAuth, onAuthStateChanged, signOut }
-  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-document.addEventListener('DOMContentLoaded', () => {
+  // ===================== Firebase Auth – показване/скриване на менюто =====================
   const auth = getAuth();
 
   const loginLink = document.getElementById("login-link");
   const userMenu = document.getElementById("user-menu");
   const logoutBtn = document.getElementById("logout-btn");
 
-  // Следим дали потребителят е логнат
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Скриваме бутон "Вход"
       if (loginLink) loginLink.style.display = "none";
-
-      // Показваме меню "👤 / Изход"
       if (userMenu) userMenu.style.display = "flex";
     } else {
-      // Няма вход
       if (loginLink) loginLink.style.display = "inline-block";
       if (userMenu) userMenu.style.display = "none";
     }
   });
 
-  // Изход
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       signOut(auth).then(() => {
