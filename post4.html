@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -15,14 +17,20 @@
         <span>DesignRealm</span>
       </a>
     </div>
-    <nav>
+    <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
-      <a href="blog.html" class="active">Блог</a>
+      <a href="blog.html">Блог</a>
       <a href="about.html">За нас</a>
       <a href="contact.html">Контакти</a>
       <a href="favorites.html">Любими</a>
-      <a href="login.html">Вход</a>
+      <a id="login-link" href="login.html" class="active">Вход</a>
+
+      <!-- Скрито по начало — показва се когато е ЛОГНАТ -->
+      <div id="user-menu" style="display:none;">
+        <span id="user-icon" style="font-size:1.2rem;">👤</span>
+        <button id="logout-btn" class="btn-logout">Изход</button>
+      </div>
     </nav>
     <button id="menu-toggle">☰</button>
 
@@ -30,16 +38,18 @@
   </header>
 
   <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
-  
+
   <main class="blog-post">
     <h1>🌱 Еко материали в 3D принтирането</h1>
     <img src="images/eco-materials.jpg" alt="Еко материали">
     <p><strong>Дата:</strong> 12 ноември 2025</p>
     <p>
-      Все повече дизайнери и инженери избират еко-филаменти — направени от царевично нишесте, кафе, бамбук или дори рециклирани пластмаси.
+      Все повече дизайнери и инженери избират еко-филаменти — направени от царевично нишесте, кафе, бамбук или дори
+      рециклирани пластмаси.
     </p>
     <p>
-      PLA и PETG вече имат свои био версии, които намаляват отпадъците и въглеродния отпечатък. Бъдещето на 3D печата е зелено! 🌍
+      PLA и PETG вече имат свои био версии, които намаляват отпадъците и въглеродния отпечатък. Бъдещето на 3D печата е
+      зелено! 🌍
     </p>
     <a href="blog.html" class="btn">← Обратно към блога</a>
   </main>
@@ -50,4 +60,5 @@
     <script src="script.js"></script>
   </footer>
 </body>
+
 </html>

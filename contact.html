@@ -18,14 +18,20 @@
       </a>
     </div>
 
-    <nav>
+    <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
       <a href="blog.html">Блог</a>
       <a href="about.html">За нас</a>
-      <a href="contact.html" class="active">Контакти</a>
+      <a href="contact.html">Контакти</a>
       <a href="favorites.html">Любими</a>
-      <a href="login.html">Вход</a>
+      <a id="login-link" href="login.html" class="active">Вход</a>
+
+      <!-- Скрито по начало — показва се когато е ЛОГНАТ -->
+      <div id="user-menu" style="display:none;">
+        <span id="user-icon" style="font-size:1.2rem;">👤</span>
+        <button id="logout-btn" class="btn-logout">Изход</button>
+      </div>
     </nav>
     <button id="menu-toggle">☰</button>
 
@@ -52,7 +58,11 @@
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
+
   <script src="script.js"></script>
+
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth-ui.js"></script>
 </body>
 
 </html>

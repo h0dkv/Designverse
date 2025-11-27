@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>За нас | DesignRealm</title> 
+  <title>За нас | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -15,50 +17,55 @@
         <span>DesignRealm</span>
       </a>
     </div>
-
-    <nav>
+    <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
       <a href="blog.html">Блог</a>
-      <a href="about.html" class="active">За нас</a>
+      <a href="about.html">За нас</a>
       <a href="contact.html">Контакти</a>
       <a href="favorites.html">Любими</a>
-      <a href="login.html">Вход</a>
+      <a id="login-link" href="login.html" class="active">Вход</a>
+
+      <!-- Скрито по начало — показва се когато е ЛОГНАТ -->
+      <div id="user-menu" style="display:none;">
+        <span id="user-icon" style="font-size:1.2rem;">👤</span>
+        <button id="logout-btn" class="btn-logout">Изход</button>
+      </div>
     </nav>
     <button id="menu-toggle">☰</button>
 
     <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
-  
+
   <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
 
   <main class="about">
     <section class="intro">
       <h1>За нас</h1>
-      <p>Ние сме група ентусиазирани седмокласници, които обичат 3D дизайна, технологиите и креативността. 
-         Създадохме DesignRealm като място, където идеите ни оживяват — от първия скицник до готовия 3D модел.</p>
+      <p>Ние сме група ентусиазирани седмокласници, които обичат 3D дизайна, технологиите и креативността.
+        Създадохме DesignRealm като място, където идеите ни оживяват — от първия скицник до готовия 3D модел.</p>
     </section>
 
     <section class="mission">
       <h2>Нашата мисия</h2>
-      <p>Да вдъхновим младите хора да създават, да експериментират и да учат чрез изкуство и технологии. 
-         Вярваме, че всеки може да бъде дизайнер, когато има въображение и правилните инструменти.</p>
+      <p>Да вдъхновим младите хора да създават, да експериментират и да учат чрез изкуство и технологии.
+        Вярваме, че всеки може да бъде дизайнер, когато има въображение и правилните инструменти.</p>
     </section>
 
     <section class="team">
       <h2>Нашият екип</h2>
       <section class="team-grid">
-  <div class="member">
-    <img src="images/person1.jpg" alt="Ico hazarta">
-    <h3>Христиан Денков</h3>
-    <p>Уеб дизайнер и програмист</p>
-  </div>
-  <div class="member">
-    <img src="images/person2.jpg" alt="shoylev">
-    <h3>Стоян Шойлев</h3>
-    <p>3D дизайнер</p>
-  </div>
+        <div class="member">
+          <img src="images/person1.jpg" alt="Ico hazarta">
+          <h3>Христиан Денков</h3>
+          <p>Уеб дизайнер и програмист</p>
+        </div>
+        <div class="member">
+          <img src="images/person2.jpg" alt="shoylev">
+          <h3>Стоян Шойлев</h3>
+          <p>3D дизайнер</p>
+        </div>
       </section>
     </section>
   </main>
@@ -68,5 +75,10 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth-ui.js"></script>
+
 </body>
+
 </html>

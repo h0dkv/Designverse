@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Блог | DesignRealm</title> 
+  <title>Блог | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -16,23 +18,29 @@
       </a>
     </div>
 
-    <nav>
+    <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
-      <a href="blog.html" class="active">Блог</a>
+      <a href="blog.html">Блог</a>
       <a href="about.html">За нас</a>
       <a href="contact.html">Контакти</a>
       <a href="favorites.html">Любими</a>
-      <a href="login.html">Вход</a>
+      <a id="login-link" href="login.html" class="active">Вход</a>
+
+      <!-- Скрито по начало — показва се когато е ЛОГНАТ -->
+      <div id="user-menu" style="display:none;">
+        <span id="user-icon" style="font-size:1.2rem;">👤</span>
+        <button id="logout-btn" class="btn-logout">Изход</button>
+      </div>
     </nav>
 
     <button id="menu-toggle">☰</button>
 
-    <button id="theme-toggle">🎄 Коледен режим</button>  
+    <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
 
   <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
-  
+
   <main class="blog">
     <h1>Блог</h1>
     <p>Открий вдъхновение, идеи и новини от света на 3D дизайна ✨</p>
@@ -107,28 +115,12 @@
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
+
   <script src="script.js"></script>
-  <script type="module">
-  import { auth, onAuthStateChanged, signOut } from "./firebase-config.js";
 
-  const userInfo = document.getElementById('user-info');
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      userInfo.innerHTML = `
-        👤 Влязъл като: <strong>${user.email}</strong>
-        <button id="logout-btn" class="btn-logout">Изход</button>
-      `;
-      document.getElementById('logout-btn').addEventListener('click', async () => {
-        await signOut(auth);
-        alert("🚪 Излезе успешно!");
-        location.reload();
-      });
-    } else {
-      userInfo.innerHTML = `<a href="login.html">🔑 Вход</a>`;
-    }
-  });
-</script>
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth-ui.js"></script>
 
 </body>
+
 </html>
