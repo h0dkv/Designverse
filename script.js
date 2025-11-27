@@ -324,3 +324,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+import { getAuth, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+document.addEventListener('DOMContentLoaded', () => {
+  const auth = getAuth();
+
+  const loginLink = document.getElementById("login-link");
+  const userMenu = document.getElementById("user-menu");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  // Следим дали потребителят е логнат
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Скриваме бутон "Вход"
+      if (loginLink) loginLink.style.display = "none";
+
+      // Показваме меню "👤 / Изход"
+      if (userMenu) userMenu.style.display = "flex";
+    } else {
+      // Няма вход
+      if (loginLink) loginLink.style.display = "inline-block";
+      if (userMenu) userMenu.style.display = "none";
+    }
+  });
+
+  // Изход
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Излязохте успешно!");
+        window.location.href = "index.html";
+      });
+    });
+  }
+});
