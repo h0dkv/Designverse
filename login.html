@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Вход | DesignRealm</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -27,14 +29,15 @@
   </header>
 
   <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
-  
+
   <main class="login-page">
     <h1>Вход в DesignRealm</h1>
     <p>Влез в профила си, за да запазваш любими модели и следиш новини.</p>
 
-    <form class="login-form">
-      <input type="text" placeholder="Имейл или потребителско име" required>
-      <input type="password" placeholder="Парола" required>
+    <!-- *** добавям id на формата и input-ите *** -->
+    <form class="login-form" id="login-form">
+      <input type="email" id="login-email" placeholder="Имейл" required>
+      <input type="password" id="login-password" placeholder="Парола" required>
       <button type="submit" class="btn">Вход</button>
       <p>Нямаш профил? <a href="register.html">Регистрирай се</a></p>
     </form>
@@ -43,6 +46,13 @@
   <footer>
     <p>© 2025 DesignRealm | Всички права запазени</p>
   </footer>
+
+  <!-- Твоят стар глобален скрипт (меню, тема, брояч и т.н.) -->
   <script src="script.js"></script>
+
+  <!-- *** НОВО: модул за Firebase логика *** -->
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="login.js"></script>
 </body>
+
 </html>

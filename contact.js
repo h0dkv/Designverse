@@ -1,15 +1,16 @@
-
 (function () {
-  emailjs.init("o6xZVMPNkI1Ch3geb"); // 
+  emailjs.init("o6xZVMPNkI1Ch3geb"); // твоя Public Key
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".contact-form");
 
+  if (!form) return; // защита, ако някой ден включиш скрипта и на друга страница
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    emailjs.sendForm("service_designsverse", "template_vfw9947", this)
+    emailjs.sendForm("service_designsverse", "template_vfw9947", form)
       .then(() => {
         alert("✅ Съобщението беше изпратено успешно!");
         form.reset();

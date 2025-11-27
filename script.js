@@ -322,12 +322,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===================== Demo login (да не праща форма) =====================
-  const loginForm = document.querySelector('.login-form');
-  if (loginForm) {
-    loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('🎉 Добре дошъл обратно в DesignRealm!');
-    });
-  }
+
 });
