@@ -830,7 +830,7 @@ body.christmas .login-form .btn {
 }
 
 .register-form .btn {
-  background: #5B5F97;
+  background: var(--crimson-violet);
   color: white;
   border: none;
   padding: 0.8rem;
