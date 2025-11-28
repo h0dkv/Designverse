@@ -1368,20 +1368,6 @@ nav a:hover {
   background: darkred;
 }
 
-.remove-btn {
-  background: #d9534f;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.remove-btn:hover {
-  background: #c9302c;
-}
-
 .search-container {
   position: relative;
   z-index: 1;
