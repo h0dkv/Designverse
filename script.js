@@ -1,4 +1,3 @@
-
 import { getAuth, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
@@ -44,8 +43,9 @@ window.addEventListener('pageshow', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCountdown();
+  initCountdown();
 
+  // ----- Мобилно меню -----
   const menuBtn = document.getElementById('menu-toggle');
   const nav = document.getElementById('nav') || document.querySelector('nav');
 
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ----- Коледен режим / сняг -----
   let snowInterval = null;
 
   function stopSnow() {
@@ -120,116 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isChristmas = true;
   }
 
-  const LS_KEY_FAV = 'favorites';
-
-  function getFavorites() {
-    try {
-      const raw = localStorage.getItem(LS_KEY_FAV);
-      if (!raw) return [];
-      const data = JSON.parse(raw);
-      return Array.isArray(data) ? data : [];
-    } catch (e) {
-      console.error('Грешка при парсване на favorites:', e);
-      localStorage.removeItem(LS_KEY_FAV);
-      return [];
-    }
-  }
-
-  function setFavorites(arr) {
-    localStorage.setItem(LS_KEY_FAV, JSON.stringify(arr));
-  }
-
-  function isFav(arr, title) {
-    return arr.some(f => f.title === title);
-  }
-
-  function addFavoriteFromCard(card, btn) {
-    const title = card.querySelector('h3')?.textContent?.trim() || 'Untitled';
-    const img = card.querySelector('img')?.src || '';
-    const file = card.querySelector('a[download]')?.getAttribute('href') || null;
-
-    let favs = getFavorites();
-    if (!isFav(favs, title)) {
-      favs.push({ title, img, file });
-      setFavorites(favs);
-
-      if (btn) {
-        btn.classList.add('added');
-        btn.innerHTML = '💚 В любими';
-        setTimeout(() => {
-          btn.classList.remove('added');
-          btn.innerHTML = '❤️ Добави в любими';
-        }, 1600);
-      }
-
-      alert(`✅ "${title}" е добавен в Любими!`);
-      console.log('Favorites now:', favs);
-    } else {
-      alert(`💡 "${title}" вече е в Любими.`);
-    }
-  }
-
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.fav-btn');
-    if (!btn) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const card = btn.closest('.card');
-    if (!card) return;
-
-    console.log('Клик по fav-btn за карта:', card);
-    addFavoriteFromCard(card, btn);
-  });
-
-  const favListEl = document.getElementById('favorites-list');
-  const favClearBtn = document.getElementById('clearFavorites');
-
-  function renderFavorites() {
-    if (!favListEl) return;
-    const favs = getFavorites();
-    favListEl.innerHTML = '';
-
-    if (favs.length === 0) {
-      favListEl.innerHTML = '<p>Нямате добавени любими модели.</p>';
-      return;
-    }
-
-    favs.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        ${item.img ? `<img src="${item.img}" alt="${item.title}">` : ''}
-        <h3>${item.title}</h3>
-        ${item.file ? `<a href="${item.file}" download class="btn">Изтегли STL</a>` : ''}
-        <button class="remove-btn">🗑 Премахни</button>
-      `;
-
-      const rmBtn = card.querySelector('.remove-btn');
-      rmBtn.addEventListener('click', () => {
-        let favsNow = getFavorites();
-        favsNow = favsNow.filter(f => f.title !== item.title);
-        setFavorites(favsNow);
-        renderFavorites();
-      });
-
-      favListEl.appendChild(card);
-    });
-  }
-
-  if (favListEl) {
-    renderFavorites();
-  }
-
-  if (favClearBtn && favListEl) {
-    favClearBtn.addEventListener('click', () => {
-      if (!confirm('Сигурни ли сте, че искате да изтриете всички любими?')) return;
-      setFavorites([]);
-      renderFavorites();
-    });
-  }
-
+  // ----- Търсачка по заглавие на картите -----
   const search = document.getElementById('search');
   if (search) {
     search.addEventListener('input', (e) => {
@@ -241,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ----- Анимация на търсачката (input-wrapper) -----
   const inputWrapper = document.querySelector('.input-wrapper');
   const searchField = document.querySelector('.search-field');
   const searchButton = document.querySelector('.search-button');
@@ -311,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ----- Auth: показване на "Вход" / "Потребител" -----
   const auth = getAuth();
 
   const loginLink = document.getElementById("login-link");
