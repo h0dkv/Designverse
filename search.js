@@ -26,16 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Бутон за търсене
     searchBtn.addEventListener('click', (e) => {
         e.preventDefault();
         filterCatalog();
     });
 
-    // Live search при писане
     searchInput.addEventListener('input', filterCatalog);
 
-    // Enter стартира търсене
     searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();

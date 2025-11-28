@@ -26,7 +26,6 @@
       <a href="favorites.html">Любими</a>
       <a id="login-link" href="login.html" class="active">Вход</a>
 
-      <!-- Скрито по начало — показва се когато е ЛОГНАТ -->
       <div id="user-menu" style="display:none;">
         <span id="user-icon" style="font-size:1.2rem;">👤</span>
         <button id="logout-btn" class="btn-logout">Изход</button>
@@ -41,7 +40,6 @@
     <h1> Моите любими модели</h1>
     <p>Тук са запазените ти 3D модели. Можеш да ги разгледаш или премахнеш от списъка.</p>
 
-    <!-- ТУК ЛИПСВАШЕ! -->
     <div id="favorites-list" class="grid"></div>
 
     <button id="clearFavorites" class="btn danger-btn">🗑️ Изчисти всички</button>
@@ -55,6 +53,7 @@
 
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth-ui.js"></script>
+  <script type="module" src="firebase-favorites.js"></script>
 </body>
 
 </html>

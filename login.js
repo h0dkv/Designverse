@@ -1,4 +1,4 @@
-// login.js
+
 import { auth } from "./firebase-init.js";
 import {
     signInWithEmailAndPassword,
@@ -22,7 +22,6 @@ if (loginForm) {
 
             alert('Успешен вход! 🙂');
 
-            // пример: след успешен вход – пращаме към началото
             window.location.href = 'index.html';
 
         } catch (err) {
@@ -40,7 +39,6 @@ if (loginForm) {
     });
 }
 
-// Следим дали има логнат потребител (по желание)
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log('В момента е логнат:', user.email);

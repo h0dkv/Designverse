@@ -1,4 +1,4 @@
-// register.js
+
 import { auth } from "./firebase-init.js";
 import {
     createUserWithEmailAndPassword,
@@ -26,11 +26,9 @@ if (form) {
         }
 
         try {
-            // Създаваме акаунта
             const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
             const user = userCredential.user;
 
-            // Записваме потребителското име в профила (displayName)
             if (username) {
                 await updateProfile(user, { displayName: username });
             }

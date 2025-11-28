@@ -1,12 +1,11 @@
 (function () {
-  emailjs.init("o6xZVMPNkI1Ch3geb"); // твоя Public Key
+  emailjs.init("o6xZVMPNkI1Ch3geb"); 
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".contact-form");
 
-  if (!form) return; // защита, ако някой ден включиш скрипта и на друга страница
-
+  if (!form) return; 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 

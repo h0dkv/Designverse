@@ -1,8 +1,7 @@
-// === Firebase Auth (зарежда се само в модулен скрипт) ===
+
 import { getAuth, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-// ===================== Коледен брояч – ГЛОБАЛНО =====================
 let countdownInterval = null;
 
 function initCountdown() {
@@ -38,19 +37,15 @@ function initCountdown() {
   countdownInterval = setInterval(updateCountdown, 1000);
 }
 
-// при връщане от back/forward cache
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
     initCountdown();
   }
 });
 
-// ===================== Основен код =====================
 document.addEventListener('DOMContentLoaded', () => {
-  // стартираме брояча при зареждане
-  initCountdown();
+    initCountdown();
 
-  // ===== Навигация (мобилно меню) =====
   const menuBtn = document.getElementById('menu-toggle');
   const nav = document.getElementById('nav') || document.querySelector('nav');
 
@@ -69,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Сняг (ефект) =====
   let snowInterval = null;
 
   function stopSnow() {
@@ -93,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 200);
   }
 
-  // ===== Тема (Коледен / Нормален) =====
   const btnTheme = document.getElementById('theme-toggle');
   const audio = document.getElementById('christmas-audio');
   let isChristmas = false;
@@ -127,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     isChristmas = true;
   }
 
-  // ===================== FAVORITES =====================
   const LS_KEY_FAV = 'favorites';
 
   function getFavorites() {
@@ -238,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===================== Search (каталог) =====================
   const search = document.getElementById('search');
   if (search) {
     search.addEventListener('input', (e) => {
@@ -250,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===================== Neon Search-bar animation =====================
   const inputWrapper = document.querySelector('.input-wrapper');
   const searchField = document.querySelector('.search-field');
   const searchButton = document.querySelector('.search-button');
@@ -321,7 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===================== Firebase Auth – показване/скриване на менюто =====================
   const auth = getAuth();
 
   const loginLink = document.getElementById("login-link");

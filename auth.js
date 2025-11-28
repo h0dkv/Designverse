@@ -1,4 +1,4 @@
-// auth-ui.js
+
 import { auth } from "./firebase-init.js";
 import {
     onAuthStateChanged,
@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const userMenu = document.getElementById("user-menu");
     const logoutBtn = document.getElementById("logout-btn");
 
-    // Следим дали има логнат потребител
     onAuthStateChanged(auth, (user) => {
         if (user) {
             // ЛОГНАТ → скриваме "Вход", показваме 👤 + Изход
@@ -23,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Изход
     if (logoutBtn) {
         logoutBtn.addEventListener("click", (e) => {
             e.preventDefault();
