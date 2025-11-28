@@ -68,10 +68,11 @@ main {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.post h3{
+.post h3 {
   color: var(--black);
   margin-bottom: 1rem;
 }
+
 .btn {
   display: inline-block;
   background-color: var(--old-gold);
@@ -81,10 +82,11 @@ main {
   text-decoration: none;
   font-weight: bold;
 }
+
 .news h2 {
   color: var(--baby-blue);
   margin-bottom: 1rem;
-  text-align: center ;
+  text-align: center;
   font-size: 2.5rem;
 }
 
@@ -100,14 +102,17 @@ main {
   margin-bottom: 1rem;
   color: var(--gold);
 }
-body.christmas  .catalog h2 {
+
+body.christmas .catalog h2 {
   color: var(--crimson-violet);
 }
+
 .catalog p {
   font-size: 1.1rem;
   color: var(--white);
 }
-body.christmas  .catalog p {
+
+body.christmas .catalog p {
   color: var(--black);
 }
 
@@ -172,6 +177,7 @@ body.christmas header {
   background-color: var(--christmas-red) !important;
   color: var(--timberwolf);
 }
+
 body.christmas .card {
   background: #FF6B6C;
   color: #fff;
@@ -375,6 +381,7 @@ nav a.active {
   margin-bottom: 2rem;
   color: var(--white);
 }
+
 body.christmas .about p {
   color: var(--black);
 }
@@ -446,6 +453,7 @@ body.christmas .contact-page h1 {
   color: #ffffff;
   margin-bottom: 2rem;
 }
+
 body.christmas .contact-page p {
   color: var(--black);
 }
@@ -525,9 +533,11 @@ body.christmas .contact-form .btn {
   color: var(--gold);
   margin-bottom: 1rem;
 }
+
 body.christmas .blog h1 {
   color: var(--crimson-violet);
 }
+
 body.christmas .blog p {
   color: var(--black);
 }
@@ -547,6 +557,7 @@ body.christmas .blog p {
   text-align: left;
   transition: transform 0.3s, box-shadow 0.3s;
   margin-left: 1rem;
+  justify-content: center;
 }
 
 .post:hover {
@@ -725,19 +736,23 @@ body.christmas nav a:hover {
 }
 
 .login-page h1 {
-  color:var(--gold);
+  color: var(--gold);
   margin-bottom: 1rem;
 }
+
 body.christmas .login-page h1 {
-  color: var(--crimson-violet);}
+  color: var(--crimson-violet);
+}
 
 .login-page p {
   color: #ffffff;
   margin-bottom: 2rem;
 }
+
 body.christmas .login-page p {
   color: var(--black);
 }
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -862,7 +877,7 @@ body.christmas .register-form .btn {
 }
 
 .hero {
-  background: linear-gradient(to right,var(--baby-blue),var(--crimson-violet));
+  background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -966,9 +981,9 @@ body.christmas .register-form .btn {
 }
 
 body.christmas #theme-toggle {
-  background: linear-gradient(135deg,var(--black), var(--midnight-violet));
+  background: linear-gradient(135deg, var(--black), var(--midnight-violet));
   color: #fff;
-   filter: drop-shadow(0 0 8px #ffffff) brightness(1.2);
+  filter: drop-shadow(0 0 8px #ffffff) brightness(1.2);
 }
 
 .search-bar {
@@ -1651,7 +1666,7 @@ nav a:hover {
     right: 20px;
     width: 200px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   }
 
   #nav.show {
