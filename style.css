@@ -1704,7 +1704,7 @@ nav a:hover {
 .content-section {
   margin-top: 2rem;
   padding: 1.5rem;
-  background: var(--white);
+  background: var(--crimson-violet);
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
