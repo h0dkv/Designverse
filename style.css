@@ -1692,7 +1692,7 @@ nav a:hover {
 .hero-3d {
   text-align: center;
   padding: 3rem 1rem;
-  background: linear-gradient(135deg, #2d2d3a, #1b1b24);
+  background: linear-gradient(to right, var(--gold), var(--midnight-violet));
   border-radius: 15px;
 }
 
@@ -1704,7 +1704,7 @@ nav a:hover {
 .content-section {
   margin-top: 2rem;
   padding: 1.5rem;
-  background: #1a1a24;
+  background: var(--white);
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
@@ -1716,7 +1716,7 @@ nav a:hover {
 }
 
 .info-box {
-  background: #22222f;
+  background: var(--black);
   border-left: 4px solid #6a4fff;
   padding: 1rem;
   border-radius: 10px;
@@ -1729,12 +1729,12 @@ nav a:hover {
 }
 
 .highlighted {
-  background: #262634;
+  background: var(--slate-gray);
   border: 1px solid #6a4fff;
   text-align: center;
 }
 
-.btn {
+.content-sectoin .highlighted .btn {
   background: #6a4fff;
   padding: 0.7rem 1.3rem;
   border-radius: 8px;
