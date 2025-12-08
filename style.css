@@ -1695,10 +1695,17 @@ nav a:hover {
   background: linear-gradient(to right, var(--gold), var(--midnight-violet));
   border-radius: 15px;
 }
+.body.christmas .hero-3d {
+  background: linear-gradient(to right, var(--christmas-green), var(--christmas-red));
+}
 
 .hero-3d h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+}
+
+.body.christmas .hero-3d h1 {
+  color: var(--white);
 }
 
 .content-section {
@@ -1708,6 +1715,10 @@ nav a:hover {
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
+body.christmas .content-section {
+  background: var(--midnight-violet);
+}
+
 
 .content-section img.content-image {
   width: 100%;
@@ -1716,11 +1727,26 @@ nav a:hover {
 }
 
 .info-box {
-  background: var(--black);
+  background: var(--baby-blue);
   border-left: 4px solid #6a4fff;
   padding: 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
+}
+
+.body.christmas .info-box {
+  background: var(--christmas-green);
+}
+
+.list-benefits {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+  background: var(--crimson-violet);
+}
+
+.body.christmas .list-benefits {
+  background: linear-gradient(to right, var(--christmas-red), var(--christmas-green));
 }
 
 .list-benefits li {
@@ -1728,10 +1754,19 @@ nav a:hover {
   font-size: 1.1rem;
 }
 
+.body.christmas .list-benefits li {
+  color: var(--white);
+}
+
 .highlighted {
   background: var(--slate-gray);
   border: 1px solid #6a4fff;
   text-align: center;
+}
+
+.body.christmas .highlighted {
+  background: linear-gradient(to right, var(--christmas-green), var(--christmas-red));
+  border: 1px solid #FFC145;
 }
 
 .content-sectoin .highlighted .btn {
@@ -1742,6 +1777,11 @@ nav a:hover {
   margin-top: 1rem;
   color: #fff;
   text-decoration: none;
+}
+
+body.christmas .content-sectoin .highlighted .btn {
+  background: #FFC145;
+  color: #5B5F97;
 }
 
 .video-container {
