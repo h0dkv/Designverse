@@ -1803,3 +1803,102 @@ body.christmas .content-sectoin .highlighted .btn {
   width: 100%;
   border-radius: 12px;
 }
+
+.dashboard {
+  position: relative;
+  display: inline-block;
+}
+
+.dashboard-btn {
+  background: #2a2a2d;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.dashboard-btn:hover {
+  background: #3a3a3d;
+}
+
+.dashboard-menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: #1c1c1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+}
+
+.dashboard-menu a,
+.dashboard-menu button {
+  padding: 10px 15px;
+  text-align: left;
+  font-size: 14px;
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.dashboard-menu a:hover,
+.dashboard-menu button:hover {
+  background: #2e2e30;
+}
+
+.logout-btn {
+  color: #ff6b6b;
+}
+
+.hidden {
+  display: none;
+}
+
+.user-welcome {
+  padding: 8px 15px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+#lang-btn {
+  background: linear-gradient(45deg, #5B5F97, #FFC145);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 0.95rem;
+  margin-left: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+#lang-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(255,199,68,0.5);
+}
+
+#lang-btn:active {
+  transform: scale(0.95);
+}
+
+body.christmas #lang-btn {
+  background: linear-gradient(45deg, #b71c1c, #1b5e20);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+body.christmas #lang-btn:hover {
+  box-shadow: 0 0 15px gold;
+  transform: scale(1.1);
+}
