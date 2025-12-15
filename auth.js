@@ -4,6 +4,26 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+
+  const ref = doc(db, "users", user.uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return;
+
+  const role = snap.data().role;
+
+  if (role === "admin") {
+    document.body.classList.add("admin");
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // --- HEADER / LOGIN ---

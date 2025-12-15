@@ -1,7 +1,19 @@
-
-
 import { auth } from "./firebase-init.js";
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+import {
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+createUserWithEmailAndPassword(auth, email, password)
+  .then(async (cred) => {
+    await setDoc(doc(db, "users", cred.user.uid), {
+      email: cred.user.email,
+      role: "user", // ⬅️ ПО ПОДРАЗБИРАНЕ
+      createdAt: serverTimestamp()
+    });
+  });
 
 const form = document.querySelector(".register-form");
 

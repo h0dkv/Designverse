@@ -230,3 +230,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+if (role === "admin") {
+  adminPanel.classList.remove("hidden");
+} else {
+  adminPanel.classList.add("hidden");
+}
+  
