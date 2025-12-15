@@ -18,7 +18,7 @@
       </a>
     </div>
     <nav id="nav">
-      <a href="index.html">Начало</a>
+      <a data-i18n="nav_home" href="index.html">Начало</a>
       <a href="3dprint.html">3D принтирането</a>
       <a href="catalog.html">Каталог</a>
       <a href="blog.html">Блог</a>
@@ -27,16 +27,35 @@
       <a href="favorites.html">Любими</a>
       <a id="login-link" href="login.html" class="active">Вход</a>
 
-      <div id="user-menu" style="display:none;">
-        <span id="user-icon" style="font-size:1.2rem;">👤</span>
-        <button id="logout-btn" class="btn-logout">Изход</button>
-      </div>
-    </nav>
-    <button id="menu-toggle">☰</button>
 
+    </nav>
+
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn">👤 Dashboard ▾</button>
+
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
+    <div id="admin-panel" class="hidden">
+      <h3>👑 Admin Panel</h3>
+      <a href="upload.html">⬆️ Качи модел</a>
+      <a href="manage-users.html">👥 Потребители</a>
+    </div>
+    <div id="admin-panel" class="hidden">
+      <h3>👑 Admin Panel</h3>
+      <a href="upload.html">⬆️ Качи модел</a>
+      <a href="manage-users.html">👥 Потребители</a>
+    </div>
+
+
+    <button id="menu-toggle">☰</button>
     <button id="theme-toggle">🎄 Коледен режим</button>
   </header>
-
 
   <audio id="christmas-audio" src="audio/christmas.mp3" loop></audio>
 

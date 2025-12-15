@@ -9,6 +9,21 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
+const adminEmails = [
+    "hristianfortnite@gmail.com",
+  ];
+  
+const role = adminEmails.includes(user.email)
+  ? "admin"
+  : "user";
+
+await setDoc(doc(db, "users", user.uid), {
+  email: user.email,
+  role: role,
+  createdAt: serverTimestamp()
+});
+
+
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
