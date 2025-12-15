@@ -634,11 +634,6 @@ body.christmas header span {
   color: white !important;
 }
 
-body.christmas nav a:hover,
-body.christmas nav a.active {
-  color: #FFC145 !important;
-}
-
 body.christmas .logo img {
   filter: drop-shadow(0 0 8px #FFC145) brightness(1.2);
   animation: glow 2s ease-in-out infinite alternate;
@@ -1901,4 +1896,51 @@ body.christmas #lang-btn {
 body.christmas #lang-btn:hover {
   box-shadow: 0 0 15px gold;
   transform: scale(1.1);
+}
+
+.dashboard {
+  position: relative;
+}
+
+#dashboard-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dashboard-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #222;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.dashboard-menu a,
+.dashboard-menu button,
+.dashboard-menu p {
+  color: white;
+  padding: 8px;
+  text-align: left;
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dashboard-menu a:hover,
+.dashboard-menu button:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.dashboard-menu.show {
+  display: flex;
 }
