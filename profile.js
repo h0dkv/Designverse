@@ -1,17 +1,21 @@
 import { auth, db } from "./firebase-init.js";
-import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { doc, getDoc } from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 const emailEl = document.getElementById("email");
 const roleEl = document.getElementById("role");
-const adminLink = document.getElementById("adminLink");
 
-const user = auth.currentUser;
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
-const snap = await getDoc(doc(db, "users", user.uid));
+  emailEl.textContent = user.email;
 
-emailEl.textContent = user.email;
-roleEl.textContent = snap.data().role;
-
-if (snap.data().role === "admin") {
-  adminLink.style.display = "inline-block";
-}
+  const snap = await getDoc(doc(db, "users", user.uid));
+  roleEl.textContent = snap.data().role;
+});
+  

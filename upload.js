@@ -1,15 +1,29 @@
 import { auth, db } from "./firebase-init.js";
-import { addDoc, collection } from "firebase/firestore";
+import { onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-uploadForm.addEventListener("submit", async e => {
+onAuthStateChanged(auth, (user) => {
+  if (!user) window.location.href = "login.html";
+});
+
+document.getElementById("upload-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   await addDoc(collection(db, "models"), {
-    title: uploadForm[0].value,
+    title: title.value,
+    fileUrl: fileUrl.value,
+    imageUrl: imageUrl.value,
     uploadedBy: auth.currentUser.uid,
     status: "pending",
-    createdAt: new Date()
+    createdAt: serverTimestamp()
   });
 
-  alert("Моделът чака одобрение от админ");
+  alert("📨 Моделът е изпратен за одобрение!");
+  e.target.reset();
 });

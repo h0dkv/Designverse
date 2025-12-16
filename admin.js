@@ -1,35 +1,19 @@
-import { db } from "./firebase-init.js";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  doc
-} from "firebase/firestore";
+import { auth, db } from "./firebase-init.js";
+import { onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { doc, getDoc } from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-const q = query(
-  collection(db, "models"),
-  where("status", "==", "pending")
-);
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
-const snap = await getDocs(q);
-
-snap.forEach(d => {
-  const model = d.data();
-  const div = document.createElement("div");
-
-  div.innerHTML = `
-    <h3>${model.title}</h3>
-    <button>Одобри</button>
-  `;
-
-  div.querySelector("button").onclick = async () => {
-    await updateDoc(doc(db, "models", d.id), {
-      status: "approved"
-    });
-    div.remove();
-  };
-
-  document.getElementById("pending-models").appendChild(div);
+  const snap = await getDoc(doc(db, "users", user.uid));
+  if (!snap.exists() || snap.data().role !== "admin") {
+    alert("Нямате админ достъп");
+    window.location.href = "index.html";
+  }
 });
+  

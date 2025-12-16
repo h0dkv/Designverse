@@ -1,6 +1,21 @@
-<form id="uploadForm">
-    <input type="text" placeholder="Име на модела" required>
-    <input type="file" accept=".stl" required>
-    <button>Качи</button>
-  </form>
-  
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>Качи модел | DesignRealm</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>⬆️ Качи 3D модел</h1>
+
+<form id="upload-form">
+  <input type="text" id="title" placeholder="Име на модела" required>
+  <input type="url" id="fileUrl" placeholder="STL линк" required>
+  <input type="url" id="imageUrl" placeholder="Снимка (по избор)">
+  <button type="submit">Изпрати за одобрение</button>
+</form>
+
+<script type="module" src="upload.js"></script>
+</body>
+</html>
