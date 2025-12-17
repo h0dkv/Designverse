@@ -10,35 +10,16 @@
 
 <body>
 
-  <h1>👤 Моят профил</h1>
-
-  <div id="profile-box">
-    <p><strong>Имейл:</strong> <span id="profile-email"></span></p>
-    <p><strong>Роля:</strong> <span id="profile-role"></span></p>
-
-    <a href="upload.html" class="btn">⬆️ Качи модел</a>
-    <a href="index.html" class="btn">⬅️ Начало</a>
-  </div>
-
-  <script type="module" src="profile.js"></script>
-  <script>
-    import { auth, db } from "./firebase-init.js";
-    import { onAuthStateChanged } from
-      "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-    import { doc, getDoc } from
-      "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) return;
-
-      const snap = await getDoc(doc(db, "users", user.uid));
-      if (!snap.exists()) return;
-
-      const data = snap.data();
-      document.getElementById("profile-email").textContent = user.email;
-      document.getElementById("profile-role").textContent = data.role;
-    });
-  </script>
+  <main class="profile">
+    <h1>Профил</h1>
+  
+    <div class="card profile-card">
+      <p><strong>Email:</strong> <span id="profile-email">...</span></p>
+      <p><strong>Роля:</strong> <span id="profile-role">...</span></p>
+    </div>
+  </main>
+  
+  <script type="module" src="profile.js"></script>  
 </body>
 
 </html>

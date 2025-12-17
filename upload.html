@@ -8,14 +8,18 @@
 </head>
 <body>
 
-<h1>⬆️ Качи 3D модел</h1>
-
-<form id="upload-form">
-  <input type="text" id="title" placeholder="Име на модела" required>
-  <input type="url" id="fileUrl" placeholder="STL линк" required>
-  <input type="url" id="imageUrl" placeholder="Снимка (по избор)">
-  <button type="submit">Изпрати за одобрение</button>
-</form>
+  <main class="upload-page">
+    <h1>Качи 3D модел</h1>
+  
+    <form id="upload-form" class="card">
+      <input type="text" id="title" placeholder="Име на модела" required>
+      <input type="file" id="file" accept=".stl" required>
+      <button class="btn">Изпрати за одобрение</button>
+    </form>
+  </main>
+  
+  <script type="module" src="upload.js"></script>
+  
 
 <script type="module" src="upload.js"></script>
 </body>

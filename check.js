@@ -5,17 +5,12 @@ import { doc, getDoc } from
 "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  document.getElementById("profile-email").textContent = user.email;
+  if (!user) return;
 
   const snap = await getDoc(doc(db, "users", user.uid));
-  if (snap.exists()) {
-    document.getElementById("profile-role").textContent = snap.data().role;
-  } else {
-    document.getElementById("profile-role").textContent = "user";
+  if (!snap.exists()) return;
+
+  if (snap.data().role === "admin") {
+    document.getElementById("admin-link").style.display = "inline-block";
   }
 });

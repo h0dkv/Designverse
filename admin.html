@@ -8,15 +8,19 @@
 </head>
 <body>
 
-<h1>⚙️ Admin Panel</h1>
-
-<nav class="admin-nav">
-  <a href="manage-users.html">👥 Потребители</a>
-  <a href="approve-models.html">✅ Одобрение на модели</a>
-  <a href="upload.html">⬆️ Качи модел</a>
-  <a href="index.html">⬅️ Начало</a>
-</nav>
-
+  <main class="admin-page">
+    <h1>Админ панел</h1>
+  
+    <section class="card">
+      <h2>Чакащи модели</h2>
+      <div id="pending-models"></div>
+    </section>
+  
+    <section class="card">
+      <h2>Потребители</h2>
+      <a href="manage-users.html" class="btn">Управление</a>
+    </section>
+  </main>
 <script type="module" src="admin.js"></script>
 </body>
 </html>
