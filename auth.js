@@ -11,6 +11,7 @@ import {
 
 const adminEmails = [
     "hristianfortnite@gmail.com",
+    "milabtv@gmail.com"
   ];
   
 const role = adminEmails.includes(user.email)

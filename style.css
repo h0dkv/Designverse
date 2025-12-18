@@ -1914,7 +1914,7 @@ body.christmas #lang-btn:hover {
   position: absolute;
   top: 120%;
   right: 0;
-  background: #222;
+  background: var(--crimson-violet) !important;
   border-radius: 10px;
   padding: 10px;
   min-width: 180px;
@@ -1985,13 +1985,14 @@ body.admin #admin-panel {
 .upload-page h1 {
   font-size: 2rem;
   margin-bottom: 10px;
+  color: var(--black)
 }
 
 .dashboard-page p,
 .profile-page p,
 .admin-page p,
 .upload-page p {
-  color: #aaa;
+  color: var(--cadet-gray);
   margin-bottom: 30px;
 }
 
@@ -2125,4 +2126,35 @@ body.admin #admin-panel {
 /* Helper */
 .hidden {
   display: none !important;
+}
+
+.admin-page {
+  padding: 2rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: #111;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.btn.danger { background: #c0392b; }
+.btn.admin { background: #8e44ad; }
+.btn.mod { background: #2980b9; }
+
+.card span {
+  font-size: 1.6rem;
+  color: #00ffcc;
 }

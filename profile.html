@@ -19,7 +19,30 @@
     </div>
   </main>
   
-  <script type="module" src="profile.js"></script>  
+  <a href="index.html" class="btn">← Начало</a>
+  <script type="module" src="profile.js"></script>
+  <script type="module">
+    import { auth } from "./firebase-init.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+    
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+    
+    const db = getFirestore();
+    
+    onAuthStateChanged(auth, async user => {
+      if (!user) return;
+    
+      document.getElementById("email").textContent = user.email;
+    
+      const snap = await getDoc(doc(db, "users", user.uid));
+      document.getElementById("role").textContent = snap.data().role;
+    });
+    </script>
+    
 </body>
 
 </html>

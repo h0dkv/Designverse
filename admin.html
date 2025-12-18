@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <title>Admin Panel | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-  <main class="admin-page">
-    <h1>Админ панел</h1>
+<body class="admin-page">
+
+  <h1>🛠 Admin Panel</h1>
+
+  <div class="grid">
+    <a href="manage-users.html" class="card btn">👥 Manage Users</a>
+    <a href="upload.html" class="card btn">⬆ Pending Models</a>
+  </div>
+
+  <div class="grid">
+    <div class="card">👤 Users: <span id="usersCount"></span></div>
+    <div class="card">📦 Models: <span id="modelsCount"></span></div>
+    <div class="card">⏳ Pending: <span id="pendingCount"></span></div>
+  </div>
+
+  <a href="index.html" class="btn">← Начало</a>
   
-    <section class="card">
-      <h2>Чакащи модели</h2>
-      <div id="pending-models"></div>
-    </section>
-  
-    <section class="card">
-      <h2>Потребители</h2>
-      <a href="manage-users.html" class="btn">Управление</a>
-    </section>
-  </main>
-<script type="module" src="admin.js"></script>
+  <script type="module" src="admin-stats.js"></script>
+  <script type="module" src="admin.js"></script>
 </body>
+
 </html>

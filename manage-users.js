@@ -1,71 +1,50 @@
-import { auth, db } from "./firebase-init.js";
+import { auth } from "./firebase-init.js";
 import {
+  getFirestore,
   collection,
   getDocs,
-  doc,
-  updateDoc
+  updateDoc,
+  deleteDoc,
+  doc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-import { onAuthStateChanged } from
-  "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-const usersList = document.getElementById("users-list");
+const db = getFirestore();
+const list = document.getElementById("users-list");
 
-// 🔒 Проверка дали е админ
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "login.html";
+    location.href = "login.html";
     return;
   }
-
-  const snap = await getDocs(collection(db, "users"));
-  let isAdmin = false;
-
-  snap.forEach(d => {
-    if (d.id === user.uid && d.data().role === "admin") {
-      isAdmin = true;
-    }
-  });
-
-  if (!isAdmin) {
-    alert("Нямате достъп до тази страница!");
-    window.location.href = "index.html";
-    return;
-  }
-
-  loadUsers();
-});
-
-// 📦 Зареждане на всички потребители
-async function loadUsers() {
-  usersList.innerHTML = "";
 
   const snap = await getDocs(collection(db, "users"));
 
   snap.forEach(docSnap => {
-    const user = docSnap.data();
+    const u = docSnap.data();
+    const uid = docSnap.id;
 
-    const div = document.createElement("div");
-    div.className = "user-card";
+    const card = document.createElement("div");
+    card.className = "card";
 
-    div.innerHTML = `
-      <p><strong>${user.email}</strong></p>
-      <p>Роля: <span>${user.role}</span></p>
-      <button class="toggle-role">
-        ${user.role === "admin" ? "⬇️ Премахни админ" : "⬆️ Направи админ"}
-      </button>
+    card.innerHTML = `
+      <h3>${u.email}</h3>
+      <p>Роля: <strong>${u.role}</strong></p>
+      <button class="btn admin">Admin</button>
+      <button class="btn mod">Moderator</button>
+      <button class="btn danger">Delete</button>
     `;
 
-    div.querySelector(".toggle-role").addEventListener("click", async () => {
-      const newRole = user.role === "admin" ? "user" : "admin";
+    card.querySelector(".admin").onclick = () =>
+      updateDoc(doc(db, "users", uid), { role: "admin" });
 
-      await updateDoc(doc(db, "users", docSnap.id), {
-        role: newRole
-      });
+    card.querySelector(".mod").onclick = () =>
+      updateDoc(doc(db, "users", uid), { role: "moderator" });
 
-      loadUsers(); // презареждаме
-    });
+    card.querySelector(".danger").onclick = () =>
+      deleteDoc(doc(db, "users", uid));
 
-    usersList.appendChild(div);
+    list.appendChild(card);
   });
-}
+});
