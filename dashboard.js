@@ -1,8 +1,23 @@
-import { auth } from "./firebase-init.js";
+import { auth, db } from "./firebase-init.js";
 import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { doc, getDoc} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+const userNameEl = document.getElementById("user-name");
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+
+  const snap = await getDoc(doc(db, "users", user.uid));
+
+  if (snap.exists()) {
+    userNameEl.textContent = snap.data().username;
+  } else {
+    userNameEl.textContent = "user";
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginLink = document.getElementById("login-link");

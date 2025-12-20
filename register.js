@@ -1,5 +1,5 @@
-import { auth } from "./firebase-init.js";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+import { auth, db } from "./firebase-init.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 import {
   doc,
   setDoc,
@@ -15,6 +15,33 @@ createUserWithEmailAndPassword(auth, email, password)
     });
   });
 
+  document.getElementById("register-btn").addEventListener("click", async () => {
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+  
+    if (!username) {
+      alert("Моля въведи потребителско име");
+      return;
+    }
+  
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+  
+      // 🔥 записваме username-а
+      await setDoc(doc(db, "users", cred.user.uid), {
+        username: username,
+        role: "student",
+        createdAt: new Date()
+      });
+  
+      window.location.href = "index.html";
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  
 const form = document.querySelector(".register-form");
 
 if (form) {

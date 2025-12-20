@@ -2138,18 +2138,6 @@ body.admin #admin-panel {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.card {
-  background: #111;
-  padding: 1rem;
-  border-radius: 10px;
-}
-
-.btn {
-  display: block;
-  text-align: center;
-  margin-top: 0.5rem;
-}
-
 .btn.danger { background: #c0392b; }
 .btn.admin { background: #8e44ad; }
 .btn.mod { background: #2980b9; }
@@ -2157,4 +2145,137 @@ body.admin #admin-panel {
 .card span {
   font-size: 1.6rem;
   color: #00ffcc;
+}
+
+/* =========================
+   ADMIN STATS PAGE
+========================= */
+
+.dashboard-body {
+  background-color: #0f0f0f;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 30px;
+  background: #181818;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.dashboard-header .logo a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.dashboard-header .logo img {
+  height: 42px;
+}
+
+.dashboard-header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.dashboard-header nav a {
+  color: #aaa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.dashboard-header nav a:hover,
+.dashboard-header nav a.active {
+  color: #fff;
+}
+
+/* ===== MAIN ===== */
+.admin-stats-page {
+  padding: 40px 60px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.admin-stats-page h1 {
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+}
+
+.admin-stats-page .subtitle {
+  color: #aaa;
+  margin-bottom: 35px;
+}
+
+/* ===== GRID ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+}
+
+/* ===== CARD ===== */
+.stat-card {
+  background: #1e1e1e;
+  border-radius: 14px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.stat-card span.material-icons {
+  font-size: 3rem;
+  color: #ff0000; /* YouTube red */
+  margin-bottom: 10px;
+}
+
+.stat-card h2 {
+  font-size: 2.4rem;
+  margin: 5px 0;
+  color: #fff;
+}
+
+.stat-card p {
+  color: #aaa;
+  font-size: 1rem;
+}
+
+/* ===== FOOTER ===== */
+.dashboard-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+  color: #777;
+  font-size: 0.9rem;
+  border-top: 1px solid #2a2a2a;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .admin-stats-page {
+    padding: 25px 20px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dashboard-header nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
