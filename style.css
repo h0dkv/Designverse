@@ -2306,11 +2306,12 @@ body.admin #admin-panel {
 
 /* ===== IMAGE FIX ===== */
 .catalog .card img {
-  width: 100%;
-  height: 180px;        /* 🔒 фиксирана височина */
-  object-fit: cover;   /* 🔥 НЕ се разтяга */
-  display: block;
-  background: #000;
+  width: auto !important; 
+  position: absolute !important;
+  height: 180px !important;        /* 🔒 фиксирана височина */
+  object-fit: cover !important;   /* 🔥 НЕ се разтяга */
+  display: block !important;
+  background: #000 !important;
 }
 
 /* ===== TEXT ===== */
