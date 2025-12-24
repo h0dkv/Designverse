@@ -2279,3 +2279,63 @@ body.admin #admin-panel {
     justify-content: center;
   }
 }
+
+/* ===== CATALOG GRID ===== */
+.catalog .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ===== CARD ===== */
+.catalog .card {
+  background: #1a1a1a;
+  border-radius: 14px;
+  overflow: hidden; /* 🔴 МНОГО ВАЖНО */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.catalog .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+/* ===== IMAGE FIX ===== */
+.catalog .card img {
+  width: 100%;
+  height: 180px;        /* 🔒 фиксирана височина */
+  object-fit: cover;   /* 🔥 НЕ се разтяга */
+  display: block;
+  background: #000;
+}
+
+/* ===== TEXT ===== */
+.catalog .card h3 {
+  font-size: 1.05rem;
+  padding: 12px 14px 4px;
+}
+
+.catalog .card p {
+  padding: 0 14px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* ===== BUTTONS ===== */
+.catalog .card .btn,
+.catalog .card .fav-btn {
+  margin: 10px 14px;
+}
+
+.catalog .card .fav-btn {
+  margin-top: auto;
+  background: transparent;
+  border: none;
+  color: #ff4d6d;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
