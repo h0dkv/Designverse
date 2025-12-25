@@ -3,21 +3,7 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-import { doc, getDoc} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-const userNameEl = document.getElementById("user-name");
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
-
-  const snap = await getDoc(doc(db, "users", user.uid));
-
-  if (snap.exists()) {
-    userNameEl.textContent = snap.data().username;
-  } else {
-    userNameEl.textContent = "user";
-  }
-});
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginLink = document.getElementById("login-link");
@@ -26,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dashboardMenu = document.getElementById("dashboard-menu");
   const logoutBtn = document.getElementById("logout-btn");
   const greeting = document.getElementById("user-greeting");
+  const userNameEl = document.getElementById("user-name");
 
 
   onAuthStateChanged(auth, user => {
@@ -33,6 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
       loginLink.style.display = "none";
       dashboard.style.display = "block";
       greeting.textContent = `Здравей, ${user.email}!`;
+      (async () => {
+        try {
+          const snap = await getDoc(doc(db, "users", user.uid));
+          if (snap.exists() && userNameEl) {
+            userNameEl.textContent = snap.data().username || user.displayName || user.email.split("@")[0];
+          }
+        } catch (err) {
+          console.error("Failed to fetch user doc:", err);
+        }
+      })();
     } else {
       loginLink.style.display = "inline-block";
       dashboard.style.display = "none";
