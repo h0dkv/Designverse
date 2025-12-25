@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <title>Качи модел | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <h1>⬆ Качване на 3D модел</h1>
-  
-  <input id="title" placeholder="Име на модела">
-  <input id="file" type="file">
-  <button id="uploadBtn" class="btn">Качи</button>
-  
-  <a href="index.html" class="btn">← Начало</a>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <span>DesignRealm</span>
+      </a>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="upload.html" class="active">Качи</a>
+      <a href="catalog.html">Каталог</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+  </header>
+
+  <main style="max-width:800px;margin:1.5rem auto;padding:0 1rem;">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>⬆ Качи 3D модел</h1>
+        <p class="subtitle">Качи своя STL/ZIP файл и добави кратко описание.</p>
+      </div>
+    </section>
+
+    <div class="card" style="padding:1rem;margin-top:1rem;">
+      <label style="display:block;margin-bottom:0.5rem;"><strong>Име на модела</strong></label>
+      <input id="title" placeholder="Име на модела" style="width:100%;margin-bottom:0.75rem;">
+
+      <label style="display:block;margin-bottom:0.5rem;"><strong>Файл</strong></label>
+      <input id="file" type="file" accept=".stl,.zip" style="display:block;margin-bottom:1rem;">
+
+      <button id="uploadBtn" class="btn">Качи</button>
+    </div>
+
+    <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">← Начало</a>
+  </main>
+
+  <footer>
+    <p>© 2025 DesignRealm. Всички права запазени.</p>
+  </footer>
+
   <script type="module" src="upload.js"></script>
-  </body>
+</body>
+
 </html>

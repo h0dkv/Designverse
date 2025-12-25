@@ -10,39 +10,67 @@
 
 <body>
 
-  <main class="profile">
-    <h1>Профил</h1>
-  
-    <div class="card profile-card">
-      <p><strong>Email:</strong> <span id="profile-email">...</span></p>
-      <p><strong>Роля:</strong> <span id="profile-role">...</span></p>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <span>DesignRealm</span>
+      </a>
     </div>
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="profile.html" class="active">Профил</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+  </header>
+
+  <main class="profile">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Вашият профил</h1>
+        <p class="subtitle">Управлявайте информацията и настройките на своя акаунт.</p>
+      </div>
+    </section>
+
+    <section style="max-width:720px; margin:1.5rem auto;">
+      <div class="card profile-card" style="display:flex;gap:1rem;align-items:center;">
+        <img src="images/avatar_placeholder.png" alt="avatar"
+          style="width:96px;height:96px;border-radius:12px;object-fit:cover">
+        <div>
+          <p><strong>Email:</strong> <span id="profile-email">...</span></p>
+          <p><strong>Роля:</strong> <span id="profile-role">...</span></p>
+          <a href="upload.html" class="btn">Качи модел</a>
+        </div>
+      </div>
+    </section>
+
+    <a href="index.html" class="btn">← Начало</a>
   </main>
-  
-  <a href="index.html" class="btn">← Начало</a>
+
+  <footer>
+    <p>© 2025 DesignRealm. Всички права запазени.</p>
+  </footer>
+
   <script type="module" src="profile.js"></script>
   <script type="module">
-    import { auth } from "./firebase-init.js";
-    import {
-      getFirestore,
-      doc,
-      getDoc
-    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-    
+    import { auth, db } from "./firebase-init.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-    
-    const db = getFirestore();
-    
+
     onAuthStateChanged(auth, async user => {
       if (!user) return;
-    
-      document.getElementById("email").textContent = user.email;
-    
-      const snap = await getDoc(doc(db, "users", user.uid));
-      document.getElementById("role").textContent = snap.data().role;
+      const emailEl = document.getElementById("profile-email");
+      const roleEl = document.getElementById("profile-role");
+      if (emailEl) emailEl.textContent = user.email;
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if (snap.exists() && roleEl) roleEl.textContent = snap.data().role || "user";
+      } catch (err) {
+        console.error(err);
+      }
     });
-    </script>
-    
+  </script>
 </body>
 
 </html>

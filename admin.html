@@ -10,23 +10,48 @@
 
 <body class="admin-page">
 
-  <h1>🛠 Admin Panel</h1>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <span>DesignRealm</span>
+      </a>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="admin.html" class="active">Админ</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+  </header>
 
-  <div class="grid">
-    <a href="manage-users.html" class="card btn">👥 Manage Users</a>
-    <a href="upload.html" class="card btn">⬆ Pending Models</a>
-    <a href="admin-stats.html" class="card btn">Statistics</a>
+  <main class="dashboard-page">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>🛠 Админ панел</h1>
+        <p class="subtitle">Бърз достъп до управление на потребители, модели и статистики.</p>
+      </div>
+    </section>
 
-  </div>
+    <section class="grid" style="margin-top:1.5rem;">
+      <a href="manage-users.html" class="card btn">👥 Управление на потребители</a>
+      <a href="upload.html" class="card btn">⬆ Качи / Одобри модели</a>
+      <a href="admin-stats.html" class="card btn">📊 Статистики</a>
+    </section>
 
-  <div class="grid">
-    <div class="card">👤 Users: <span id="usersCount"></span></div>
-    <div class="card">📦 Models: <span id="modelsCount"></span></div>
-    <div class="card">⏳ Pending: <span id="pendingCount"></span></div>
-  </div>
+    <section class="grid" style="margin-top:1.5rem;">
+      <div class="card">👤 <strong>Потребители:</strong> <span id="usersCount">—</span></div>
+      <div class="card">📦 <strong>Модели:</strong> <span id="modelsCount">—</span></div>
+      <div class="card">⏳ <strong>В очакване:</strong> <span id="pendingCount">—</span></div>
+    </section>
 
-  <a href="index.html" class="btn">← Начало</a>
-  
+    <a href="index.html" class="btn" style="margin-top:1.5rem; display:inline-block">← Начало</a>
+  </main>
+
+  <footer>
+    <p>© 2025 DesignRealm. Всички права запазени.</p>
+  </footer>
+
   <script type="module" src="admin-stats.js"></script>
   <script type="module" src="admin.js"></script>
 </body>

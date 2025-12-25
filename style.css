@@ -12,6 +12,12 @@
   --baby-blue: #89CFF0;
   --christmas-green: #00873e;
   --christmas-red: #b71c1c;
+  /* App-wide semantic colors */
+  --primary: var(--crimson-violet);
+  --accent: #FFC145;
+  --light: #ffffff;
+  --old-gold: #FFC145;
+  --baby-powder: #ffffff;
 }
 
 body {
@@ -30,6 +36,81 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+}
+
+/* Modern page components */
+.subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.card {
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+}
+
+.hero {
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  padding: 48px 24px;
+  color: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text h1 {
+  margin: 0;
+}
+
+.profile-card {
+  display: block;
+  background: linear-gradient(180deg, #ffffff, #f7f7fb);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+}
+
+.user-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.upload-card {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.search-field {
+  max-width: 520px;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 36px 16px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 header .logo {
