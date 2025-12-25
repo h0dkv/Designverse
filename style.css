@@ -149,6 +149,60 @@ main {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
+/* 3D viewer modal */
+.viewer-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+}
+
+.viewer-modal.hidden {
+  display: none;
+}
+
+.viewer-panel {
+  background: #0f1724;
+  width: min(1100px, 96%);
+  height: min(720px, 86%);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer-canvas {
+  flex: 1 1 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.viewer-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.viewer-toolbar .title {
+  color: white;
+  font-weight: 600;
+}
+
+.viewer-toolbar .close {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer
+}
+
 .post h3 {
   color: var(--black);
   margin-bottom: 1rem;

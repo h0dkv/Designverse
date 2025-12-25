@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Одобряване на модели | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body class="admin-page">
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+                <span>DesignRealm</span>
+            </a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="admin.html">Админ</a>
+            <a href="pending-models.html" class="active">Одобряване</a>
+        </nav>
+        <button id="menu-toggle">☰</button>
+    </header>
+
+    <main style="max-width:1100px;margin:1.5rem auto;padding:0 1rem;">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Одобряване на постъпили модели</h1>
+                <p class="subtitle">Тук виждате всички модели в очакване — прегледайте и одобрете или отхвърлете.</p>
+            </div>
+        </section>
+
+        <section style="margin-top:1.25rem;">
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+                <input id="pm-search" class="search-field" placeholder="Търси по заглавие...">
+                <button id="pm-refresh" class="btn">Обнови</button>
+            </div>
+
+            <div id="pending-list" class="grid"></div>
+        </section>
+
+        <a href="admin.html" class="btn" style="margin-top:1rem;display:inline-block">← Назад</a>
+    </main>
+
+    <footer>
+        <p>© 2025 DesignRealm</p>
+    </footer>
+
+    <script type="module" src="pending-models.js"></script>
+</body>
+
+</html>
