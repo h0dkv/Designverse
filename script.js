@@ -1,51 +1,7 @@
 import { getAuth, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-let countdownInterval = null;
-
-function initCountdown() {
-  const countdown = document.getElementById('countdown');
-  if (!countdown) return; // ако няма брояч на страницата, нищо не правим
-
-  const now = new Date();
-  const nextYear = now.getFullYear() + 1;
-  const targetDate = new Date(nextYear, 0, 1, 0, 0, 0).getTime();
-
-  function updateCountdown() {
-    const now = Date.now();
-    const distance = targetDate - now;
-
-    if (distance <= 0) {
-      countdown.innerHTML = '🎉 Честита Нова Година!';
-      if (countdownInterval) clearInterval(countdownInterval);
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdown.innerHTML =
-      `<span><strong>${days}</strong> дни</span>` +
-      `<span><strong>${hours}</strong> ч.</span>` +
-      `<span><strong>${minutes}</strong> мин.</span>` +
-      `<span><strong>${seconds}</strong> сек.</span>`;
-  }
-
-  if (countdownInterval) clearInterval(countdownInterval);
-  updateCountdown();
-  countdownInterval = setInterval(updateCountdown, 1000);
-}
-
-window.addEventListener('pageshow', (event) => {
-  if (event.persisted) {
-    initCountdown();
-  }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-  initCountdown();
 
   // ----- Мобилно меню -----
   const menuBtn = document.getElementById('menu-toggle');
@@ -66,62 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ----- Празничен (New Year) режим -----
-  let snowInterval = null;
-
-  function stopSnow() {
-    if (snowInterval) {
-      clearInterval(snowInterval);
-      snowInterval = null;
-    }
-    document.querySelectorAll('.snowflake').forEach(s => s.remove());
-  }
-
-  function startSnow() {
-    stopSnow();
-    snowInterval = setInterval(() => {
-      const snowflake = document.createElement('div');
-      snowflake.textContent = '❄';
-      snowflake.className = 'snowflake';
-      snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.animationDuration = 5 + Math.random() * 5 + 's';
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 11000);
-    }, 200);
-  }
-
-  const btnTheme = document.getElementById('theme-toggle');
-  const audio = document.getElementById('christmas-audio');
-  let isChristmas = false;
-
-  if (btnTheme) {
-    btnTheme.addEventListener('click', () => {
-      isChristmas = !isChristmas;
-      document.body.classList.toggle('christmas', isChristmas);
-      btnTheme.textContent = isChristmas ? '☀️ Нормален режим' : '🎉 Новогодишен режим';
-
-      if (isChristmas) {
-        startSnow();
-        if (audio) audio.play().catch(() => { });
-      } else {
-        stopSnow();
-        if (audio) {
-          audio.pause();
-          audio.currentTime = 0;
-        }
-      }
-      localStorage.setItem('theme', isChristmas ? 'christmas' : 'normal');
-    });
-  }
-
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'christmas') {
-    document.body.classList.add('christmas');
-    if (btnTheme) btnTheme.textContent = '☀️ Нормален режим';
-    startSnow();
-    if (audio) audio.play().catch(() => { });
-    isChristmas = true;
-  }
+  // theme toggle removed (button and countdown were deleted)
 
   // ----- Търсачка по заглавие на картите -----
   const search = document.getElementById('search');
