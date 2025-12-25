@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   onAuthStateChanged(auth, user => {
     if (user) {
-      loginLink.style.display = "none";
-      dashboard.style.display = "block";
-      greeting.textContent = `Здравей, ${user.email}!`;
+      if (loginLink) loginLink.style.display = "none";
+      if (dashboard) dashboard.style.display = "block";
+      if (greeting) greeting.textContent = `Здравей, ${user.email}!`;
       (async () => {
         try {
           const snap = await getDoc(doc(db, "users", user.uid));
@@ -31,22 +31,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       })();
     } else {
-      loginLink.style.display = "inline-block";
-      dashboard.style.display = "none";
+      if (loginLink) loginLink.style.display = "inline-block";
+      if (dashboard) dashboard.style.display = "none";
     }
   });
 
-  dashboardBtn.addEventListener("click", () => {
-    dashboardMenu.classList.toggle("show");
-  });
+  if (dashboardBtn && dashboardMenu) {
+    dashboardBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dashboardMenu.classList.toggle("show");
+    });
+  }
 
-  logoutBtn.addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "index.html";
-  });
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+      } catch (err) {
+        console.error("Sign out failed:", err);
+      }
+      window.location.href = "index.html";
+    });
+  }
 
   document.addEventListener("click", e => {
-    if (!dashboard.contains(e.target)) {
+    if (dashboard && dashboardMenu && !dashboard.contains(e.target)) {
       dashboardMenu.classList.remove("show");
     }
   });
