@@ -5,14 +5,16 @@ function initCountdown() {
     const countdown = document.getElementById("countdown");
     if (!countdown) return; // ако няма брояч на страницата, нищо не правим
 
-    const targetDate = new Date("December 25, 2025 00:00:00").getTime();
+    const now = new Date();
+    const nextYear = now.getFullYear() + 1;
+    const targetDate = new Date(nextYear, 0, 1, 0, 0, 0).getTime();
 
     function updateCountdown() {
         const now = Date.now();
         const distance = targetDate - now;
 
         if (distance <= 0) {
-            countdown.innerHTML = "🎄 Весела Коледа! 🎁";
+            countdown.innerHTML = "🎉 Честита Нова Година!";
             if (countdownInterval) clearInterval(countdownInterval);
             return;
         }
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ===================== Коледен режим / сняг =====================
+    // ===================== Празничен (New Year) режим =====================
     let snowInterval = null;
 
     function stopSnow() {
@@ -101,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.toggle("christmas", isChristmas);
             btnTheme.textContent = isChristmas
                 ? "☀️ Нормален режим"
-                : "🎄 Коледен режим";
+                : "🎉 Новогодишен режим";
 
             if (isChristmas) {
                 startSnow();
