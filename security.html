@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигурност | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo">
+                <span>DesignRealm</span>
+            </a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="profile.html">Профил</a>
+            <a href="favorites.html">Любими</a>
+            <a id="login-link" href="login.html">Вход</a>
+            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+        </nav>
+        <button id="menu-toggle">☰</button>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Сигурност на акаунта</h1>
+                <p class="subtitle">Промяна на парола и управление на достъпа.</p>
+            </div>
+        </section>
+
+        <section style="max-width:720px;margin:1.5rem auto;">
+            <div class="card">
+                <h3>Промени парола</h3>
+                <form id="change-password-form">
+                    <input type="password" id="current-password" placeholder="Текуща парола">
+                    <input type="password" id="new-password" placeholder="Нова парола">
+                    <button type="submit" class="btn">Промени парола</button>
+                </form>
+
+                <hr style="margin:1rem 0">
+
+                <h3>Изтриване на акаунт</h3>
+                <p class="small">Изтриването на акаунта е необратимо. Всички ваши модели и данни ще бъдат премахнати.
+                </p>
+                <button id="delete-account-btn" class="btn danger">Изтрий акаунт</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 DesignRealm. Всички права запазени.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="check.js"></script>
+</body>
+
+</html>

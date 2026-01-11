@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Качвания | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo">
+                <span>DesignRealm</span>
+            </a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="profile.html">Профил</a>
+            <a href="favorites.html">Любими</a>
+            <a id="login-link" href="login.html">Вход</a>
+            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+        </nav>
+        <button id="menu-toggle">☰</button>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Вашите качвания</h1>
+                <p class="subtitle">Преглед и управление на вашите модели.</p>
+            </div>
+        </section>
+
+        <section style="max-width:1000px;margin:1.5rem auto;">
+            <div class="card">
+                <h3>Списък на качените модели</h3>
+                <p class="small">Тук ще се покаже списък с моделите, които сте качили. (Демо съдържание)</p>
+                <ul id="uploads-list">
+                    <li>Модел 1 — <a href="preview.html">Преглед</a> • <a href="#">Редактирай</a> • <a
+                            href="#">Изтрий</a></li>
+                    <li>Модел 2 — <a href="preview.html">Преглед</a> • <a href="#">Редактирай</a> • <a
+                            href="#">Изтрий</a></li>
+                </ul>
+            </div>
+            <a href="upload.html" class="btn" style="margin-top:1rem;display:inline-block">Качи нов модел</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 DesignRealm. Всички права запазени.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="check.js"></script>
+</body>
+
+</html>

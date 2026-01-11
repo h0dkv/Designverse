@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo">
+                <span>DesignRealm</span>
+            </a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="profile.html">Профил</a>
+            <a href="favorites.html">Любими</a>
+            <a id="login-link" href="login.html">Вход</a>
+            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+        </nav>
+        <button id="menu-toggle">☰</button>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Настройки на профила</h1>
+                <p class="subtitle">Променете информацията, която се показва за вашия акаунт.</p>
+            </div>
+        </section>
+
+        <section style="max-width:720px;margin:1.5rem auto;">
+            <div class="card">
+                <form id="settings-form">
+                    <label>Показвано име</label>
+                    <input type="text" id="displayName" placeholder="Име за показване">
+
+                    <label>URL към снимка</label>
+                    <input type="url" id="photoURL" placeholder="https://...">
+
+                    <div style="margin-top:.75rem">
+                        <button type="submit" class="btn">Запази</button>
+                        <a href="profile.html" class="btn ghost">Откажи</a>
+                    </div>
+                </form>
+                <p class="small" style="margin-top:.5rem">(Функционалност: Демонстрация — можем да свържем запис в
+                    Firestore при желание.)</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 DesignRealm. Всички права запазени.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="check.js"></script>
+</body>
+
+</html>
