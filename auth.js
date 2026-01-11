@@ -34,19 +34,28 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// Ensure user document exists and has a role
+// Ensure user document exists and has a role; store Google profile fields when available
 onAuthStateChanged(auth, async (user) => {
     if (!user) return;
     try {
         const ref = doc(db, "users", user.uid);
         const snap = await getDoc(ref);
+        const role = adminEmails.includes(user.email) ? "admin" : "user";
+        const userData = {
+            email: user.email,
+            role,
+            displayName: user.displayName || null,
+            photoURL: user.photoURL || null
+        };
+
         if (!snap.exists()) {
-            const role = adminEmails.includes(user.email) ? "admin" : "user";
             await setDoc(ref, {
-                email: user.email,
-                role,
+                ...userData,
                 createdAt: serverTimestamp()
             });
+        } else {
+            // Merge new profile fields in case they are missing or updated
+            await setDoc(ref, userData, { merge: true });
         }
     } catch (err) {
         console.error("Failed to ensure user doc:", err);
