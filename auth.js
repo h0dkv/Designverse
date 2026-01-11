@@ -1,11 +1,10 @@
 import { auth, db } from "./firebase-init.js";
 import {
     onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-import {
+    signOut,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    signInWithRedirect
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 import {
@@ -101,13 +100,38 @@ document.addEventListener("DOMContentLoaded", () => {
     googleButtons.forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
+            if (btn.disabled) return;
+            btn.disabled = true;
             try {
                 const result = await signInWithPopup(auth, provider);
-                // user handled by onAuthStateChanged listeners above
+                // onAuthStateChanged will handle post-login logic
                 window.location.href = 'profile.html';
             } catch (err) {
                 console.error('Google sign-in failed', err);
+                // User closed the popup manually
+                if (err && err.code === 'auth/popup-closed-by-user') {
+                    alert('Входът беше прекъснат — затворихте прозореца. Опитайте отново.');
+                    return;
+                }
+                // Popup blocked or environment not supporting popups -> fallback to redirect
+                if (err && (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request' || err.code === 'auth/operation-not-supported-in-this-environment')) {
+                    try {
+                        await signInWithRedirect(auth, provider);
+                        return;
+                    } catch (rerr) {
+                        console.error('Redirect fallback failed', rerr);
+                        alert('Грешка при пренасочване за вход: ' + (rerr.message || rerr.code));
+                        return;
+                    }
+                }
+                // Account exists with different credential
+                if (err && err.code === 'auth/account-exists-with-different-credential') {
+                    alert('Вече имате акаунт с този имейл чрез друг доставчик. Влезте с него.');
+                    return;
+                }
                 alert('Неуспешен вход с Google: ' + (err.message || err.code));
+            } finally {
+                btn.disabled = false;
             }
         });
     });
