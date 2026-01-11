@@ -3,6 +3,10 @@ import {
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import {
+    GoogleAuthProvider,
+    signInWithPopup
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 import {
     doc,
@@ -85,5 +89,27 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // --- Google Sign-In / Registration ---
+    const googleButtons = [
+        document.getElementById('google-signin'),
+        document.getElementById('google-register')
+    ].filter(Boolean);
+
+    const provider = new GoogleAuthProvider();
+
+    googleButtons.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const result = await signInWithPopup(auth, provider);
+                // user handled by onAuthStateChanged listeners above
+                window.location.href = 'profile.html';
+            } catch (err) {
+                console.error('Google sign-in failed', err);
+                alert('Неуспешен вход с Google: ' + (err.message || err.code));
+            }
+        });
+    });
 
 });
