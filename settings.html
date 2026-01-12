@@ -65,6 +65,51 @@
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="check.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-init.js';
+        import { onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+        import { doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
+
+        const displayNameInput = document.getElementById('displayName');
+        const photoURLInput = document.getElementById('photoURL');
+        const form = document.getElementById('settings-form');
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            displayNameInput.value = user.displayName || '';
+            photoURLInput.value = user.photoURL || '';
+            try {
+                const snap = await getDoc(doc(db, 'users', user.uid));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    displayNameInput.value = data.displayName || displayNameInput.value;
+                    photoURLInput.value = data.photoURL || photoURLInput.value;
+                }
+            } catch (err) {
+                console.error('Failed to load user settings', err);
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (!user) return alert('Трябва да сте влезли.');
+            const displayName = displayNameInput.value.trim() || null;
+            const photoURL = photoURLInput.value.trim() || null;
+            try {
+                await updateProfile(user, { displayName, photoURL });
+                await setDoc(doc(db, 'users', user.uid), { displayName, photoURL }, { merge: true });
+                alert('Профилът е обновен.');
+                window.location.href = 'profile.html';
+            } catch (err) {
+                console.error('Failed to update profile', err);
+                alert('Грешка при запис.');
+            }
+        });
+    </script>
 </body>
 
 </html>

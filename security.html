@@ -64,6 +64,73 @@
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="check.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-init.js';
+        import {
+            onAuthStateChanged,
+            EmailAuthProvider,
+            reauthenticateWithCredential,
+            updatePassword,
+            deleteUser
+        } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+        import { collection, query, where, getDocs, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
+
+        const changeForm = document.getElementById('change-password-form');
+        const deleteBtn = document.getElementById('delete-account-btn');
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+            }
+        });
+
+        changeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const current = document.getElementById('current-password').value;
+            const next = document.getElementById('new-password').value;
+            if (!current || !next) return alert('Попълнете полетата');
+            const user = auth.currentUser;
+            if (!user) return alert('Трябва да сте влезли.');
+            try {
+                const cred = EmailAuthProvider.credential(user.email, current);
+                await reauthenticateWithCredential(user, cred);
+                await updatePassword(user, next);
+                alert('Паролата е успешно променена.');
+                changeForm.reset();
+            } catch (err) {
+                console.error('Password change failed', err);
+                alert('Грешка: ' + (err.message || err.code));
+            }
+        });
+
+        deleteBtn.addEventListener('click', async () => {
+            const ok = confirm('Наистина ли искате да изтриете акаунта си? Тази операция изтрива всички ваши данни.');
+            if (!ok) return;
+            const user = auth.currentUser;
+            if (!user) return alert('Трябва да сте влезли.');
+            try {
+                // delete user's models
+                const q = query(collection(db, 'models'), where('ownerId', '==', user.uid));
+                const snaps = await getDocs(q);
+                for (const d of snaps.docs) {
+                    await deleteDoc(doc(db, 'models', d.id));
+                }
+                // delete user doc
+                await deleteDoc(doc(db, 'users', user.uid));
+                // delete auth user
+                await deleteUser(user);
+                alert('Акаунтът е изтрит.');
+                window.location.href = 'index.html';
+            } catch (err) {
+                console.error('Account deletion failed', err);
+                if (err && err.code === 'auth/requires-recent-login') {
+                    alert('За сигурност — моля, влезте отново и опитайте пак.');
+                    return;
+                }
+                alert('Грешка при изтриване: ' + (err.message || err.code));
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -60,6 +60,64 @@
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="check.js"></script>
+    <script type="module">
+        import { auth, db } from "./firebase-init.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import {
+            collection,
+            query,
+            where,
+            orderBy,
+            getDocs,
+            doc,
+            deleteDoc
+        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+        const uploadsList = document.getElementById('uploads-list');
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            uploadsList.innerHTML = '';
+            try {
+                const q = query(collection(db, 'models'), where('ownerId', '==', user.uid), orderBy('createdAt', 'desc'));
+                const snaps = await getDocs(q);
+                if (snaps.empty) {
+                    uploadsList.innerHTML = '<li>Нямате качени модели.</li>';
+                    return;
+                }
+                snaps.forEach(d => {
+                    const data = d.data();
+                    const title = data.title || 'Без заглавие';
+                    const li = document.createElement('li');
+                    li.innerHTML = `${title} — <a href="preview.html?model=${d.id}">Преглед</a> • <a href="upload.html?edit=${d.id}">Редактирай</a> • <a href="#" class="del" data-id="${d.id}">Изтрий</a>`;
+                    uploadsList.appendChild(li);
+                });
+            } catch (err) {
+                console.error('Failed loading uploads', err);
+                uploadsList.innerHTML = '<li>Грешка при зареждане на качванията.</li>';
+            }
+        });
+
+        uploadsList.addEventListener('click', async (e) => {
+            const del = e.target.closest('.del');
+            if (!del) return;
+            e.preventDefault();
+            const id = del.dataset.id;
+            const ok = confirm('Наистина ли искате да изтриете този модел?');
+            if (!ok) return;
+            try {
+                await deleteDoc(doc(db, 'models', id));
+                del.closest('li').remove();
+            } catch (err) {
+                console.error('Delete failed', err);
+                alert('Грешка при изтриване.');
+            }
+        });
+    </script>
 </body>
 
 </html>
