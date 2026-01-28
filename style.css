@@ -2497,3 +2497,7 @@ body.admin #admin-panel {
 .profile-section ul li.disabled {
   opacity: 0.5;
 }
+
+img {
+  overflow: visible;
+}
