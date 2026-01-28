@@ -1009,12 +1009,32 @@ body.christmas .register-form .btn {
   color: #5B5F97;
 }
 
+.dashboard-page .hero {
+  background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.dashboard-page .hero-text h1 {
+  font-size: 2.8rem;
+  color: var(--gold);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-page .hero-text p {
+  font-size: 1.2rem;
+  color: var(--crimson-violet);
+  margin: 15px 0 25px;
+}
+
 .hero {
   background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 20px;
+  padding: 50px 20px;
 }
 
 .hero-content {
@@ -2451,9 +2471,17 @@ body.admin #admin-panel {
   margin-top: 10px;
 }
 
-.role-badge.student { background: #2196f3; }
-.role-badge.teacher { background: #4caf50; }
-.role-badge.admin { background: #ff5722; }
+.role-badge.student {
+  background: #2196f3;
+}
+
+.role-badge.teacher {
+  background: #4caf50;
+}
+
+.role-badge.admin {
+  background: #ff5722;
+}
 
 .profile-section {
   margin-top: 2rem;
