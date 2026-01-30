@@ -19,14 +19,6 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // Only admins should manage users
-  const myself = await getDoc(doc(db, "users", user.uid));
-  if (!myself.exists() || (myself.data().role !== "admin" && myself.data().role !== "superAdmin")) {
-    alert("Нямате достъп до тази страница.");
-    location.href = "index.html";
-    return;
-  }
-
   const snap = await getDocs(collection(db, "users"));
 
   snap.forEach(docSnap => {
@@ -38,27 +30,20 @@ onAuthStateChanged(auth, async (user) => {
 
     card.innerHTML = `
       <h3>${u.email}</h3>
-      <p>Роля: <strong class="user-role">${u.role}</strong></p>
-      <div style="display:flex;gap:.5rem;margin-top:.5rem">
-        <button class="btn student">Student</button>
-        <button class="btn teacher">Teacher</button>
-        <button class="btn admin">Admin</button>
-        <button class="btn mod">Moderator</button>
-        <button class="btn danger">Delete</button>
-      </div>
+      <p>Роля: <strong>${u.role}</strong></p>
+      <button class="btn admin">Admin</button>
+      <button class="btn mod">Moderator</button>
+      <button class="btn danger">Delete</button>
     `;
 
-    const setRole = (r) => updateDoc(doc(db, "users", uid), { role: r }).then(() => {
-      card.querySelector('.user-role').textContent = r;
-    });
+    card.querySelector(".admin").onclick = () =>
+      updateDoc(doc(db, "users", uid), { role: "admin" });
 
-    card.querySelector(".student").onclick = () => setRole("student");
-    card.querySelector(".teacher").onclick = () => setRole("teacher");
-    card.querySelector(".admin").onclick = () => setRole("admin");
-    card.querySelector(".mod").onclick = () => setRole("moderator");
+    card.querySelector(".mod").onclick = () =>
+      updateDoc(doc(db, "users", uid), { role: "moderator" });
 
     card.querySelector(".danger").onclick = () =>
-      deleteDoc(doc(db, "users", uid)).then(() => card.remove());
+      deleteDoc(doc(db, "users", uid));
 
     list.appendChild(card);
   });
