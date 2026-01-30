@@ -7,10 +7,31 @@ import {
 
 const db = getFirestore();
 
-export async function isSuperAdmin() {
+export async function getUserRole() {
   const user = auth.currentUser;
-  if (!user) return false;
+  if (!user) return null;
 
   const snap = await getDoc(doc(db, "users", user.uid));
-  return snap.exists() && snap.data().role === "superAdmin";
+  if (!snap.exists()) return null;
+  return snap.data().role || null;
+}
+
+export async function isStudent() {
+  const r = await getUserRole();
+  return r === "student";
+}
+
+export async function isTeacher() {
+  const r = await getUserRole();
+  return r === "teacher";
+}
+
+export async function isAdmin() {
+  const r = await getUserRole();
+  return r === "admin" || r === "superAdmin";
+}
+
+export async function isSuperAdmin() {
+  const r = await getUserRole();
+  return r === "superAdmin";
 }

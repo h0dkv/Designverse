@@ -10,7 +10,7 @@ createUserWithEmailAndPassword(auth, email, password)
   .then(async (cred) => {
     await setDoc(doc(db, "users", cred.user.uid), {
       email: cred.user.email,
-      role: "user", // ⬅️ ПО ПОДРАЗБИРАНЕ
+      role: document.querySelector('input[name="role"]:checked').value,
       createdAt: serverTimestamp()
     });
   });

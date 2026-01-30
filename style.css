@@ -1398,6 +1398,20 @@ body.christmas .favorites-page p {
   padding: 15px;
   width: 250px;
   transition: transform 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ensure card images fit the frame without overflowing */
+#favorites-list .card img {
+  display: block;
+  width: calc(100% + 30px);
+  margin: -15px -15px 12px -15px;
+  height: 160px;
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 #favorites-list .card:hover {
@@ -2496,8 +2510,4 @@ body.admin #admin-panel {
 
 .profile-section ul li.disabled {
   opacity: 0.5;
-}
-
-img {
-  overflow: visible;
 }

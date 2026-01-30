@@ -1,8 +1,8 @@
 import { auth, db } from "./firebase-init.js";
 import { onAuthStateChanged } from
-"https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 import { doc, getDoc } from
-"https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -19,3 +19,8 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById("profile-role").textContent = "user";
   }
 });
+
+const snap = await getDoc(doc(db, "users", user.uid));
+const role = snap.data().role;
+
+document.getElementById("profile-role").textContent = role;
