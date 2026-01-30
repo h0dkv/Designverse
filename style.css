@@ -2159,14 +2159,14 @@ body.admin #admin-panel {
 .upload-page h1 {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: var(--black)
+  color: var(--white)
 }
 
 .dashboard-page p,
 .profile-page p,
 .admin-page p,
 .upload-page p {
-  color: var(--cadet-gray);
+  color: var(--white);
   margin-bottom: 30px;
 }
 
@@ -2368,7 +2368,7 @@ body.admin #admin-panel {
 }
 
 .dashboard-header nav a {
-  color: #aaa;
+  color: var(--white);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
@@ -2384,11 +2384,13 @@ body.admin #admin-panel {
   padding: 40px 60px;
   max-width: 1300px;
   margin: auto;
+  background-color: var(--midnight-violet);
 }
 
 .admin-stats-page h1 {
   font-size: 2.2rem;
   margin-bottom: 5px;
+  color: #fff;
 }
 
 .admin-stats-page .subtitle {
@@ -2446,6 +2448,10 @@ body.admin #admin-panel {
   border-top: 1px solid #2a2a2a;
 }
 
+.dashboard-footer p {
+  margin: 0;
+  color: var(--white);
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .admin-stats-page {
