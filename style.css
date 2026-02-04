@@ -1019,13 +1019,13 @@ body.christmas .register-form .btn {
 
 .dashboard-page .hero-text h1 {
   font-size: 2.8rem;
-  color: var(--gold);
+  color: var(--white);
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-page .hero-text p {
   font-size: 1.2rem;
-  color: var(--old-gold);
+  color: var(--white);
   margin: 15px 0 25px;
 }
 
@@ -1034,7 +1034,7 @@ body.christmas .register-form .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 20px;
+  padding: 0.1px 0.1px;
 }
 
 .hero-content {
