@@ -2,8 +2,8 @@
 // Статистики за Admin / Teacher – DesignRealm
 
 import { auth, db } from "./firebase-init.js";
-
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 import {
   collection,
   getDocs,
@@ -11,46 +11,42 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-// ===== HTML ЕЛЕМЕНТИ =====
+// ===== HTML ELEMENTS =====
 const totalUsersEl = document.getElementById("total-users");
 const studentsEl = document.getElementById("students-count");
 const teachersEl = document.getElementById("teachers-count");
-const modelsEl = document.getElementById("models-count");
+const approvedModelsEl = document.getElementById("approved-models");
+const pendingModelsEl = document.getElementById("pending-models");
 const favoritesEl = document.getElementById("favorites-count");
 
 // ===== AUTH CHECK =====
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    // Не е логнат
     window.location.href = "login.html";
     return;
   }
 
   try {
-    // Взимаме данните за текущия потребител
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
+    const userSnap = await getDoc(doc(db, "users", user.uid));
 
     if (!userSnap.exists()) {
-      alert("Потребителят няма профил в системата.");
+      alert("Няма потребителски профил.");
       window.location.href = "index.html";
       return;
     }
 
     const role = userSnap.data().role;
 
-    // Само admin или teacher имат достъп
     if (role !== "admin" && role !== "teacher") {
-      alert("Нямате достъп до Admin Statistics.");
+      alert("Нямате достъп до статистиките.");
       window.location.href = "index.html";
       return;
     }
 
-    // Зареждаме статистиките
-    loadStatistics();
+    await loadStatistics();
 
-  } catch (error) {
-    console.error("Грешка при проверка на ролята:", error);
+  } catch (err) {
+    console.error("Auth / role error:", err);
   }
 });
 
@@ -63,10 +59,9 @@ async function loadStatistics() {
     let students = 0;
     let teachers = 0;
 
-    usersSnap.forEach((doc) => {
-      const data = doc.data();
-      if (data.role === "student") students++;
-      if (data.role === "teacher") teachers++;
+    usersSnap.forEach(d => {
+      if (d.data().role === "student") students++;
+      if (d.data().role === "teacher") teachers++;
     });
 
     if (totalUsersEl) totalUsersEl.textContent = usersSnap.size;
@@ -74,14 +69,17 @@ async function loadStatistics() {
     if (teachersEl) teachersEl.textContent = teachers;
 
     // ---- MODELS ----
-    const modelsSnap = await getDocs(collection(db, "models"));
-    if (modelsEl) modelsEl.textContent = modelsSnap.size;
+    const approvedSnap = await getDocs(collection(db, "models"));
+    if (approvedModelsEl) approvedModelsEl.textContent = approvedSnap.size;
+
+    const pendingSnap = await getDocs(collection(db, "pendingModels"));
+    if (pendingModelsEl) pendingModelsEl.textContent = pendingSnap.size;
 
     // ---- FAVORITES ----
     const favoritesSnap = await getDocs(collection(db, "favorites"));
     if (favoritesEl) favoritesEl.textContent = favoritesSnap.size;
 
   } catch (error) {
-    console.error("Грешка при зареждане на статистиките:", error);
+    console.error("Грешка при статистиките:", error);
   }
 }

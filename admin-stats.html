@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Админ Статистики | DesignRealm</title>
 
   <link rel="icon" href="favicon.png">
@@ -14,75 +15,68 @@
 
 <body class="dashboard-body">
 
-<!-- ===== HEADER ===== -->
-<header class="dashboard-header">
-  <div class="logo">
-    <a href="index.html">
-      <img src="images/logo_notext.png" alt="DesignRealm">
-      <span>DesignRealm</span>
-    </a>
-  </div>
-
-  <nav class="dashboard-nav">
-    <a href="admin.html">Админ панел</a>
-    <a href="manage-users.html">Потребители</a>
-    <a href="upload.html">Качи модел</a>
-    <a href="admin-stats.html" class="active">Статистики</a>
-    <a href="index.html">Начало</a>
-  </nav>
-</header>
-
-<!-- ===== MAIN ===== -->
-<main class="admin-stats-page">
-
-  <h1>📊 Статистика на платформата</h1>
-  <p class="subtitle">Обща информация за потребители, роли и съдържание</p>
-
-  <!-- ===== STATS GRID ===== -->
-  <section class="stats-grid">
-
-    <div class="stat-card">
-      <span class="material-icons">group</span>
-      <h2 id="total-users">0</h2>
-      <p>Общо потребители</p>
+  <!-- ===== HEADER ===== -->
+  <header class="dashboard-header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm">
+        <span>DesignRealm</span>
+      </a>
     </div>
 
-    <div class="stat-card">
-      <span class="material-icons">school</span>
-      <h2 id="students-count">0</h2>
-      <p>Ученици</p>
-    </div>
+    <nav class="dashboard-nav">
+      <a href="admin.html">Админ панел</a>
+      <a href="manage-users.html">Потребители</a>
+      <a href="upload.html">Качи модел</a>
+      <a href="admin-stats.html" class="active">Статистики</a>
+      <a href="index.html">Начало</a>
+    </nav>
+  </header>
 
-    <div class="stat-card">
-      <span class="material-icons">person</span>
-      <h2 id="teachers-count">0</h2>
-      <p>Учители</p>
-    </div>
+  <!-- ===== MAIN ===== -->
+  <main class="admin-stats-page">
 
-    <div class="stat-card">
-      <span class="material-icons">view_in_ar</span>
-      <h2 id="models-count">0</h2>
-      <p>3D модели</p>
-    </div>
+    <h1>📊 Статистика на платформата</h1>
+    <p class="subtitle">Обща информация за потребители, роли и съдържание</p>
 
-    <div class="stat-card">
-      <span class="material-icons">favorite</span>
-      <h2 id="favorites-count">0</h2>
-      <p>Любими модели</p>
-    </div>
+    <!-- ===== STATS GRID ===== -->
+    <section class="stats-grid">
 
-  </section>
+      <div class="stat-card">
+        <span class="material-icons">group</span>
+        <h2 id="total-users">0</h2>
+        <p>Общо потребители</p>
+      </div>
 
-</main>
+      <div class="stat-card">
+        <span class="material-icons">view_in_ar</span>
+        <h2>
+          <span id="approved-models">0</span> /
+          <span id="pending-models">0</span>
+        </h2>
+        <p>3D модели (Одобрени / Изчакващи)</p>
+      </div>
 
-<!-- ===== FOOTER ===== -->
-<footer class="dashboard-footer">
-  <p>© 2025 DesignRealm • Учебен проект</p>
-</footer>
 
-<!-- ===== SCRIPTS ===== -->
-<script type="module" src="firebase-init.js"></script>
-<script type="module" src="admin-stats.js"></script>
+      <div class="stat-card">
+        <span class="material-icons">favorite</span>
+        <h2 id="favorites-count">0</h2>
+        <p>Любими модели</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="dashboard-footer">
+    <p>© 2025 DesignRealm • Учебен проект</p>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="admin-stats.js"></script>
 
 </body>
+
 </html>

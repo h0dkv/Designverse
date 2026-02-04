@@ -2166,7 +2166,7 @@ body.admin #admin-panel {
 .profile-page p,
 .admin-page p,
 .upload-page p {
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 30px;
 }
 
@@ -2407,7 +2407,7 @@ body.admin #admin-panel {
 
 /* ===== CARD ===== */
 .stat-card {
-  background: #1e1e1e;
+  background: var(--crimson-violet);
   border-radius: 14px;
   padding: 30px 20px;
   text-align: center;
@@ -2434,7 +2434,7 @@ body.admin #admin-panel {
 }
 
 .stat-card p {
-  color: #aaa;
+  color: var(--white);
   font-size: 1rem;
 }
 
