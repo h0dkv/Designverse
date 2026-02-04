@@ -2517,3 +2517,13 @@ body.admin #admin-panel {
 .profile-section ul li.disabled {
   opacity: 0.5;
 }
+
+#pending-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#pending-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
