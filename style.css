@@ -2338,6 +2338,8 @@ body.admin #admin-panel {
   color: #fff;
   font-family: 'Segoe UI', sans-serif;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===== HEADER ===== */
@@ -2385,6 +2387,7 @@ body.admin #admin-panel {
   max-width: 1300px;
   margin: auto;
   background-color: var(--midnight-violet);
+  flex: 1;
 }
 
 .admin-stats-page h1 {
@@ -2452,6 +2455,7 @@ body.admin #admin-panel {
   margin: 0;
   color: var(--white);
 }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .admin-stats-page {
