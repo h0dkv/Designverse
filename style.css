@@ -10,8 +10,6 @@
   --white: #ffffff;
   --lavender-blush: #fff0f6;
   --baby-blue: #89CFF0;
-  --christmas-green: #00873e;
-  --christmas-red: #b71c1c;
   /* App-wide semantic colors */
   --primary: var(--crimson-violet);
   --accent: #FFC145;
@@ -238,17 +236,9 @@ main {
   color: var(--gold);
 }
 
-body.christmas .catalog h2 {
-  color: var(--crimson-violet);
-}
-
 .catalog p {
   font-size: 1.1rem;
   color: var(--white);
-}
-
-body.christmas .catalog p {
-  color: var(--black);
 }
 
 .catalog.grid {
@@ -303,25 +293,6 @@ body.christmas .catalog p {
 }
 
 .btn:hover {
-  background: #FFC145;
-  color: #000;
-}
-
-body.christmas {
-  background: #f5f2f2;
-}
-
-body.christmas header {
-  background-color: var(--christmas-red) !important;
-  color: var(--timberwolf);
-}
-
-body.christmas .card {
-  background: #FF6B6C;
-  color: #fff;
-}
-
-body.christmas .btn {
   background: #FFC145;
   color: #000;
 }
@@ -456,29 +427,6 @@ nav a.active {
   }
 }
 
-.christmas body {
-  background-color: #e8f5e9;
-  color: #2e7d42;
-}
-
-.christmas header {
-  color: var(--timberwolf);
-  background-color: var(--gold);
-}
-
-.christmas .hero {
-  background: linear-gradient(135deg, #b71c1c, #1b5e20);
-  color: #fff;
-}
-
-.christmas .btn {
-  background: #388e3c;
-}
-
-.christmas footer {
-  background: var(--christmas-green);
-}
-
 .snowflake {
   position: fixed;
   top: 0;
@@ -520,9 +468,6 @@ nav a.active {
   color: var(--white);
 }
 
-body.christmas .about p {
-  color: var(--black);
-}
 
 .team-grid {
   display: flex;
@@ -561,15 +506,6 @@ body.christmas .about p {
   font-size: 0.9rem;
 }
 
-body.christmas .about h1,
-body.christmas .about h2 {
-  color: #FFC145;
-}
-
-body.christmas .member {
-  background: #FF6B6C;
-  color: #fff;
-}
 
 .contact-page {
   text-align: center;
@@ -583,18 +519,12 @@ body.christmas .member {
   margin-bottom: 1rem;
 }
 
-body.christmas .contact-page h1 {
-  color: var(--crimson-violet);
-}
 
 .contact-page p {
   color: #ffffff;
   margin-bottom: 2rem;
 }
 
-body.christmas .contact-page p {
-  color: var(--black);
-}
 
 .contact-form {
   display: flex;
@@ -644,22 +574,6 @@ body.christmas .contact-page p {
   transform: scale(1.03);
 }
 
-body.christmas .contact-form {
-  background: #FF6B6C;
-  color: white;
-}
-
-body.christmas .contact-form input,
-body.christmas .contact-form textarea {
-  background: #fff;
-  border: none;
-}
-
-body.christmas .contact-form .btn {
-  background: #FFC145;
-  color: #5B5F97;
-}
-
 .blog {
   text-align: center;
   padding: 2rem;
@@ -670,14 +584,6 @@ body.christmas .contact-form .btn {
 .blog h1 {
   color: var(--gold);
   margin-bottom: 1rem;
-}
-
-body.christmas .blog h1 {
-  color: var(--crimson-violet);
-}
-
-body.christmas .blog p {
-  color: var(--black);
 }
 
 .blog-grid {
@@ -734,15 +640,6 @@ body.christmas .blog p {
   color: #000;
 }
 
-body.christmas .post {
-  background: #FF6B6C;
-  color: white;
-}
-
-body.christmas .post .btn {
-  background: var();
-  color: #5B5F97;
-}
 
 .snowflake {
   position: fixed;
@@ -764,17 +661,6 @@ body.christmas .post .btn {
     transform: translateY(100vh);
     opacity: 0;
   }
-}
-
-body.christmas header,
-body.christmas header a,
-body.christmas header span {
-  color: white !important;
-}
-
-body.christmas .logo img {
-  filter: drop-shadow(0 0 8px #FFC145) brightness(1.2);
-  animation: glow 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
@@ -813,15 +699,6 @@ body.christmas .logo img {
   line-height: 1.6;
 }
 
-body.christmas .blog-post {
-  background: #FF6B6C;
-  color: white;
-}
-
-body.christmas .blog-post h1 {
-  color: #FFC145;
-}
-
 nav a {
   position: relative;
   color: white;
@@ -853,14 +730,6 @@ nav a:hover {
   color: var(--old-gold);
 }
 
-body.christmas nav a::after {
-  background: #FFC145;
-}
-
-body.christmas nav a:hover {
-  color: #FFC145;
-}
-
 .login-page {
   text-align: center;
   padding: 2rem;
@@ -873,18 +742,13 @@ body.christmas nav a:hover {
   margin-bottom: 1rem;
 }
 
-body.christmas .login-page h1 {
-  color: var(--crimson-violet);
-}
+
 
 .login-page p {
   color: #ffffff;
   margin-bottom: 2rem;
 }
 
-body.christmas .login-page p {
-  color: var(--black);
-}
 
 .login-form {
   display: flex;
@@ -938,19 +802,6 @@ body.christmas .login-page p {
   margin-bottom: 1rem;
 }
 
-body.christmas .login-form {
-  background: #FF6B6C;
-  color: white;
-}
-
-body.christmas .login-form input {
-  background: #fff;
-}
-
-body.christmas .login-form .btn {
-  background: #FFC145;
-  color: #5B5F97;
-}
 
 .register-form {
   display: flex;
@@ -994,20 +845,6 @@ body.christmas .login-form .btn {
   transform: scale(1.03);
 }
 
-body.christmas .register-form {
-  background: #FF6B6C;
-  color: white;
-}
-
-body.christmas .register-form input {
-  background: #fff;
-  border: none;
-}
-
-body.christmas .register-form .btn {
-  background: #FFC145;
-  color: #5B5F97;
-}
 
 .dashboard-page .hero {
   background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
@@ -1133,12 +970,6 @@ body.christmas .register-form .btn {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-body.christmas #theme-toggle {
-  background: linear-gradient(135deg, var(--black), var(--midnight-violet));
-  color: #fff;
-  filter: drop-shadow(0 0 8px #ffffff) brightness(1.2);
-}
-
 .search-bar {
   display: block;
   width: 80%;
@@ -1158,10 +989,6 @@ body.christmas #theme-toggle {
   box-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
 }
 
-body.christmas .search-bar {
-  border-color: gold;
-  background-color: rgba(255, 255, 255, 0.9);
-}
 
 @media (max-width: 600px) {
   .search-bar {
@@ -1175,11 +1002,6 @@ body.christmas .search-bar {
   }
 }
 
-body.christmas #countdown {
-  background: linear-gradient(90deg, #c00000, #008000);
-  color: gold;
-  text-shadow: 0 0 10px white;
-}
 
 .countdown-section {
   text-align: center;
@@ -1237,16 +1059,6 @@ body.christmas #countdown {
   }
 }
 
-body.christmas .countdown-section h2 {
-  color: gold;
-  text-shadow: 0 0 15px red;
-}
-
-body.christmas #countdown {
-  background: linear-gradient(90deg, #c00000, #008000);
-  color: gold;
-  text-shadow: 0 0 10px white;
-}
 
 .countdown-title {
   font-size: 2rem;
@@ -1283,22 +1095,6 @@ body.christmas #countdown {
   }
 }
 
-body.christmas .countdown-title {
-  color: gold;
-  animation: fadeIn 2s ease-out, pulseGlowChristmas 3s infinite ease-in-out;
-}
-
-@keyframes pulseGlowChristmas {
-
-  0%,
-  100% {
-    text-shadow: 0 0 10px red, 0 0 20px green, 0 0 30px gold;
-  }
-
-  50% {
-    text-shadow: 0 0 25px gold, 0 0 40px red, 0 0 60px green;
-  }
-}
 
 .fav-btn {
   display: inline-flex;
@@ -1348,16 +1144,6 @@ body.christmas .countdown-title {
   }
 }
 
-body.christmas .fav-btn {
-  background: linear-gradient(45deg, #c00000, #008000);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-}
-
-body.christmas .fav-btn.added {
-  background: linear-gradient(45deg, #00cc00, #ff3333);
-  box-shadow: 0 0 20px gold;
-}
-
 
 .favorites-page {
   text-align: center;
@@ -1377,11 +1163,6 @@ body.christmas .fav-btn.added {
   color: var(--white);
 }
 
-body.christmas .favorites-page p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
-  color: var(--black);
-}
 
 #favorites-list {
   display: grid;
@@ -1446,19 +1227,6 @@ body.christmas .favorites-page p {
 .danger-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-}
-
-body.christmas .favorites-page h1 {
-  color: var(--crimson-violet);
-}
-
-body.christmas .remove-btn {
-  background: linear-gradient(45deg, #c00000, #008000);
-}
-
-body.christmas .danger-btn {
-  background: linear-gradient(45deg, #ff0000, #006600);
-  color: var(--white);
 }
 
 nav {
@@ -1863,18 +1631,11 @@ nav a:hover {
   border-radius: 15px;
 }
 
-.body.christmas .hero-3d {
-  background: linear-gradient(to right, var(--christmas-green), var(--christmas-red));
-}
-
 .hero-3d h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
-.body.christmas .hero-3d h1 {
-  color: var(--white);
-}
 
 .content-section {
   margin-top: 2rem;
@@ -1884,9 +1645,6 @@ nav a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-body.christmas .content-section {
-  background: var(--midnight-violet);
-}
 
 
 .content-section img.content-image {
@@ -1903,10 +1661,6 @@ body.christmas .content-section {
   margin-bottom: 1rem;
 }
 
-.body.christmas .info-box {
-  background: var(--christmas-green);
-}
-
 .list-benefits {
   list-style-type: disc;
   padding-left: 1.5rem;
@@ -1914,18 +1668,12 @@ body.christmas .content-section {
   background: var(--crimson-violet);
 }
 
-.body.christmas .list-benefits {
-  background: linear-gradient(to right, var(--christmas-red), var(--christmas-green));
-}
 
 .list-benefits li {
   margin: 0.5rem 0;
   font-size: 1.1rem;
 }
 
-.body.christmas .list-benefits li {
-  color: var(--white);
-}
 
 .highlighted {
   background: var(--slate-gray);
@@ -1933,10 +1681,6 @@ body.christmas .content-section {
   text-align: center;
 }
 
-.body.christmas .highlighted {
-  background: linear-gradient(to right, var(--christmas-green), var(--christmas-red));
-  border: 1px solid #FFC145;
-}
 
 .content-sectoin .highlighted .btn {
   background: #6a4fff;
@@ -1948,10 +1692,6 @@ body.christmas .content-section {
   text-decoration: none;
 }
 
-body.christmas .content-sectoin .highlighted .btn {
-  background: #FFC145;
-  color: #5B5F97;
-}
 
 .video-container {
   position: relative;
@@ -2059,17 +1799,6 @@ body.christmas .content-sectoin .highlighted .btn {
 
 #lang-btn:active {
   transform: scale(0.95);
-}
-
-body.christmas #lang-btn {
-  background: linear-gradient(45deg, #b71c1c, #1b5e20);
-  color: #fff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-}
-
-body.christmas #lang-btn:hover {
-  box-shadow: 0 0 15px gold;
-  transform: scale(1.1);
 }
 
 .dashboard {
