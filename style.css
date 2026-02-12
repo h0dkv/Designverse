@@ -1877,7 +1877,7 @@ body.admin #admin-panel {
 .admin-page,
 .upload-page {
 
-  margin: 60px auto;
+  margin: auto auto auto auto;
 
 }
 
