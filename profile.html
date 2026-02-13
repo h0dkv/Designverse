@@ -163,103 +163,66 @@
 
   <script type="module">
     import { auth, db } from "./firebase-init.js";
-
     import {
       onAuthStateChanged,
-      updateProfile,
-      signOut,
-      deleteUser,
-      sendPasswordResetEmail
+      updateProfile
     } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
     import {
       doc,
       getDoc,
-      updateDoc,
-      deleteDoc
+      updateDoc
     } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-    // ===== ELEMENTS =====
-    const avatarImg = document.getElementById("profileAvatar");
-    const emailEl = document.getElementById("profile-email");
-    const roleEl = document.getElementById("profile-role");
-
-    const logoutBtn = document.getElementById("logout");
-    const deleteBtn = document.getElementById("delete-account");
-    const changePassBtn = document.getElementById("change-password");
-    const editBtn = document.getElementById("edit-profile");
+    const avatarInput = document.getElementById("avatar-input");
+    const avatarPreview = document.getElementById("avatar-preview");
+    const nameInput = document.getElementById("display-name");
+    const bioInput = document.getElementById("bio");
+    const saveBtn = document.getElementById("save-profile");
 
     let userRef;
-    let currentUser;
 
-    // ===== AUTH CHECK =====
     onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-        return;
-      }
+      if (!user) return location.href = "login.html";
 
-      currentUser = user;
       userRef = doc(db, "users", user.uid);
-
       const snap = await getDoc(userRef);
 
       if (snap.exists()) {
         const data = snap.data();
-
-        avatarImg.src = data.avatar || "images/avatar_placeholder.png";
-        emailEl.textContent = user.email;
-        roleEl.textContent = data.role || "user";
-      } else {
-        emailEl.textContent = user.email;
-        roleEl.textContent = "user";
+        avatarPreview.src = data.avatar || "images/default-avatar.png";
+        nameInput.value = data.displayName || "";
+        bioInput.value = data.bio || "";
       }
     });
 
-    // ===== EDIT PROFILE (simple prompt version) =====
-    editBtn.addEventListener("click", async () => {
-      const newName = prompt("Въведете ново име:", currentUser.displayName || "");
+    avatarInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-      if (!newName) return;
+      const reader = new FileReader();
+      reader.onload = () => avatarPreview.src = reader.result;
+      reader.readAsDataURL(file);
+    });
 
-      await updateProfile(currentUser, {
-        displayName: newName
+    saveBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      await updateProfile(user, {
+        displayName: nameInput.value
       });
 
       await updateDoc(userRef, {
-        displayName: newName,
+        displayName: nameInput.value,
+        bio: bioInput.value,
+        avatar: avatarPreview.src,
         updatedAt: new Date()
       });
 
-      alert("Името е обновено!");
-    });
-
-    // ===== CHANGE PASSWORD =====
-    changePassBtn.addEventListener("click", async () => {
-      await sendPasswordResetEmail(auth, currentUser.email);
-      alert("Изпратен е имейл за смяна на парола.");
-    });
-
-    // ===== DELETE ACCOUNT =====
-    deleteBtn.addEventListener("click", async () => {
-      const confirmDelete = confirm("Сигурни ли сте, че искате да изтриете акаунта си?");
-
-      if (!confirmDelete) return;
-
-      await deleteDoc(userRef);
-      await deleteUser(currentUser);
-
-      alert("Акаунтът е изтрит.");
-      window.location.href = "index.html";
-    });
-
-    // ===== LOGOUT =====
-    logoutBtn.addEventListener("click", async () => {
-      await signOut(auth);
-      window.location.href = "index.html";
+      alert("Профилът е обновен!");
     });
   </script>
-
 
   <script type="module" src="monitor.js"></script>
 </body>
