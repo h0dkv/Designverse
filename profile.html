@@ -163,91 +163,104 @@
 
   <script type="module">
     import { auth, db } from "./firebase-init.js";
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-    // Populate profile info when user is signed in
-    onAuthStateChanged(auth, async user => {
-      if (!user) return;
-      const emailEl = document.getElementById("profile-email");
-      const roleEl = document.getElementById("profile-role");
-      if (emailEl) emailEl.textContent = user.email;
-      try {
-        const snap = await getDoc(doc(db, "users", user.uid));
-        if (!snap.exists()) return;
+    import {
+      onAuthStateChanged,
+      updateProfile,
+      signOut,
+      deleteUser,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
+    import {
+      doc,
+      getDoc,
+      updateDoc,
+      deleteDoc
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+    // ===== ELEMENTS =====
+    const avatarImg = document.getElementById("profileAvatar");
+    const emailEl = document.getElementById("profile-email");
+    const roleEl = document.getElementById("profile-role");
+
+    const logoutBtn = document.getElementById("logout");
+    const deleteBtn = document.getElementById("delete-account");
+    const changePassBtn = document.getElementById("change-password");
+    const editBtn = document.getElementById("edit-profile");
+
+    let userRef;
+    let currentUser;
+
+    // ===== AUTH CHECK =====
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      currentUser = user;
+      userRef = doc(db, "users", user.uid);
+
+      const snap = await getDoc(userRef);
+
+      if (snap.exists()) {
         const data = snap.data();
 
-        // Роля като badge
-        if (roleEl) {
-          const r = data.role || "user";
-          roleEl.innerHTML = `<span class="role-badge ${r}">${r}</span>`;
-        }
-
-        // ✅ АВАТАР
-        const avatar = document.getElementById("profileAvatar");
-        if (avatar && data.photoURL) {
-          avatar.src = data.photoURL;
-        }
-
-      } catch (err) {
-        console.error(err);
+        avatarImg.src = data.avatar || "images/avatar_placeholder.png";
+        emailEl.textContent = user.email;
+        roleEl.textContent = data.role || "user";
+      } else {
+        emailEl.textContent = user.email;
+        roleEl.textContent = "user";
       }
     });
 
-    // Menu interactions
-    const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    if (menuToggle && sidebar) {
-      menuToggle.addEventListener('click', () => {
-        // simple toggle for small screens
-        sidebar.style.display = (sidebar.style.display === 'none' || getComputedStyle(sidebar).display === 'none') ? 'block' : 'none';
+    // ===== EDIT PROFILE (simple prompt version) =====
+    editBtn.addEventListener("click", async () => {
+      const newName = prompt("Въведете ново име:", currentUser.displayName || "");
+
+      if (!newName) return;
+
+      await updateProfile(currentUser, {
+        displayName: newName
       });
-    }
 
-    // Make profile menu links set active
-    const menu = document.getElementById('profile-menu');
-    if (menu) {
-      menu.addEventListener('click', e => {
-        const a = e.target.closest('a');
-        if (!a) return;
-        menu.querySelectorAll('a').forEach(x => x.classList.remove('active'));
-        a.classList.add('active');
+      await updateDoc(userRef, {
+        displayName: newName,
+        updatedAt: new Date()
       });
-    }
 
-    // Action buttons
-    document.getElementById('edit-profile')?.addEventListener('click', () => {
-      const name = prompt('Въведете име за показване (пример):');
-      if (name) alert('Промените са записани (демо)');
+      alert("Името е обновено!");
     });
 
-    document.getElementById('logout')?.addEventListener('click', async () => {
-      try {
-        await signOut(auth);
-        window.location.href = 'index.html';
-      } catch (err) {
-        console.error(err);
-        alert('Грешка при изход.');
-      }
+    // ===== CHANGE PASSWORD =====
+    changePassBtn.addEventListener("click", async () => {
+      await sendPasswordResetEmail(auth, currentUser.email);
+      alert("Изпратен е имейл за смяна на парола.");
     });
 
-    document.getElementById('change-password')?.addEventListener('click', () => {
-      const pw = prompt('Въведете новата парола:');
-      if (pw) alert('Паролата е обновена (демо).');
+    // ===== DELETE ACCOUNT =====
+    deleteBtn.addEventListener("click", async () => {
+      const confirmDelete = confirm("Сигурни ли сте, че искате да изтриете акаунта си?");
+
+      if (!confirmDelete) return;
+
+      await deleteDoc(userRef);
+      await deleteUser(currentUser);
+
+      alert("Акаунтът е изтрит.");
+      window.location.href = "index.html";
     });
 
-    document.getElementById('delete-account')?.addEventListener('click', async () => {
-      const ok = confirm('Наистина ли искате да изтриете акаунта си? Тази операция е необратима.');
-      if (!ok) return;
-      alert('Акаунтът е маркиран за изтриване (демо).');
+    // ===== LOGOUT =====
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "index.html";
     });
-
-    // Placeholder functions kept for backward compatibility
-    function updateProfile() { console.warn('updateProfile() - demo placeholder'); }
-    function changePassword() { console.warn('changePassword() - demo placeholder'); }
-    function deleteAccount() { console.warn('deleteAccount() - demo placeholder'); }
   </script>
+
+
   <script type="module" src="monitor.js"></script>
 </body>
 
