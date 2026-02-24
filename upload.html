@@ -10,19 +10,22 @@
 
 <body>
 
-  
-    <header class="dashboard-header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm">
-                <span>DesignRealm</span>
-            </a>
-        </div>
 
-        <nav class="dashboard-nav">
-            <a href="index.html">Начало</a>
-        </nav>
-    </header>
+  <header class="dashboard-header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm">
+        <span>DesignRealm</span>
+      </a>
+    </div>
+
+    <nav class="dashboard-nav">
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="profile.html">Профил</a>
+      <a href="upload.html" class="active">Качи модел</a>
+    </nav>
+  </header>
 
   <main style="max-width:800px;margin:1.5rem auto;">
     <section class="hero">
@@ -32,14 +35,37 @@
       </div>
     </section>
 
-    <div class="card" style="padding:1rem;margin-top:1rem;">
-      <label style="display:block;margin-bottom:0.5rem;"><strong>Име на модела</strong></label>
-      <input id="title" placeholder="Име на модела" style="width:100%;margin-bottom:0.75rem;">
+    <div class="upload-card">
+      <h2>📤 Качи 3D модел</h2>
+      <p>Поддържани формати: STL, ZIP</p>
 
-      <label style="display:block;margin-bottom:0.5rem;"><strong>Файл</strong></label>
-      <input id="file" type="file" accept=".stl,.zip" style="display:block;margin-bottom:1rem;">
+      <div class="form-group">
+        <label for="title">Име на модела</label>
+        <input id="title" type="text" placeholder="Въведи име на модела" required>
+      </div>
 
-      <button id="uploadBtn" class="btn">Качи</button>
+      <div class="form-group">
+        <label>Файл за качване</label>
+        <div id="drop-zone" class="drop-zone">
+          <div class="drop-zone-content">
+            <div class="icon">📁</div>
+            <p>Пусни файла тук или <span class="click-here">кликни за избор</span></p>
+            <input id="file" type="file" accept=".stl,.zip" hidden>
+          </div>
+        </div>
+        <div id="file-info" class="file-info" style="display:none;">
+          <span id="file-name"></span> (<span id="file-size"></span>)
+        </div>
+      </div>
+
+      <div id="progress-container" class="progress-container" style="display:none;">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="progress-text">Качване... 0%</p>
+      </div>
+
+      <button id="uploadBtn" class="btn upload-btn" disabled>⬆ Качи модел</button>
     </div>
 
     <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">← Начало</a>
