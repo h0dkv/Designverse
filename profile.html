@@ -161,69 +161,7 @@
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
-  <script type="module">
-    import { auth, db } from "./firebase-init.js";
-    import {
-      onAuthStateChanged,
-      updateProfile
-    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-    import {
-      doc,
-      getDoc,
-      updateDoc
-    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-    const avatarInput = document.getElementById("avatar-input");
-    const avatarPreview = document.getElementById("avatar-preview");
-    const nameInput = document.getElementById("display-name");
-    const bioInput = document.getElementById("bio");
-    const saveBtn = document.getElementById("save-profile");
-
-    let userRef;
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) return location.href = "login.html";
-
-      userRef = doc(db, "users", user.uid);
-      const snap = await getDoc(userRef);
-
-      if (snap.exists()) {
-        const data = snap.data();
-        avatarPreview.src = data.avatar || "images/default-avatar.png";
-        nameInput.value = data.displayName || "";
-        bioInput.value = data.bio || "";
-      }
-    });
-
-    avatarInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = () => avatarPreview.src = reader.result;
-      reader.readAsDataURL(file);
-    });
-
-    saveBtn.addEventListener("click", async () => {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      await updateProfile(user, {
-        displayName: nameInput.value
-      });
-
-      await updateDoc(userRef, {
-        displayName: nameInput.value,
-        bio: bioInput.value,
-        avatar: avatarPreview.src,
-        updatedAt: new Date()
-      });
-
-      alert("Профилът е обновен!");
-    });
-  </script>
-
+  <script type="module" src="profile.js"></script>
   <script type="module" src="monitor.js"></script>
 </body>
 
