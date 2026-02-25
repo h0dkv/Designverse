@@ -72,7 +72,6 @@ header {
   justify-content: center;
   background-image: url("images/hero.jpg");
   height: 70vh;
-  flex-direction: column;
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
@@ -122,23 +121,6 @@ header {
 }
 
 
-.admin .hero {
-  background-size: cover;
-  background-position: center;
-  border-radius: 1rem;
-  padding: 0.1px 0.1px;
-  color: violet;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url("images/hero.jpg");
-  height: 70vh;
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-  background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
-  position: relative;
-  overflow: hidden;
-}
 
 .profile-card {
   display: block;
