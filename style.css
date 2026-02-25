@@ -121,6 +121,26 @@ header {
   }
 }
 
+
+.admin .hero {
+  background-size: cover;
+  background-position: center;
+  border-radius: 1rem;
+  padding: 0.1px 0.1px;
+  color: violet;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("images/hero.jpg");
+  height: 70vh;
+  flex-direction: column;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
+  position: relative;
+  overflow: hidden;
+}
+
 .profile-card {
   display: block;
   background: #121212;
@@ -478,7 +498,6 @@ main {
 /* Featured Models Section */
 .featured-models {
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, var(--midnight-violet) 0%, var(--crimson-violet) 100%);
   color: white;
   text-align: center;
 }
@@ -542,7 +561,7 @@ main {
 /* Call to Action Section */
 .cta-section {
   padding: 2rem 2rem;
-  background: linear-gradient(135deg, var(--crimson-violet) 0%, var(--midnight-violet) 100%);
+  background: linear-gradient(135deg, var(--old-gold) 10%, var(--midnight-violet) 100%);
   color: white;
   text-align: center;
   margin-top: 2rem;
@@ -1049,8 +1068,8 @@ nav a:hover {
 }
 
 .hero-image img {
-  max-width: 300px;
-  height: auto;
+  max-width: 600px;
+  height: 300px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
