@@ -91,19 +91,13 @@ header {
   z-index: 1;
 }
 
-.hero-text {
-  position: relative;
-  z-index: 2;
-  animation: fadeInUp 1s ease-out;
-}
-
-.hero-text h1 {
-  margin: 0;
-  font-size: 3.5rem;
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-  animation: glow 2s ease-in-out infinite alternate;
-}
+  .hero-text h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
 
 @keyframes fadeInUp {
   from {
@@ -125,13 +119,6 @@ header {
   to {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
   }
-}
-
-.hero-text h1 {
-  margin: 0;
-  font-size: 2.8rem;
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .profile-card {
@@ -1002,27 +989,6 @@ nav a:hover {
   transform: scale(1.03);
 }
 
-.dashboard-page .hero {
-  background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 20px;
-  height: 50vh;
-}
-
-.dashboard-page .hero-text h1 {
-  font-size: 2.8rem;
-  color: var(--white);
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.dashboard-page .hero-text p {
-  font-size: 1.2rem;
-  color: var(--white);
-  margin: 15px 0 25px;
-}
-
 .hero-content {
   display: flex;
   align-items: center;
@@ -1048,11 +1014,11 @@ nav a:hover {
   animation: glow 2s ease-in-out infinite alternate;
 }
 
-.hero-text p {
-  font-size: 1.3rem;
-  margin: 1rem 0 2rem;
-  opacity: 0.9;
-}
+  .hero-text p {
+    font-size: 1.3rem;
+    margin: 1rem 0 2rem;
+    opacity: 0.9;
+  }
 
 .hero-text .btn {
   padding: 1rem 2rem;
