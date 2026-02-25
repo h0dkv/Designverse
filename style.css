@@ -72,7 +72,6 @@ header {
   justify-content: center;
   background-image: url("images/hero.jpg");
   height: 70vh;
-  flex-direction: column;
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
@@ -89,12 +88,6 @@ header {
   bottom: 0;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
-}
-
-.hero-text {
-  position: relative;
-  z-index: 2;
-  animation: fadeInUp 1s ease-out;
 }
 
 .hero-text h1 {
@@ -127,12 +120,7 @@ header {
   }
 }
 
-.hero-text h1 {
-  margin: 0;
-  font-size: 2.8rem;
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
+
 
 .profile-card {
   display: block;
@@ -491,7 +479,6 @@ main {
 /* Featured Models Section */
 .featured-models {
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, var(--midnight-violet) 0%, var(--crimson-violet) 100%);
   color: white;
   text-align: center;
 }
@@ -554,10 +541,11 @@ main {
 
 /* Call to Action Section */
 .cta-section {
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, var(--crimson-violet) 0%, var(--midnight-violet) 100%);
+  padding: 2rem 2rem;
+  background: linear-gradient(135deg, var(--old-gold) 10%, var(--midnight-violet) 100%);
   color: white;
   text-align: center;
+  margin-top: 2rem;
 }
 
 .cta-content h2 {
@@ -1002,27 +990,6 @@ nav a:hover {
   transform: scale(1.03);
 }
 
-.dashboard-page .hero {
-  background: linear-gradient(to right, var(--baby-blue), var(--crimson-violet));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 20px;
-  height: 50vh;
-}
-
-.dashboard-page .hero-text h1 {
-  font-size: 2.8rem;
-  color: var(--white);
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.dashboard-page .hero-text p {
-  font-size: 1.2rem;
-  color: var(--white);
-  margin: 15px 0 25px;
-}
-
 .hero-content {
   display: flex;
   align-items: center;
@@ -1082,8 +1049,8 @@ nav a:hover {
 }
 
 .hero-image img {
-  max-width: 300px;
-  height: auto;
+  max-width: 600px;
+  height: 300px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
