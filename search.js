@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // theme toggle removed (button and countdown were deleted)
 
-    // ===================== Обикновена търсачка (#search) =====================
-    const search = document.getElementById("search");
+    // ===================== Обикновена търсачка (#catalogSearch) =====================
+    const search = document.getElementById("catalogSearch");
     if (search) {
         search.addEventListener("input", (e) => {
             const term = e.target.value.toLowerCase();
@@ -71,6 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 targetDuration = 60000;
                 if (!animationFrame) smoothTransition();
             }
+            // Добавяне на филтриране
+            const term = searchField.value.toLowerCase();
+            document.querySelectorAll(".card").forEach((card) => {
+                const title = card.querySelector("h3")?.textContent?.toLowerCase() || "";
+                card.style.display = title.includes(term) ? "" : "none";
+            });
         });
 
         searchField.addEventListener("focus", () => {
