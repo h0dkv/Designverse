@@ -38,9 +38,6 @@ onAuthStateChanged(auth, async (user) => {
     card.querySelector(".admin").onclick = () =>
       updateDoc(doc(db, "users", uid), { role: "admin" });
 
-    card.querySelector(".mod").onclick = () =>
-      updateDoc(doc(db, "users", uid), { role: "moderator" });
-
     card.querySelector(".danger").onclick = () =>
       deleteDoc(doc(db, "users", uid));
 
