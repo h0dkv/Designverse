@@ -32,7 +32,6 @@ onAuthStateChanged(auth, async (user) => {
       <h3>${u.email}</h3>
       <p>Роля: <strong>${u.role}</strong></p>
       <button class="btn admin">Admin</button>
-      <button class="btn mod">Moderator</button>
       <button class="btn danger">Delete</button>
     `;
 
