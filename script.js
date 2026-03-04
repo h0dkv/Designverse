@@ -132,10 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
 
-if (role === "admin") {
-  adminPanel.classList.remove("hidden");
-} else {
-  adminPanel.classList.add("hidden");
-}
+  // ----- Admin panel visibility -----
+  const adminPanel = document.getElementById("admin-panel");
+  const role = localStorage.getItem("userRole") || "user";
+
+  if (adminPanel) {
+    if (role === "admin") {
+      adminPanel.classList.remove("hidden");
+    } else {
+      adminPanel.classList.add("hidden");
+    }
+  }
+});

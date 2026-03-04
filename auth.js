@@ -16,7 +16,8 @@ import {
 
 const adminEmails = [
     "hristianfortnite@gmail.com",
-    "milabtv@gmail.com"
+    "milabtv@gmail.com",
+    "noit@oupvolov.com"
 ];
 
 onAuthStateChanged(auth, async (user) => {

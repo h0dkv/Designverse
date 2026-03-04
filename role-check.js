@@ -16,22 +16,8 @@ export async function getUserRole() {
   return snap.data().role || null;
 }
 
-export async function isStudent() {
-  const r = await getUserRole();
-  return r === "student";
-}
-
-export async function isTeacher() {
-  const r = await getUserRole();
-  return r === "teacher";
-}
 
 export async function isAdmin() {
   const r = await getUserRole();
-  return r === "admin" || r === "superAdmin";
-}
-
-export async function isSuperAdmin() {
-  const r = await getUserRole();
-  return r === "superAdmin";
+  return r === "admin"
 }
