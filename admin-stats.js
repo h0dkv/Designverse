@@ -13,8 +13,6 @@ import {
 
 // ===== HTML ELEMENTS =====
 const totalUsersEl = document.getElementById("total-users");
-const studentsEl = document.getElementById("students-count");
-const teachersEl = document.getElementById("teachers-count");
 const approvedModelsEl = document.getElementById("approved-models");
 const pendingModelsEl = document.getElementById("pending-models");
 const favoritesEl = document.getElementById("favorites-count");
@@ -56,17 +54,8 @@ async function loadStatistics() {
     // ---- USERS ----
     const usersSnap = await getDocs(collection(db, "users"));
 
-    let students = 0;
-    let teachers = 0;
-
-    usersSnap.forEach(d => {
-      if (d.data().role === "student") students++;
-      if (d.data().role === "teacher") teachers++;
-    });
 
     if (totalUsersEl) totalUsersEl.textContent = usersSnap.size;
-    if (studentsEl) studentsEl.textContent = students;
-    if (teachersEl) teachersEl.textContent = teachers;
 
     // ---- MODELS ----
     const approvedSnap = await getDocs(collection(db, "models"));
