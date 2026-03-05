@@ -4,17 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Качи модел | DesignRealm</title>
+
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-
   <header class="dashboard-header">
+
     <div class="logo">
       <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm">
+        <img src="images/logo_notext.png" alt="DesignRealm logo">
         <span>DesignRealm</span>
       </a>
     </div>
@@ -25,57 +28,104 @@
       <a href="profile.html">Профил</a>
       <a href="upload.html" class="active">Качи модел</a>
     </nav>
+
   </header>
 
+
   <main style="max-width:800px;margin:1.5rem auto;">
+
     <section class="hero">
       <div class="hero-text">
         <h1>⬆ Качи 3D модел</h1>
-        <p class="subtitle">Качи своя STL/ZIP файл и добави кратко описание.</p>
+        <p class="subtitle">Качи своя STL или ZIP файл и го сподели с общността.</p>
       </div>
     </section>
 
-    <div class="upload-card">
-      <h2>📤 Качи 3D модел</h2>
-      <p>Поддържани формати: STL, ZIP</p>
 
+    <div class="upload-card">
+
+      <h2>📤 Качи модел</h2>
+      <p>Поддържани формати: <strong>STL, ZIP</strong> (макс. 50MB)</p>
+
+
+      <!-- TITLE -->
       <div class="form-group">
         <label for="title">Име на модела</label>
-        <input id="title" type="text" placeholder="Въведи име на модела" required>
+        <input id="title" type="text" placeholder="Например: Phone Stand" required>
       </div>
 
+
+      <!-- DESCRIPTION -->
       <div class="form-group">
+        <label for="description">Описание</label>
+        <textarea id="description" rows="3" placeholder="Кратко описание на модела..."></textarea>
+      </div>
+
+
+      <!-- FILE UPLOAD -->
+      <div class="form-group">
+
         <label>Файл за качване</label>
+
         <div id="drop-zone" class="drop-zone">
+
           <div class="drop-zone-content">
             <div class="icon">📁</div>
-            <p>Пусни файла тук или <span class="click-here">кликни за избор</span></p>
+
+            <p>
+              Пусни файла тук или
+              <span class="click-here">кликни за избор</span>
+            </p>
+
             <input id="file" type="file" accept=".stl,.zip" hidden>
           </div>
+
         </div>
+
+
+        <!-- FILE INFO -->
         <div id="file-info" class="file-info" style="display:none;">
-          <span id="file-name"></span> (<span id="file-size"></span>)
+          <strong id="file-name"></strong>
+          (<span id="file-size"></span>)
         </div>
+
       </div>
 
+
+      <!-- PROGRESS -->
       <div id="progress-container" class="progress-container" style="display:none;">
+
         <div class="progress-bar">
           <div id="progress-fill" class="progress-fill"></div>
         </div>
+
         <p id="progress-text">Качване... 0%</p>
+
       </div>
 
-      <button id="uploadBtn" class="btn upload-btn" disabled>⬆ Качи модел</button>
+
+      <!-- BUTTON -->
+      <button id="uploadBtn" class="btn upload-btn" disabled>
+        ⬆ Качи модел
+      </button>
+
     </div>
 
-    <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">← Начало</a>
+
+    <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">
+      ← Начало
+    </a>
+
   </main>
+
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
+
   <script type="module" src="upload.js"></script>
+
 </body>
 
 </html>

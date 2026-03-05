@@ -3295,3 +3295,42 @@ body.admin #admin-panel {
     width: calc(90vw - 13px);
   }
 }
+
+/* ===== DESCRIPTION TEXTAREA ===== */
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 90px;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.form-group textarea:hover {
+  border-color: #999;
+}
+
+/* Focus */
+.form-group textarea:focus {
+  outline: none;
+  border-color: #7b3fe4;
+  box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.15);
+}
+
+/* Placeholder */
+.form-group textarea::placeholder {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .form-group textarea {
+    font-size: 0.9rem;
+  }
+}
