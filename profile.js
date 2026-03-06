@@ -10,6 +10,8 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  document.getElementById("profile-avatar").src =
+    user.photoURL || "default-avatar.png";
   document.getElementById("profile-email").textContent = user.email;
 
   const snap = await getDoc(doc(db, "users", user.uid));
