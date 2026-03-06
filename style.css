@@ -741,15 +741,6 @@ footer {
   margin-top: 2rem;
 }
 
-#menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 28px;
-  cursor: pointer;
-}
-
 .logo {
   display: flex;
   align-items: center;
@@ -3333,4 +3324,46 @@ body.admin #admin-panel {
   .form-group textarea {
     font-size: 0.9rem;
   }
+}
+
+/* ===== MOBILE BURGER MENU ===== */
+
+#menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  #menu-toggle {
+    display: block;
+  }
+
+  #nav {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    background: var(--crimson-violet);
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 10px;
+    display: none;
+    width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  #nav a {
+    display: block;
+    padding: 0.6rem 0;
+  }
+
+  #nav.active {
+    display: flex;
+  }
+
 }
