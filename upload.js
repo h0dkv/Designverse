@@ -129,7 +129,6 @@ uploadBtn.onclick = async () => {
       async () => {
         // Upload completed successfully
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
         // Save to Firestore
         await addDoc(collection(db, "models"), {
           title,
