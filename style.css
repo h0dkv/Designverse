@@ -3387,7 +3387,7 @@ body.admin #admin-panel {
   text-decoration: none;
 }
 
-.card > a img {
+.card>a img {
   width: 100%;
   height: 220px;
   object-fit: cover;
@@ -3396,18 +3396,18 @@ body.admin #admin-panel {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card > a h3 {
+.card>a h3 {
   margin: 1rem 0 0.5rem;
   color: #222;
   font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
-.card > a:hover img {
+.card>a:hover img {
   transform: scale(1.03);
 }
 
-.card > a:hover h3 {
+.card>a:hover h3 {
   color: var(--primary);
 }
 
@@ -3451,12 +3451,12 @@ body.admin #admin-panel {
 }
 
 .model-view {
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(12px);
   border-radius: 24px;
   padding: 1.2rem;
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .model-view img {
@@ -3468,12 +3468,12 @@ body.admin #admin-panel {
 }
 
 .model-details {
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(12px);
   border-radius: 24px;
   padding: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   color: var(--white);
   text-align: left;
 }
@@ -3486,7 +3486,7 @@ body.admin #admin-panel {
 }
 
 .model-description {
-  color: rgba(255,255,255,0.92);
+  color: rgba(255, 255, 255, 0.92);
   line-height: 1.7;
   margin-bottom: 1.5rem;
   font-size: 1rem;
@@ -3499,8 +3499,8 @@ body.admin #admin-panel {
 }
 
 .model-meta div {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
   padding: 0.9rem 1rem;
   color: var(--white);
@@ -3555,5 +3555,213 @@ body.admin #admin-panel {
   .model-actions .btn,
   .model-actions .fav-btn {
     width: 100%;
+  }
+}
+
+/* =========================
+   MODEL PAGE STYLES
+========================= */
+
+.model-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--white);
+  transform: translateX(-4px);
+}
+
+.model-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.model-view {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-view img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease;
+}
+
+.model-view img:hover {
+  transform: scale(1.02);
+}
+
+.model-details {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  color: var(--white);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.model-details h1 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.model-description {
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.model-meta {
+  display: grid;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.model-meta div {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  color: var(--white);
+  font-size: 0.98rem;
+}
+
+.model-meta strong {
+  color: var(--accent);
+}
+
+.model-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.model-actions .btn,
+.model-actions .fav-btn {
+  min-width: 180px;
+  text-align: center;
+}
+
+.model-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-actions .fav-btn {
+  padding: 0.85rem 1.2rem;
+}
+
+/* =========================
+   OPTIONAL EXTRA INFO BOX
+========================= */
+
+.model-extra {
+  margin-top: 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  color: var(--white);
+}
+
+.model-extra h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.model-extra p {
+  margin-bottom: 0;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+  .model-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .model-details h1 {
+    font-size: 1.7rem;
+  }
+
+  .model-view img {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 600px) {
+  .model-page {
+    padding: 1rem;
+  }
+
+  .model-view,
+  .model-details {
+    border-radius: 18px;
+    padding: 1rem;
+  }
+
+  .model-details h1 {
+    font-size: 1.5rem;
+  }
+
+  .model-description {
+    font-size: 0.95rem;
+  }
+
+  .model-actions {
+    flex-direction: column;
+  }
+
+  .model-actions .btn,
+  .model-actions .fav-btn {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .back-link {
+    font-size: 0.95rem;
   }
 }
