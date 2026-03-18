@@ -25,6 +25,8 @@ const progressContainer = document.getElementById("progress-container");
 const progressFill = document.getElementById("progress-fill");
 const progressText = document.getElementById("progress-text");
 
+let selectedFile = null;  // тяло на избрания файл (работи при drag-drop и нормален избор)
+
 // Drag and Drop Functionality
 dropZone.addEventListener("click", () => fileInput.click());
 
@@ -53,6 +55,8 @@ fileInput.addEventListener("change", (e) => {
 });
 
 function handleFileSelect(file) {
+  if (!file) return;
+
   // Validate file type
   const allowedTypes = ['.stl', '.zip'];
   const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
@@ -68,10 +72,18 @@ function handleFileSelect(file) {
     return;
   }
 
+  // Запазване на избрания файл (за drag'n'drop и другите случаи)
+  selectedFile = file;
+
   // Display file info
   fileName.textContent = file.name;
   fileSize.textContent = formatFileSize(file.size);
   fileInfo.style.display = "block";
+
+  // Ако се ползва файлов input (click), може да синхронизираме visual с него
+  if (fileInput.files.length === 0 || fileInput.files[0].name !== file.name) {
+    // не може да зададем fileInput.files директно (read-only), но visible info е показано
+  }
 
   // Enable upload button if title is also filled
   checkFormValidity();
@@ -89,7 +101,7 @@ titleInput.addEventListener("input", checkFormValidity);
 
 function checkFormValidity() {
   const title = titleInput.value.trim();
-  const hasFile = fileInput.files.length > 0;
+  const hasFile = selectedFile !== null || fileInput.files.length > 0;
   uploadBtn.disabled = !(title && hasFile);
 }
 
@@ -101,7 +113,7 @@ uploadBtn.onclick = async () => {
   }
 
   const title = titleInput.value.trim();
-  const file = fileInput.files[0];
+  const file = selectedFile || fileInput.files[0];
 
   if (!title || !file) return;
 
@@ -154,6 +166,7 @@ uploadBtn.onclick = async () => {
 function resetForm() {
   titleInput.value = "";
   fileInput.value = "";
+  selectedFile = null;
   fileInfo.style.display = "none";
   progressContainer.style.display = "none";
   progressFill.style.width = "0%";
