@@ -38,6 +38,7 @@ header {
   padding: 0.8rem 2rem;
   top: 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: visible !important;
 }
 
 .subtitle {
