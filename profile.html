@@ -49,15 +49,16 @@
 
       <div class="top-actions">
         <div class="small">Статус: <strong id="profile-status">Активен</strong></div>
-        <button class="btn" id="change-password" href="security.html">Промени парола</button>
-        <button class="btn danger" id="delete-account" href="security.html">Изтрий акаунт</button>
+        <div>
+          <a href="settings.html" class="btn">Настройки</a>
+          <button id="logout-btn" class="btn btn-logout">Изход</button>
+        </div>
       </div>
 
       <section class="card profile-card">
         <div style="display:flex;gap:1rem;align-items:center;">
             <p><strong>Email:</strong> <span id="profile-email">...</span></p>
             <p><strong>Роля:</strong> <span id="profile-role"></span></p>
-            <a href="upload.html" class="btn">Качи модел</a>
         </div>
       </section>
 

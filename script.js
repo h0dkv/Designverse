@@ -5,20 +5,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ----- Мобилно меню -----
   const menuBtn = document.getElementById('menu-toggle');
-  const nav = document.getElementById('nav') || document.querySelector('nav');
+  let nav = document.querySelector('header > nav#nav') || document.getElementById('nav') || document.querySelector('nav');
+  if (nav && nav.querySelector('nav#nav')) {
+    nav = nav.querySelector('nav#nav');
+  }
+
+  function closeNav() {
+    if (!nav) return;
+    nav.classList.remove('show', 'active');
+    if (menuBtn) menuBtn.textContent = '☰';
+  }
+
+  function openNav() {
+    if (!nav) return;
+    nav.classList.add('show', 'active');
+    if (menuBtn) menuBtn.textContent = '✖';
+  }
 
   if (menuBtn && nav) {
-    menuBtn.addEventListener('click', () => {
-      nav.classList.toggle('show');
-      menuBtn.textContent = nav.classList.contains('show') ? '✖' : '☰';
+    menuBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (nav.classList.contains('show') || nav.classList.contains('active')) {
+        closeNav();
+      } else {
+        openNav();
+      }
     });
 
-    const links = nav.querySelectorAll ? nav.querySelectorAll('a') : [];
+    const links = nav.querySelectorAll('a');
     links.forEach(link => {
       link.addEventListener('click', () => {
-        nav.classList.remove('show');
-        menuBtn.textContent = '☰';
+        closeNav();
       });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!nav.contains(event.target) && event.target !== menuBtn) {
+        closeNav();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) {
+        nav.classList.remove('show', 'active');
+        if (menuBtn) menuBtn.textContent = '☰';
+      }
     });
   }
 

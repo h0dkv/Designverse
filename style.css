@@ -3332,10 +3332,11 @@ body.admin #admin-panel {
   border: none;
   cursor: pointer;
   color: white;
+  z-index: 150;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+/* MOBILE + TABLET */
+@media (max-width: 1024px) {
 
   #menu-toggle {
     display: block;
@@ -3347,20 +3348,33 @@ body.admin #admin-panel {
     right: 10px;
     background: var(--crimson-violet);
     flex-direction: column;
+    align-items: flex-start;
     padding: 1rem;
     border-radius: 10px;
     display: none;
-    width: 200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: min(240px, 85vw);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    gap: 0.4rem;
+    z-index: 140;
   }
 
   #nav a {
     display: block;
     padding: 0.6rem 0;
+    width: 100%;
   }
 
+  #nav.show,
   #nav.active {
     display: flex;
   }
 
+}
+
+@media (max-width: 768px) {
+  #nav {
+    top: 64px;
+    right: 8px;
+    width: min(220px, 90vw);
+  }
 }
