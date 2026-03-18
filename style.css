@@ -3785,15 +3785,114 @@ body.admin #admin-panel {
 
 .btn.ghost {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: var(--white);
 }
 
 .btn.ghost:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .small {
   font-size: 0.92rem;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== DASHBOARD FIX ===== */
+
+#dashboard {
+  position: relative;
+  display: none;
+  margin-left: 1rem;
+}
+
+#dashboard-btn {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+#dashboard-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+#dashboard-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background: linear-gradient(135deg, rgba(86, 25, 72, 0.98), rgba(168, 102, 131, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 0.6rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  z-index: 2000;
+  backdrop-filter: blur(14px);
+}
+
+#dashboard-menu.show {
+  display: flex;
+}
+
+#dashboard-menu p,
+#dashboard-menu a,
+#dashboard-menu button {
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  color: #fff;
+  background: none;
+  border: none;
+  text-decoration: none;
+  padding: 0.85rem 0.95rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+#dashboard-menu p {
+  cursor: default;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#dashboard-menu a:hover,
+#dashboard-menu button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(3px);
+}
+
+#dashboard-menu .btn-logout {
+  color: #ffd1d1;
+}
+
+@media (max-width: 768px) {
+  #dashboard {
+    margin-left: 0.5rem;
+  }
+
+  #dashboard-btn {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  #dashboard-menu {
+    right: 0;
+    min-width: 200px;
+  }
 }
