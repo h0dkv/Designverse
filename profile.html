@@ -3,77 +3,325 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Профил | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .profile-page {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .profile-banner {
+      background: linear-gradient(135deg, var(--midnight-violet), var(--crimson-violet));
+      border-radius: 24px;
+      padding: 2.5rem 2rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.12);
+      animation: fadeInUp 0.6s ease-out both;
+      flex-wrap: wrap;
+    }
+
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--crimson-violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      border: 3px solid rgba(255,255,255,0.2);
+      overflow: hidden;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .profile-banner-info h2 {
+      margin: 0 0 0.3rem;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    .profile-banner-info p {
+      margin: 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+    }
+
+    .profile-badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: rgba(255,193,69,0.2);
+      color: var(--accent);
+      border: 1px solid rgba(255,193,69,0.3);
+    }
+
+    .profile-badge.admin {
+      background: rgba(168, 102, 131, 0.3);
+      color: #ffb3d1;
+      border-color: rgba(168,102,131,0.4);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .profile-info-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .profile-info-card:nth-child(1) { animation-delay: 0.1s; }
+    .profile-info-card:nth-child(2) { animation-delay: 0.2s; }
+    .profile-info-card:nth-child(3) { animation-delay: 0.3s; }
+    .profile-info-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .profile-info-card h4 {
+      margin: 0 0 1rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .profile-info-card .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.95rem;
+    }
+
+    .profile-info-card .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .profile-info-card .info-label {
+      color: rgba(255,255,255,0.55);
+    }
+
+    .profile-info-card .info-value {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      text-align: center;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease-out 0.5s both;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 640px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-banner { flex-direction: column; text-align: center; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 
 <body>
-
   <header>
     <div class="logo">
       <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo">
         <span>DesignRealm</span>
       </a>
     </div>
     <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="catalog.html">Каталог</a>
-      <a href="profile.html" class="active">Профил</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">За нас</a>
+      <a href="contact.html">Контакти</a>
+      <a href="favorites.html">Любими</a>
+      <a id="login-link" href="login.html">Вход</a>
+      <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
+
+    <button id="menu-toggle">☰</button>
+
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn">👤 Dashboard ▾</button>
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html" class="active">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
   </header>
 
+  <div class="profile-page">
 
-  <div class="layout">
-    <aside class="sidebar" aria-label="Профил меню">
-      <h3>Меню</h3>
-      <ul class="menu" id="profile-menu">
-        <li><a href="#overview" class="active">Преглед</a></li>
-        <li><a href="uploads.html">Качвания</a></li>
-        <li><a href="favorites.html">Любими</a></li>
-        <li><a href="settings.html">Настройки</a></li>
-        <li><a href="security.html">Сигурност</a></li>
-        <li><a href="index.html">Начало</a></li>
-      </ul>
-    
-    </aside>
+    <!-- BANNER -->
+    <div class="profile-banner">
+      <div class="profile-avatar" id="profile-avatar">👤</div>
+      <div class="profile-banner-info">
+        <h2 id="profile-name">Зареждане...</h2>
+        <p id="profile-email">...</p>
+        <span class="profile-badge" id="profile-badge">Потребител</span>
+      </div>
+    </div>
 
-    <main class="content">
-      <section class="hero">
-        <div class="hero-text">
-          <h1>Вашият профил</h1>
-          <p class="subtitle">Управлявайте информацията и настройките на своя акаунт.</p>
+    <!-- GRID -->
+    <div class="profile-grid">
+
+      <!-- Информация -->
+      <div class="profile-info-card">
+        <h4>📋 Информация</h4>
+        <div class="info-row">
+          <span class="info-label">Имейл</span>
+          <span class="info-value" id="info-email">...</span>
         </div>
-      </section>
-
-      <div class="top-actions">
-        <div class="small">Статус: <strong id="profile-status">Активен</strong></div>
-        <div>
-          <a href="settings.html" class="btn">Настройки</a>
+        <div class="info-row">
+          <span class="info-label">Роля</span>
+          <span class="info-value" id="info-role">...</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Статус</span>
+          <span class="info-value" style="color:#6fcf97;">● Активен</span>
         </div>
       </div>
 
-      <section class="card profile-card">
-        <div style="display:flex;gap:1rem;align-items:center;">
-            <p><strong>Email:</strong> <span id="profile-email">...</span></p>
-            <p><strong>Роля:</strong> <span id="profile-role"></span></p>
+      <!-- Статистики -->
+      <div class="profile-info-card">
+        <h4>📊 Статистики</h4>
+        <div class="stats-grid">
+          <div>
+            <div class="stat-number" id="stat-uploads">0</div>
+            <div class="stat-label">Качвания</div>
+          </div>
+          <div>
+            <div class="stat-number" id="stat-favorites">0</div>
+            <div class="stat-label">Любими</div>
+          </div>
+          <div>
+            <div class="stat-number">⭐</div>
+            <div class="stat-label">Член</div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section id="overview" style="margin-top:1rem">
-        <h3>Преглед</h3>
-        <p class="small">Тук ще намерите основна информация за акаунта и бързи връзки.</p>
-      </section>
+      <!-- Бързи връзки -->
+      <div class="profile-info-card">
+        <h4>🔗 Бързи връзки</h4>
+        <div class="info-row">
+          <span class="info-label">Любими модели</span>
+          <a href="favorites.html" style="color:var(--accent);text-decoration:none;">→ Виж</a>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Качи модел</span>
+          <a href="upload.html" style="color:var(--accent);text-decoration:none;">→ Качи</a>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Настройки</span>
+          <a href="settings.html" style="color:var(--accent);text-decoration:none;">→ Промени</a>
+        </div>
+      </div>
 
-      <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">← Начало</a>
-    </main>
+      <!-- Акаунт -->
+      <div class="profile-info-card">
+        <h4>🔒 Акаунт</h4>
+        <div class="info-row">
+          <span class="info-label">Парола</span>
+          <a href="security.html" style="color:var(--accent);text-decoration:none;">→ Промени</a>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Известия</span>
+          <span class="info-value">Включени</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Език</span>
+          <span class="info-value">Български</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="profile-actions">
+      <a href="settings.html" class="btn">⚙️ Настройки</a>
+      <a href="upload.html" class="btn">⬆️ Качи модел</a>
+      <a href="index.html" class="btn-outline">← Начало</a>
+    </div>
+
   </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
   <script type="module" src="profile.js"></script>
   <script type="module" src="monitor.js"></script>
 </body>

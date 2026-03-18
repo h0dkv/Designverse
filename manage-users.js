@@ -31,8 +31,8 @@ onAuthStateChanged(auth, async (user) => {
     card.innerHTML = `
       <h3>${u.email}</h3>
       <p>Роля: <strong>${u.role}</strong></p>
-      <button class="btn admin">Admin</button>
-      <button class="btn danger">Delete</button>
+      <button class="btn admin">Админ</button>
+      <button class="btn danger">Изтрий</button>
     `;
 
     card.querySelector(".admin").onclick = () =>
