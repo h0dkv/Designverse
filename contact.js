@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    emailjs.sendForm("service_designsverse", "template_vfw9947", form)
+    emailjs.sendForm("service_designrealm", "template_vfw9947", form)
       .then(() => {
         alert("✅ Съобщението беше изпратено успешно!");
         form.reset();
