@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фингърборд | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+                <span>DesignRealm</span>
+            </a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="3dprint.html">3D принтирането</a>
+            <a href="catalog.html" class="active">Каталог</a>
+            <a href="blog.html">Блог</a>
+            <a href="about.html">За нас</a>
+            <a href="contact.html">Контакти</a>
+            <a href="favorites.html">Любими</a>
+        </nav>
+    </header>
+
+    <main class="model-page">
+        <a href="catalog.html" class="back-link">← Назад към каталога</a>
+        <section class="model-layout">
+            <div class="model-view">
+                <img src="images/fingerboard.webp" alt="Фингърборд">
+            </div>
+            <div class="model-details">
+                <h1>Фингърборд</h1>
+                <p class="model-description">
+                    Компактен модел за любители на мини скейтбордовете и забавните настолни трикове.
+                </p>
+                <div class="model-meta">
+                    <div><strong>Формат:</strong> STL</div>
+                    <div><strong>Категория:</strong> Играчки</div>
+                    <div><strong>Ниво на печат:</strong> Средно</div>
+                </div>
+                <div class="model-actions">
+                    <a href="files/fingerboard.stl" download class="btn">⬇ Изтегли STL</a>
+                    <button class="fav-btn">❤️ Добави в любими</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 DesignRealm. Всички права запазени.</p>
+    </footer>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="firebase-favorites.js"></script>
+</body>
+
+</html>

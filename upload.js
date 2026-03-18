@@ -5,6 +5,7 @@ import {
   collection,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
 import {
   ref,
   uploadBytesResumable,
@@ -13,7 +14,8 @@ import {
 
 const db = getFirestore();
 
-// DOM Elements
+/* ---------------- DOM ---------------- */
+
 const titleInput = document.getElementById("title");
 const fileInput = document.getElementById("file");
 const dropZone = document.getElementById("drop-zone");
@@ -25,9 +27,10 @@ const progressContainer = document.getElementById("progress-container");
 const progressFill = document.getElementById("progress-fill");
 const progressText = document.getElementById("progress-text");
 
-let selectedFile = null;  // тяло на избрания файл (работи при drag-drop и нормален избор)
+let selectedFile = null;
 
-// Drag and Drop Functionality
+/* ---------------- DRAG & DROP ---------------- */
+
 dropZone.addEventListener("click", () => fileInput.click());
 
 dropZone.addEventListener("dragover", (e) => {
@@ -42,6 +45,7 @@ dropZone.addEventListener("dragleave", () => {
 dropZone.addEventListener("drop", (e) => {
   e.preventDefault();
   dropZone.classList.remove("dragover");
+
   const files = e.dataTransfer.files;
   if (files.length > 0) {
     handleFileSelect(files[0]);
@@ -54,123 +58,169 @@ fileInput.addEventListener("change", (e) => {
   }
 });
 
+/* ---------------- FILE VALIDATION ---------------- */
+
 function handleFileSelect(file) {
+
   if (!file) return;
 
-  // Validate file type
-  const allowedTypes = ['.stl', '.zip'];
-  const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
-  if (!allowedTypes.includes(fileExtension)) {
-    alert("Моля, изберете STL или ZIP файл.");
+  const allowed = [".stl", ".zip"];
+  const ext = file.name.toLowerCase().substring(file.name.lastIndexOf("."));
+
+  if (!allowed.includes(ext)) {
+    alert("Позволени са само STL или ZIP файлове.");
     return;
   }
 
-  // Validate file size (max 50MB)
   const maxSize = 50 * 1024 * 1024;
+
   if (file.size > maxSize) {
-    alert("Файлът е твърде голям. Максимален размер: 50MB.");
+    alert("Файлът е над 50MB.");
     return;
   }
 
-  // Запазване на избрания файл (за drag'n'drop и другите случаи)
   selectedFile = file;
 
-  // Display file info
   fileName.textContent = file.name;
   fileSize.textContent = formatFileSize(file.size);
   fileInfo.style.display = "block";
 
-  // Ако се ползва файлов input (click), може да синхронизираме visual с него
-  if (fileInput.files.length === 0 || fileInput.files[0].name !== file.name) {
-    // не може да зададем fileInput.files директно (read-only), но visible info е показано
-  }
-
-  // Enable upload button if title is also filled
-  checkFormValidity();
+  checkForm();
 }
 
 function formatFileSize(bytes) {
-  if (bytes === 0) return '0 Bytes';
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+
+  const sizes = ["Bytes", "KB", "MB", "GB"];
+
+  if (bytes === 0) return "0 Bytes";
+
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+
+  return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i];
 }
 
-titleInput.addEventListener("input", checkFormValidity);
+/* ---------------- FORM CHECK ---------------- */
 
-function checkFormValidity() {
+titleInput.addEventListener("input", checkForm);
+
+function checkForm() {
+
   const title = titleInput.value.trim();
-  const hasFile = selectedFile !== null || fileInput.files.length > 0;
-  uploadBtn.disabled = !(title && hasFile);
+
+  if (title && selectedFile) {
+    uploadBtn.disabled = false;
+  } else {
+    uploadBtn.disabled = true;
+  }
 }
 
-// Upload Functionality
+/* ---------------- UPLOAD ---------------- */
+
 uploadBtn.onclick = async () => {
-  if (!auth.currentUser) {
-    alert("Трябва да сте логнати!");
+
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Моля първо влезте в профила си.");
     return;
   }
 
   const title = titleInput.value.trim();
-  const file = selectedFile || fileInput.files[0];
+  const file = selectedFile;
 
-  if (!title || !file) return;
+  if (!title || !file) {
+    alert("Липсва име или файл.");
+    return;
+  }
 
-  // Disable button and show progress
   uploadBtn.disabled = true;
   uploadBtn.textContent = "Качване...";
   progressContainer.style.display = "block";
 
   try {
-    // Upload file to Firebase Storage
-    const storageRef = ref(storage, `models/${Date.now()}_${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on('state_changed',
+    const path = `models/${Date.now()}_${file.name}`;
+    const storageRef = ref(storage, path);
+
+    const task = uploadBytesResumable(storageRef, file);
+
+    task.on("state_changed",
+
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        progressFill.style.width = progress + '%';
-        progressText.textContent = `Качване... ${Math.round(progress)}%`;
+
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+        progressFill.style.width = progress + "%";
+        progressText.textContent =
+          "Качване... " + Math.round(progress) + "%";
+
       },
+
       (error) => {
-        console.error("Upload error:", error);
-        alert("Грешка при качване: " + error.message);
+
+        console.error(error);
+
+        alert("Грешка при качване.");
+
         resetForm();
+
       },
+
       async () => {
-        // Upload completed successfully
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        // Save to Firestore
+
+        const url = await getDownloadURL(task.snapshot.ref);
+
         await addDoc(collection(db, "models"), {
-          title,
-          fileURL: downloadURL,
+
+          title: title,
+          fileURL: url,
           fileName: file.name,
           fileSize: file.size,
+
           status: "pending",
-          uploadedBy: auth.currentUser.uid,
+
+          uploadedBy: user.uid,
+
           createdAt: serverTimestamp()
+
         });
 
-        alert("Моделът е качен успешно и чака одобрение!");
+        alert("Моделът е качен успешно!");
+
         resetForm();
+
       }
+
     );
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Възникна грешка: " + error.message);
+
+  } catch (e) {
+
+    console.error(e);
+
+    alert("Възникна грешка.");
+
     resetForm();
+
   }
+
 };
 
+/* ---------------- RESET ---------------- */
+
 function resetForm() {
+
   titleInput.value = "";
   fileInput.value = "";
+
   selectedFile = null;
+
   fileInfo.style.display = "none";
+
   progressContainer.style.display = "none";
   progressFill.style.width = "0%";
+
   uploadBtn.disabled = true;
   uploadBtn.textContent = "⬆ Качи модел";
-}
 
+}
