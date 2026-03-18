@@ -2714,23 +2714,6 @@ body.admin #admin-panel {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.btn.ghost {
-  background: transparent;
-  color: var(--white);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 0.6rem 1.2rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-
-.btn.ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
 
 .profile-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
@@ -3764,4 +3747,53 @@ body.admin #admin-panel {
   .back-link {
     font-size: 0.95rem;
   }
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-form label {
+  font-weight: 600;
+  color: var(--white);
+  margin-top: 0.25rem;
+}
+
+.settings-form input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.settings-form input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.settings-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(255, 193, 69, 0.35);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+}
+
+.btn.ghost:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.small {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.8);
 }

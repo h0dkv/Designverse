@@ -17,6 +17,7 @@
                 <span>DesignRealm</span>
             </a>
         </div>
+
         <nav id="nav">
             <a href="index.html">Начало</a>
             <a href="catalog.html">Каталог</a>
@@ -25,6 +26,7 @@
             <a id="login-link" href="login.html">Вход</a>
             <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
         </nav>
+
         <button id="menu-toggle">☰</button>
     </header>
 
@@ -38,17 +40,22 @@
 
         <section style="max-width:720px;margin:1.5rem auto;">
             <div class="card">
-                <form id="settings-form">
-                    <label>Показвано име</label>
+                <form id="settings-form" class="settings-form">
+                    <label for="displayName">Показвано име</label>
                     <input type="text" id="displayName" placeholder="Име за показване">
 
-                    <div style="margin-top:.75rem">
+                    <label for="photoURL" style="margin-top:1rem;">Линк към профилна снимка</label>
+                    <input type="url" id="photoURL" placeholder="https://example.com/photo.jpg">
+
+                    <div style="margin-top:1rem; display:flex; gap:.75rem; flex-wrap:wrap;">
                         <button type="submit" class="btn">Запази</button>
                         <a href="profile.html" class="btn ghost">Откажи</a>
                     </div>
                 </form>
-                <p class="small" style="margin-top:.5rem">(Функционалност: Демонстрация — можем да свържем запис в
-                    Firestore при желание.)</p>
+
+                <p class="small" style="margin-top:1rem;">
+                    Промените ще се запазят в акаунта и в потребителския документ.
+                </p>
             </div>
         </section>
     </main>
@@ -62,6 +69,7 @@
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="check.js"></script>
+
     <script type="module">
         import { auth, db } from './firebase-init.js';
         import { onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
@@ -76,37 +84,56 @@
                 window.location.href = 'login.html';
                 return;
             }
+
             displayNameInput.value = user.displayName || '';
             photoURLInput.value = user.photoURL || '';
+
             try {
-                const snap = await getDoc(doc(db, 'users', user.uid));
+                const userRef = doc(db, 'users', user.uid);
+                const snap = await getDoc(userRef);
+
                 if (snap.exists()) {
                     const data = snap.data();
                     displayNameInput.value = data.displayName || displayNameInput.value;
                     photoURLInput.value = data.photoURL || photoURLInput.value;
                 }
             } catch (err) {
-                console.error('Failed to load user settings', err);
+                console.error('Failed to load user settings:', err);
             }
         });
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const user = auth.currentUser;
-            if (!user) return alert('Трябва да сте влезли.');
-            const displayName = displayNameInput.value.trim() || null;
-            const photoURL = photoURLInput.value.trim() || null;
+            if (!user) {
+                alert('Трябва да сте влезли.');
+                return;
+            }
+
+            const displayName = displayNameInput.value.trim();
+            const photoURL = photoURLInput.value.trim();
+
             try {
-                await updateProfile(user, { displayName, photoURL });
-                await setDoc(doc(db, 'users', user.uid), { displayName, photoURL }, { merge: true });
-                alert('Профилът е обновен.');
+                await updateProfile(user, {
+                    displayName: displayName || null,
+                    photoURL: photoURL || null
+                });
+
+                await setDoc(doc(db, 'users', user.uid), {
+                    displayName: displayName || '',
+                    photoURL: photoURL || ''
+                }, { merge: true });
+
+                alert('Профилът е обновен успешно.');
                 window.location.href = 'profile.html';
             } catch (err) {
-                console.error('Failed to update profile', err);
-                alert('Грешка при запис.');
+                console.error('Failed to update profile:', err);
+                alert('Грешка при запис на профила.');
             }
         });
     </script>
+
     <script type="module" src="monitor.js"></script>
 </body>
 
