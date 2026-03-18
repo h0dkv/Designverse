@@ -173,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (dashboardBtn && dashboardMenu && dashboard) {
     dashboardBtn.addEventListener("click", (e) => {
       e.stopPropagation();
+      console.log("dashboard clicked");
       dashboardMenu.classList.toggle("show");
     });
 
@@ -198,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const role = localStorage.getItem("userRole") || "user";
-
       if (adminLink) {
         adminLink.style.display = role === "admin" ? "inline-block" : "none";
       }
@@ -206,10 +206,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginLink) loginLink.style.display = "inline-block";
       if (dashboard) dashboard.style.display = "none";
       if (adminLink) adminLink.style.display = "none";
-
       closeDashboardMenu();
     }
   });
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        alert("Излязохте успешно!");
+        window.location.href = "index.html";
+      } catch (error) {
+        console.error("Logout error:", error);
+        alert("Грешка при изход.");
+      }
+    });
+  }
 
   /* =========================
      LOGOUT

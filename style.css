@@ -3803,78 +3803,54 @@ body.admin #admin-panel {
 #dashboard {
   position: relative;
   display: none;
-  margin-left: 1rem;
 }
 
 #dashboard-btn {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.75rem 1rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 12px;
+  padding: 0.75rem 1rem;
   cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
-}
-
-#dashboard-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 #dashboard-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 8px);
   right: 0;
   min-width: 220px;
-  background: linear-gradient(135deg, rgba(86, 25, 72, 0.98), rgba(168, 102, 131, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 0.6rem;
   display: none;
   flex-direction: column;
-  gap: 0.25rem;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
-  z-index: 2000;
-  backdrop-filter: blur(14px);
+  gap: 6px;
+  padding: 10px;
+  border-radius: 16px;
+  background: rgba(82, 29, 68, 0.98);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  z-index: 9999;
 }
 
 #dashboard-menu.show {
-  display: flex;
+  display: flex !important;
 }
 
-#dashboard-menu p,
 #dashboard-menu a,
-#dashboard-menu button {
-  margin: 0;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: left;
-  color: #fff;
-  background: none;
-  border: none;
-  text-decoration: none;
-  padding: 0.85rem 0.95rem;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background 0.25s ease, transform 0.25s ease;
-}
-
+#dashboard-menu button,
 #dashboard-menu p {
-  cursor: default;
-  font-weight: 600;
-  color: var(--accent);
-  background: rgba(255, 255, 255, 0.06);
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  background: none;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 #dashboard-menu a:hover,
 #dashboard-menu button:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 #dashboard-menu .btn-logout {
