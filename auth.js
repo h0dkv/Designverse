@@ -20,6 +20,28 @@ const adminEmails = [
     "noit@oupvolov.com"
 ];
 
+// ===== TOAST СИСТЕМА =====
+function showToast(message, type = "success") {
+    const existing = document.querySelector(".dr-toast");
+    if (existing) existing.remove();
+
+    const toast = document.createElement("div");
+    toast.className = `dr-toast dr-toast--${type}`;
+    toast.innerHTML = `
+        <span class="dr-toast__icon">${type === "success" ? "✅" : "❌"}</span>
+        <span class="dr-toast__msg">${message}</span>
+    `;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add("dr-toast--show"));
+
+    setTimeout(() => {
+        toast.classList.remove("dr-toast--show");
+        setTimeout(() => toast.remove(), 400);
+    }, 3500);
+}
+
+// ===== AUTH STATE =====
 onAuthStateChanged(auth, async (user) => {
     if (!user) return;
 
@@ -29,13 +51,11 @@ onAuthStateChanged(auth, async (user) => {
     if (!snap.exists()) return;
 
     const role = snap.data().role;
-
     if (role === "admin") {
         document.body.classList.add("admin");
     }
 });
 
-// Ensure user document exists and has a role; store Google profile fields when available
 onAuthStateChanged(auth, async (user) => {
     if (!user) return;
     try {
@@ -50,33 +70,30 @@ onAuthStateChanged(auth, async (user) => {
         };
 
         if (!snap.exists()) {
-            await setDoc(ref, {
-                ...userData,
-                createdAt: serverTimestamp()
-            });
+            await setDoc(ref, { ...userData, createdAt: serverTimestamp() });
         } else {
-            // Merge new profile fields in case they are missing or updated
             await setDoc(ref, userData, { merge: true });
         }
     } catch (err) {
         console.error("Failed to ensure user doc:", err);
     }
 });
+
 onAuthStateChanged(auth, async (user) => {
     if (!user) return;
-
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (snap.exists() && snap.data().role === "admin") {
-        document.getElementById("admin-link").style.display = "inline-block";
+    const adminLink = document.getElementById("admin-link");
+    if (snap.exists() && snap.data().role === "admin" && adminLink) {
+        adminLink.style.display = "inline-block";
     }
-})
+});
+
+// ===== DOM READY =====
 document.addEventListener("DOMContentLoaded", () => {
-    // --- HEADER / LOGIN ---
     const loginLink = document.getElementById("login-link");
     const userMenu = document.getElementById("user-menu");
     const logoutBtn = document.getElementById("logout-btn");
 
-    // 🔐 Follow auth state for header visibility
     onAuthStateChanged(auth, (user) => {
         if (user) {
             if (loginLink) loginLink.style.display = "none";
@@ -89,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 🚪 Logout (header)
     if (logoutBtn) {
         logoutBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -99,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Google Sign-In / Registration ---
+    // ===== GOOGLE SIGN-IN =====
     const googleButtons = [
         document.getElementById('google-signin'),
         document.getElementById('google-register')
@@ -113,37 +129,32 @@ document.addEventListener("DOMContentLoaded", () => {
             if (btn.disabled) return;
             btn.disabled = true;
             try {
-                const result = await signInWithPopup(auth, provider);
-                // onAuthStateChanged will handle post-login logic
+                await signInWithPopup(auth, provider);
                 window.location.href = 'profile.html';
             } catch (err) {
                 console.error('Google sign-in failed', err);
-                // User closed the popup manually
-                if (err && err.code === 'auth/popup-closed-by-user') {
-                    alert('Входът беше прекъснат — затворихте прозореца. Опитайте отново.');
-                    return;
-                }
-                // Popup blocked or environment not supporting popups -> fallback to redirect
-                if (err && (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request' || err.code === 'auth/operation-not-supported-in-this-environment')) {
+
+                if (err.code === 'auth/popup-closed-by-user') {
+                    showToast('Затворихте прозореца. Опитайте отново.', 'error');
+                } else if (
+                    err.code === 'auth/popup-blocked' ||
+                    err.code === 'auth/cancelled-popup-request' ||
+                    err.code === 'auth/operation-not-supported-in-this-environment'
+                ) {
                     try {
                         await signInWithRedirect(auth, provider);
-                        return;
                     } catch (rerr) {
                         console.error('Redirect fallback failed', rerr);
-                        alert('Грешка при пренасочване за вход: ' + (rerr.message || rerr.code));
-                        return;
+                        showToast('Грешка при пренасочване за вход.', 'error');
                     }
+                } else if (err.code === 'auth/account-exists-with-different-credential') {
+                    showToast('Вече имате акаунт с този имейл чрез друг доставчик.', 'error');
+                } else {
+                    showToast('Неуспешен вход с Google. Опитайте отново.', 'error');
                 }
-                // Account exists with different credential
-                if (err && err.code === 'auth/account-exists-with-different-credential') {
-                    alert('Вече имате акаунт с този имейл чрез друг доставчик. Влезте с него.');
-                    return;
-                }
-                alert('Неуспешен вход с Google: ' + (err.message || err.code));
             } finally {
                 btn.disabled = false;
             }
         });
     });
-
 });
