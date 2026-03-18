@@ -82,7 +82,7 @@ async function renderFavorites(favs, uid) {
     card.innerHTML = `
       <img src="${item.img}" alt="${item.title}">
       <h3>${item.title}</h3>
-      <a href="${item.file}" download class="btn">Изтегли STL</a>
+      <a href="${item.file}" download class="btn">Изтегли</a>
       <button class="remove-btn">🗑 Премахни</button>
     `;
 

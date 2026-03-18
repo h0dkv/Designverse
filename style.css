@@ -3230,9 +3230,6 @@ body.admin #admin-panel {
 }
 
 @media (max-width: 768px) {
-  #menu-toggle {
-    display: block;
-  }
 
   .dashboard-header {
     padding: 12px 16px !important;
