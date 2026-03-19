@@ -35,7 +35,6 @@
       <button id="dashboard-btn">
         <span class="dash-avatar">👤</span>
       </button>
-
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -46,33 +45,29 @@
     </div>
   </header>
 
-
-
   <main class="contact-page">
     <h1>Свържете се с нас</h1>
     <p>Имаш въпрос, предложение или просто искаш да ни поздравиш? Изпрати ни съобщение 👇</p>
 
-    <form class="contact-form">
+    <form class="contact-form" id="contact-form">
       <input type="text" name="name" placeholder="Вашето име" required>
       <input type="email" name="email" placeholder="Имейл" required>
       <textarea name="message" placeholder="Вашето съобщение" required></textarea>
-      <button type="submit" class="btn">Изпрати</button>
+      <button type="submit" class="btn" id="contact-submit">Изпрати</button>
     </form>
-
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script src="contact.js"></script>
-  <script type="module" src="script.js"></script>
-  <script type="module" src="dashboard.js"></script>
-  <script type="module" src="firebase-init.js"></script>
-  <script type="module" src="auth.js"></script>
-  <script type="module" src="check.js"></script>
+
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
-
-
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="contact.js"></script>
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
+  <script type="module" src="check.js"></script>
 </body>
 
 </html>

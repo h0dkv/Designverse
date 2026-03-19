@@ -1,21 +1,41 @@
 (function () {
-  emailjs.init("o6xZVMPNkI1Ch3geb"); 
+  emailjs.init("o6xZVMPNkI1Ch3geb");
 })();
 
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector(".contact-form");
+function showToast(message, type) {
+  const existing = document.querySelector(".dr-toast");
+  if (existing) existing.remove();
+  const toast = document.createElement("div");
+  toast.className = `dr-toast dr-toast--${type}`;
+  toast.innerHTML = `<span class="dr-toast__icon">${type === "success" ? "✅" : "❌"}</span><span class="dr-toast__msg">${message}</span>`;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add("dr-toast--show"));
+  setTimeout(() => { toast.classList.remove("dr-toast--show"); setTimeout(() => toast.remove(), 400); }, 3500);
+}
 
-  if (!form) return; 
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("contact-submit");
+
+  if (!form) return;
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Изпращане...";
+
     emailjs.sendForm("service_designrealm", "template_vfw9947", form)
       .then(() => {
-        alert("✅ Съобщението беше изпратено успешно!");
+        showToast("Съобщението беше изпратено успешно!", "success");
         form.reset();
       }, (error) => {
-        alert("❌ Възникна грешка при изпращането. Опитай отново.");
         console.error("EmailJS error:", error);
+        showToast("Грешка при изпращането. Опитай отново.", "error");
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Изпрати";
       });
   });
 });
