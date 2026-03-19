@@ -2,123 +2,232 @@
 <html lang="bg">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Качвания | DesignRealm</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Качвания | DesignRealm</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .uploads-page {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .uploads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .upload-item {
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 1.3rem;
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    .upload-item h4 {
+      margin: 0 0 0.4rem;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .upload-item .meta {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .upload-item .status {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .status-pending {
+      background: rgba(255,193,69,0.2);
+      color: var(--accent);
+      border: 1px solid rgba(255,193,69,0.3);
+    }
+
+    .status-approved {
+      background: rgba(40,167,69,0.2);
+      color: #6fcf97;
+      border: 1px solid rgba(40,167,69,0.3);
+    }
+
+    .upload-item-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .btn-sm.danger {
+      background: rgba(180,40,60,0.2);
+      color: #ffb3b3;
+      border: 1px solid rgba(180,40,60,0.3);
+    }
+
+    .btn-sm.danger:hover {
+      background: rgba(180,40,60,0.4);
+    }
+
+    .btn-sm.primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .empty-state .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Confirm Dialog */
+    .confirm-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 9998;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .confirm-overlay.show {
+      display: flex;
+    }
+
+    .confirm-box {
+      background: rgba(82,29,68,0.98);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .confirm-box h3 {
+      margin: 0 0 0.7rem;
+      color: #fff;
+    }
+
+    .confirm-box p {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1.5rem;
+    }
+
+    .confirm-actions {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm Logo">
-                <span>DesignRealm</span>
-            </a>
-        </div>
-        <nav id="nav">
-            <a href="index.html">Начало</a>
-            <a href="catalog.html">Каталог</a>
-            <a href="profile.html">Профил</a>
-            <a href="favorites.html">Любими</a>
-            <a id="login-link" href="login.html">Вход</a>
-            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
-        </nav>
-        <button id="menu-toggle">☰</button>
-    </header>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo">
+        <span>DesignRealm</span>
+      </a>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="3dprint.html">3D принтирането</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">За нас</a>
+      <a href="contact.html">Контакти</a>
+      <a href="favorites.html">Любими</a>
+      <a id="login-link" href="login.html">Вход</a>
+      <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn">👤 Dashboard ▾</button>
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
+  </header>
 
-    <main class="page">
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Вашите качвания</h1>
-                <p class="subtitle">Преглед и управление на вашите модели.</p>
-            </div>
-        </section>
+  <!-- CONFIRM DIALOG -->
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-box">
+      <h3>🗑️ Изтриване</h3>
+      <p>Наистина ли искате да изтриете този модел? Действието е необратимо.</p>
+      <div class="confirm-actions">
+        <button class="btn-sm danger" id="confirm-yes">Изтрий</button>
+        <button class="btn-sm primary" id="confirm-no">Отказ</button>
+      </div>
+    </div>
+  </div>
 
-        <section style="max-width:1000px;margin:1.5rem auto;">
-            <div class="card">
-                <h3>Списък на качените модели</h3>
-                <p class="small">Тук ще се покаже списък с моделите, които сте качили. (Демо съдържание)</p>
-                <ul id="uploads-list">
-                    <li>Модел 1 — <a href="preview.html">Преглед</a> • <a href="#">Редактирай</a> • <a
-                            href="#">Изтрий</a></li>
-                    <li>Модел 2 — <a href="preview.html">Преглед</a> • <a href="#">Редактирай</a> • <a
-                            href="#">Изтрий</a></li>
-                </ul>
-            </div>
-            <a href="upload.html" class="btn" style="margin-top:1rem;display:inline-block">Качи нов модел</a>
-        </section>
-    </main>
+  <div class="uploads-page">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>📦 Вашите качвания</h1>
+        <p class="subtitle">Преглед и управление на вашите 3D модели.</p>
+      </div>
+    </section>
 
-    <footer>
-        <p>© 2025 DesignRealm. Всички права запазени.</p>
-    </footer>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+      <span class="small" id="uploads-count">Зареждане...</span>
+      <a href="upload.html" class="btn">⬆️ Качи нов модел</a>
+    </div>
 
-    <script type="module" src="script.js"></script>
-    <script type="module" src="dashboard.js"></script>
-    <script type="module" src="firebase-init.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script type="module" src="check.js"></script>
-    <script type="module">
-        import { auth, db } from "./firebase-init.js";
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-        import {
-            collection,
-            query,
-            where,
-            orderBy,
-            getDocs,
-            doc,
-            deleteDoc
-        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+    <div class="uploads-grid" id="uploads-grid">
+      <div class="empty-state">
+        <div class="icon">⏳</div>
+        <p>Зареждане...</p>
+      </div>
+    </div>
 
-        const uploadsList = document.getElementById('uploads-list');
+    <a href="profile.html" class="btn" style="margin-top:1.5rem;display:inline-block;background:transparent;border:1px solid rgba(255,255,255,0.25);">← Профил</a>
+  </div>
 
-        onAuthStateChanged(auth, async (user) => {
-            if (!user) {
-                window.location.href = 'login.html';
-                return;
-            }
+  <footer>
+    <p>© 2025 DesignRealm. Всички права запазени.</p>
+  </footer>
 
-            uploadsList.innerHTML = '';
-            try {
-                const q = query(collection(db, 'models'), where('ownerId', '==', user.uid), orderBy('createdAt', 'desc'));
-                const snaps = await getDocs(q);
-                if (snaps.empty) {
-                    uploadsList.innerHTML = '<li>Нямате качени модели.</li>';
-                    return;
-                }
-                snaps.forEach(d => {
-                    const data = d.data();
-                    const title = data.title || 'Без заглавие';
-                    const li = document.createElement('li');
-                    li.innerHTML = `${title} — <a href="preview.html?model=${d.id}">Преглед</a> • <a href="upload.html?edit=${d.id}">Редактирай</a> • <a href="#" class="del" data-id="${d.id}">Изтрий</a>`;
-                    uploadsList.appendChild(li);
-                });
-            } catch (err) {
-                console.error('Failed loading uploads', err);
-                uploadsList.innerHTML = '<li>Грешка при зареждане на качванията.</li>';
-            }
-        });
-
-        uploadsList.addEventListener('click', async (e) => {
-            const del = e.target.closest('.del');
-            if (!del) return;
-            e.preventDefault();
-            const id = del.dataset.id;
-            const ok = confirm('Наистина ли искате да изтриете този модел?');
-            if (!ok) return;
-            try {
-                await deleteDoc(doc(db, 'models', id));
-                del.closest('li').remove();
-            } catch (err) {
-                console.error('Delete failed', err);
-                alert('Грешка при изтриване.');
-            }
-        });
-    </script>
-    <script type="module" src="monitor.js"></script>
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
+  <script type="module" src="check.js"></script>
+  <script type="module" src="uploads.js"></script>
+  <script type="module" src="monitor.js"></script>
 </body>
 
 </html>
