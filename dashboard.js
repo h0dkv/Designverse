@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (user) {
       if (loginLink) loginLink.style.display = "none";
       if (dashboard) dashboard.style.display = "block";
-      if (greeting) greeting.textContent = `Здравей, ${user.email}!`;
+      if (greeting) greeting.textContent = `Здравей, ${user.displayName || user.email.split("@")[0]}!`;
       (async () => {
         try {
           const snap = await getDoc(doc(db, "users", user.uid));
