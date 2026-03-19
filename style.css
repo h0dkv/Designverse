@@ -37,7 +37,8 @@ header {
   align-items: center;
   padding: 0.8rem 2rem;
   top: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  ;
 }
 
 .subtitle {
@@ -3890,7 +3891,7 @@ body.admin #admin-panel {
   z-index: 99999;
   opacity: 0;
   transition: opacity 0.35s ease, transform 0.35s ease;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   max-width: 90vw;
   text-align: center;
@@ -3903,14 +3904,154 @@ body.admin #admin-panel {
 
 .dr-toast--success {
   background: rgba(40, 167, 69, 0.92);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dr-toast--error {
   background: rgba(180, 40, 60, 0.92);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dr-toast__icon {
   font-size: 1.1rem;
+}
+
+.uploads-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.uploads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.upload-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 1.3rem;
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.upload-item h4 {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.upload-item .meta {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 1rem;
+}
+
+.upload-item .status {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.status-pending {
+  background: rgba(255, 193, 69, 0.2);
+  color: var(--accent);
+  border: 1px solid rgba(255, 193, 69, 0.3);
+}
+
+.status-approved {
+  background: rgba(40, 167, 69, 0.2);
+  color: #6fcf97;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.upload-item-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.btn-sm {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.btn-sm.danger {
+  background: rgba(180, 40, 60, 0.2);
+  color: #ffb3b3;
+  border: 1px solid rgba(180, 40, 60, 0.3);
+}
+
+.btn-sm.danger:hover {
+  background: rgba(180, 40, 60, 0.4);
+}
+
+.btn-sm.primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.empty-state .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Confirm Dialog */
+.confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-overlay.show {
+  display: flex;
+}
+
+.confirm-box {
+  background: rgba(82, 29, 68, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-box h3 {
+  margin: 0 0 0.7rem;
+  color: #fff;
+}
+
+.confirm-box p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
 }
