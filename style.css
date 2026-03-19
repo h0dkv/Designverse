@@ -4276,7 +4276,7 @@ body.admin #admin-panel {
 .cta-new {
   margin: 2rem 2rem 4rem;
   border-radius: 28px;
-  background: linear-gradient(135deg, var(--midnight-violet), var(--crimson-violet));
+  background: linear-gradient(135deg, var(--old-gold) 10%, var(--midnight-violet) 100%);
   border: 1px solid rgba(255,255,255,0.12);
   padding: 4rem 2rem;
   text-align: center;
