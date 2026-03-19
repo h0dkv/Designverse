@@ -13,14 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logout-btn");
   const greeting = document.getElementById("user-greeting");
   const userNameEl = document.getElementById("user-name");
-  const btn = document.getElementById("dashboard-btn");
-
 
   onAuthStateChanged(auth, user => {
     if (user) {
       if (loginLink) loginLink.style.display = "none";
       if (dashboard) dashboard.style.display = "block";
       if (greeting) greeting.textContent = `Здравей, ${user.displayName || user.email.split("@")[0]}!`;
+
+      // Снимка от Google
+      const btn = document.getElementById("dashboard-btn");
+      if (btn && user.photoURL) {
+        btn.innerHTML = `<img src="${user.photoURL}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;">`;
+      }
+
       (async () => {
         try {
           const snap = await getDoc(doc(db, "users", user.uid));
@@ -60,9 +65,4 @@ document.addEventListener("DOMContentLoaded", () => {
       dashboardMenu.classList.remove("show");
     }
   });
-  
-  if (btn && user.photoURL) {
-    btn.innerHTML = `<img src="${user.photoURL}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;">`;
-  }
-
 });
