@@ -1,24 +1,20 @@
-import { auth, db, storage } from "./firebase-init.js";
+import { auth, db } from "./firebase-init.js";
 import {
   addDoc,
   collection,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-storage.js";
-
 import { onAuthStateChanged } from
   "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+/* ---------------- CLOUDINARY ---------------- */
+const CLOUD_NAME = "djyxlskkh";
+const UPLOAD_PRESET = "DesignRealm";
 
 /* ---------------- TOAST ---------------- */
 function showToast(message, type = "success") {
   const existing = document.querySelector(".dr-toast");
   if (existing) existing.remove();
-
   const toast = document.createElement("div");
   toast.className = `dr-toast dr-toast--${type}`;
   toast.innerHTML = `
@@ -61,22 +57,13 @@ onAuthStateChanged(auth, (user) => {
 
 /* ---------------- DRAG & DROP ---------------- */
 dropZone.addEventListener("click", () => fileInput.click());
-
-dropZone.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  dropZone.classList.add("dragover");
-});
-
-dropZone.addEventListener("dragleave", () => {
-  dropZone.classList.remove("dragover");
-});
-
+dropZone.addEventListener("dragover", (e) => { e.preventDefault(); dropZone.classList.add("dragover"); });
+dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
 dropZone.addEventListener("drop", (e) => {
   e.preventDefault();
   dropZone.classList.remove("dragover");
   if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]);
 });
-
 fileInput.addEventListener("change", (e) => {
   if (e.target.files.length > 0) handleFileSelect(e.target.files[0]);
 });
@@ -84,20 +71,15 @@ fileInput.addEventListener("change", (e) => {
 /* ---------------- FILE VALIDATION ---------------- */
 function handleFileSelect(file) {
   if (!file) return;
-
-  const allowed = [".stl", ".zip"];
   const ext = file.name.toLowerCase().substring(file.name.lastIndexOf("."));
-
-  if (!allowed.includes(ext)) {
+  if (![".stl", ".zip"].includes(ext)) {
     showToast("Позволени са само STL или ZIP файлове.", "error");
     return;
   }
-
   if (file.size > 50 * 1024 * 1024) {
     showToast("Файлът е над 50MB.", "error");
     return;
   }
-
   selectedFile = file;
   fileName.textContent = file.name;
   fileSize.textContent = formatFileSize(file.size);
@@ -106,15 +88,13 @@ function handleFileSelect(file) {
 }
 
 function formatFileSize(bytes) {
-  const sizes = ["Bytes", "KB", "MB", "GB"];
   if (bytes === 0) return "0 Bytes";
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
-  return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i];
+  return (bytes / Math.pow(1024, i)).toFixed(2) + " " + ["Bytes", "KB", "MB", "GB"][i];
 }
 
 /* ---------------- FORM CHECK ---------------- */
 titleInput.addEventListener("input", checkForm);
-
 function checkForm() {
   uploadBtn.disabled = !(titleInput.value.trim() && selectedFile);
 }
@@ -138,55 +118,58 @@ uploadBtn.onclick = async () => {
   uploadBtn.textContent = "Качване...";
   progressContainer.style.display = "block";
 
-  try {
-    const path = `models/${Date.now()}_${selectedFile.name}`;
-    const storageRef = ref(storage, path);
-    const task = uploadBytesResumable(storageRef, selectedFile);
+  const formData = new FormData();
+  formData.append("file", selectedFile);
+  formData.append("upload_preset", UPLOAD_PRESET);
 
-    task.on("state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        progressFill.style.width = progress + "%";
-        progressText.textContent = "Качване... " + Math.round(progress) + "%";
-      },
-      (error) => {
-        console.error("Storage error:", error);
-        showToast("Грешка при качване: " + error.code, "error");
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/raw/upload`);
+
+  xhr.upload.addEventListener("progress", (e) => {
+    if (e.lengthComputable) {
+      const percent = Math.round((e.loaded / e.total) * 100);
+      progressFill.style.width = percent + "%";
+      progressText.textContent = "Качване... " + percent + "%";
+    }
+  });
+
+  xhr.addEventListener("load", async () => {
+    if (xhr.status === 200) {
+      const result = JSON.parse(xhr.responseText);
+      try {
+        await addDoc(collection(db, "models"), {
+          title,
+          description,
+          fileURL: result.secure_url,
+          fileName: selectedFile.name,
+          fileSize: selectedFile.size,
+          status: "pending",
+          uploadedBy: currentUser.uid,
+          uploaderEmail: currentUser.email,
+          createdAt: serverTimestamp()
+        });
+        progressFill.style.width = "100%";
+        progressText.textContent = "Качено успешно! ✅";
+        showToast("Моделът е качен успешно! 🎉", "success");
+        setTimeout(() => resetForm(), 2000);
+      } catch (err) {
+        console.error("Firestore error:", err);
+        showToast("Файлът е качен, но грешка при записа.", "error");
         resetForm();
-      },
-      async () => {
-        try {
-          const url = await getDownloadURL(task.snapshot.ref);
-          await addDoc(collection(db, "models"), {
-            title,
-            description,
-            fileURL: url,
-            fileName: selectedFile.name,
-            fileSize: selectedFile.size,
-            status: "pending",
-            uploadedBy: currentUser.uid,
-            uploaderEmail: currentUser.email,
-            createdAt: serverTimestamp()
-          });
-
-          progressFill.style.width = "100%";
-          progressText.textContent = "Качено успешно! ✅";
-          showToast("Моделът е качен успешно! 🎉", "success");
-          setTimeout(() => resetForm(), 2000);
-
-        } catch (firestoreErr) {
-          console.error("Firestore error:", firestoreErr);
-          showToast("Файлът е качен, но грешка при записа.", "error");
-          resetForm();
-        }
       }
-    );
+    } else {
+      console.error("Cloudinary error:", xhr.responseText);
+      showToast("Грешка при качване. Провери Upload Preset.", "error");
+      resetForm();
+    }
+  });
 
-  } catch (e) {
-    console.error("Upload error:", e);
-    showToast("Възникна грешка при качването.", "error");
+  xhr.addEventListener("error", () => {
+    showToast("Мрежова грешка при качването.", "error");
     resetForm();
-  }
+  });
+
+  xhr.send(formData);
 };
 
 /* ---------------- RESET ---------------- */
