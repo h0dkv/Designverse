@@ -3,32 +3,40 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Управление на потребители | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-</body>
-</head>
 
 <body>
-
-    <header class="dashboard-header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm">
-                <span>DesignRealm</span>
-            </a>
-        </div>
-
-        <nav class="dashboard-nav">
-            <a href="admin.html">Админ панел</a>
-            <a href="manage-users.html" class="active">Потребители</a>
-            <a href="upload.html" >Качи модел</a>
-            <a href="admin-stats.html">Статистики</a>
-            <a href="pending-models.html">Одобряване на модели</a>
-            <a href="index.html">Начало</a>
-        </nav>
-    </header>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm">
+        <span>DesignRealm</span>
+      </a>
+    </div>
+    <nav id="nav">
+      <a href="admin.html">Админ панел</a>
+      <a href="manage-users.html" class="active">Потребители</a>
+      <a href="upload.html">Качи модел</a>
+      <a href="admin-stats.html">Статистики</a>
+      <a href="pending-models.html">Одобряване</a>
+      <a href="index.html">Начало</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
+  </header>
 
   <main style="max-width:1100px;margin:1.5rem auto;padding:0 1rem;">
     <section class="hero">
@@ -38,18 +46,23 @@
       </div>
     </section>
 
-    <div style="display:flex;gap:1rem;align-items:center;margin:1rem 0;">
-      <input class="search-field" id="userSearch" placeholder="Търси потребител..." style="flex:1;">
-      <button id="refreshUsers" class="btn">Обнови</button>
+    <div style="display:flex;gap:1rem;align-items:center;margin:1rem 0;flex-wrap:wrap;">
+      <input class="search-field" id="userSearch" placeholder="Търси по имейл..." style="flex:1;max-width:400px;">
+      <button id="refreshUsers" class="btn">🔄 Обнови</button>
+      <span id="users-count" class="small"></span>
     </div>
 
     <div id="users-list" class="grid"></div>
   </main>
 
-  <footer class="dashboard-footer">
+  <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
   <script type="module" src="manage-users.js"></script>
 </body>
 
