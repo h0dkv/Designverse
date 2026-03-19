@@ -21,8 +21,8 @@
       display: flex;
       align-items: center;
       gap: 2rem;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       animation: fadeInUp 0.6s ease-out both;
       flex-wrap: wrap;
     }
@@ -37,8 +37,8 @@
       justify-content: center;
       font-size: 2.5rem;
       flex-shrink: 0;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      border: 3px solid rgba(255,255,255,0.2);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      border: 3px solid rgba(255, 255, 255, 0.2);
       overflow: hidden;
     }
 
@@ -57,7 +57,7 @@
 
     .profile-banner-info p {
       margin: 0;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 0.95rem;
     }
 
@@ -68,15 +68,15 @@
       border-radius: 20px;
       font-size: 0.82rem;
       font-weight: 600;
-      background: rgba(255,193,69,0.2);
+      background: rgba(255, 193, 69, 0.2);
       color: var(--accent);
-      border: 1px solid rgba(255,193,69,0.3);
+      border: 1px solid rgba(255, 193, 69, 0.3);
     }
 
     .profile-badge.admin {
       background: rgba(168, 102, 131, 0.3);
       color: #ffb3d1;
-      border-color: rgba(168,102,131,0.4);
+      border-color: rgba(168, 102, 131, 0.4);
     }
 
     .profile-grid {
@@ -87,19 +87,30 @@
     }
 
     .profile-info-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
       backdrop-filter: blur(12px);
       border-radius: 20px;
       padding: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       animation: fadeInUp 0.6s ease-out both;
     }
 
-    .profile-info-card:nth-child(1) { animation-delay: 0.1s; }
-    .profile-info-card:nth-child(2) { animation-delay: 0.2s; }
-    .profile-info-card:nth-child(3) { animation-delay: 0.3s; }
-    .profile-info-card:nth-child(4) { animation-delay: 0.4s; }
+    .profile-info-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .profile-info-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .profile-info-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .profile-info-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
 
     .profile-info-card h4 {
       margin: 0 0 1rem;
@@ -114,7 +125,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       font-size: 0.95rem;
     }
 
@@ -123,7 +134,7 @@
     }
 
     .profile-info-card .info-label {
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.55);
     }
 
     .profile-info-card .info-value {
@@ -139,7 +150,7 @@
 
     .stat-label {
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       margin-top: 0.2rem;
     }
 
@@ -160,7 +171,7 @@
 
     .btn-outline {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.25);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #fff;
       padding: 0.8rem 1.5rem;
       border-radius: 15px;
@@ -173,14 +184,23 @@
     }
 
     .btn-outline:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.4);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
     @media (max-width: 640px) {
-      .profile-grid { grid-template-columns: 1fr; }
-      .profile-banner { flex-direction: column; text-align: center; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
@@ -205,7 +225,9 @@
     <button id="menu-toggle">☰</button>
 
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">👤 Dashboard ▾</button>
+      <button id="dashboard-btn">
+        <span class="dash-avatar">👤</span>
+      </button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>

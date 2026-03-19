@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logout-btn");
   const greeting = document.getElementById("user-greeting");
   const userNameEl = document.getElementById("user-name");
+  const btn = document.getElementById("dashboard-btn");
 
 
   onAuthStateChanged(auth, user => {
@@ -59,4 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
       dashboardMenu.classList.remove("show");
     }
   });
+  
+  if (btn && user.photoURL) {
+    btn.innerHTML = `<img src="${user.photoURL}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;">`;
+  }
+
 });
