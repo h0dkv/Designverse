@@ -4,21 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="DesignRealm е платформа за 3D модели и 3D принтиране. Разгледай каталога, качи свои модели и се присъедини към общността.">
-
+  <meta name="description" content="DesignRealm е платформа за 3D модели и 3D принтиране. Разгледай каталога, качи свои модели и се присъедини към общността.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://h0dkv.github.io/DesignVerse/index.html">
   <meta property="og:title" content="DesignRealm - Платформа за 3D модели">
-  <meta property="og:description"
-    content="DesignRealm е платформа за 3D модели и 3D принтиране. Разгледай каталога, качи свои модели и се присъедини към общността.">
+  <meta property="og:description" content="DesignRealm е платформа за 3D модели и 3D принтиране. Разгледай каталога, качи свои модели и се присъедини към общността.">
   <meta property="og:image" content="https://h0dkv.github.io/DesignVerse/images/logo_notext.png">
   <meta property="og:image:width" content="200">
   <meta property="og:image:height" content="200">
   <link rel="canonical" href="https://h0dkv.github.io/DesignVerse/index.html">
   <title>Начало | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">  
 </head>
 
 <body>
@@ -42,15 +39,12 @@
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
 
-
     <button id="menu-toggle">☰</button>
-
 
     <div id="dashboard" class="dashboard" style="display:none;">
       <button id="dashboard-btn">
         <span class="dash-avatar">👤</span>
       </button>
-
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -59,27 +53,31 @@
         <button id="logout-btn" class="btn-logout">🚪 Изход</button>
       </div>
     </div>
-
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Добре дошли в DesignRealm.</h1>
-          <p>Направи въображението си реалност.</p>
+  <!-- HERO -->
+  <section class="hero-new">
+    <div class="hero-new-inner">
+      <div class="hero-new-text">
+        <span class="badge">🚀 Платформа за 3D модели</span>
+        <h1>Направи въображението си <span>реалност</span></h1>
+        <p>Разгледай множество 3D модели, качи свои дизайни и се присъедини към общността на DesignRealm.</p>
+        <div class="hero-btns">
           <a href="catalog.html" class="btn">Разгледай моделите</a>
-        </div>
-        <div class="hero-image">
-          <img src="images/logo_notext.png" alt="3D модел" style="max-width: 200px; height: auto;">
+          <a href="register.html" class="btn-outline-white">Регистрирай се</a>
         </div>
       </div>
-    </section>
-  </main>
-
-  <section class="featured-models">
-    <h2>⭐ Популярни модели</h2>
-    <p>Разгледайте някои от най-харесваните 3D модели в нашата колекция.</p>
+      <div class="hero-new-image">
+        <img src="images/logo_notext.png" alt="DesignRealm 3D">
+      </div>
+    </div>
+  </section>
+  <!-- POPULAR MODELS -->
+  <section class="models-section">
+    <div class="section-title">
+      <h2>⭐ Популярни модели</h2>
+      <p>Разгледайте някои от най-харесваните 3D модели в нашата колекция</p>
+    </div>
     <div class="grid">
       <div class="card">
         <img src="images/chisla.png" alt="Числата на 2025">
@@ -96,52 +94,63 @@
       <div class="card">
         <img src="images/snowflake.jpg" alt="Снежинка">
         <h3>Снежинка</h3>
-        <p>Кристално ледено образувание с уникална шестоъгълна симетрия и фина, дантелена структура.</p>
+        <p>Кристално ледено образувание с уникална шестоъгълна симетрия.</p>
         <a href="catalog.html" class="btn">Виж в каталога</a>
       </div>
     </div>
   </section>
 
-  <section class="news">
-    <h2>📰 Новини</h2>
-    <div class="blog-grid">
-      <div class="post">
+  <!-- NEWS -->
+  <section class="news-section">
+    <div class="section-title">
+      <h2>📰 Последни новини</h2>
+      <p>Научете повече за света на 3D принтирането</p>
+    </div>
+    <div class="blog-grid-new">
+      <div class="post-card" style="animation-delay:0.1s">
         <img src="images/3dprinters.jpg" alt="Бъдещето на 3D дизайна">
-        <h3>Бъдещето на 3D дизайна</h3>
-        <p>Разгледайте най-новите технологии в 3D принтирането.</p>
-        <a href="post3.html" class="btn">Прочети</a>
+        <div class="post-card-body">
+          <h3>Бъдещето на 3D дизайна</h3>
+          <p>Разгледайте най-новите технологии в 3D принтирането.</p>
+          <a href="post3.html" class="btn" style="font-size:0.85rem;padding:0.5rem 1rem;">Прочети →</a>
+        </div>
       </div>
-      <div class="post">
+      <div class="post-card" style="animation-delay:0.2s">
         <img src="images/new year.webp" alt="Нова година">
-        <h3>Честита Нова година 2026!</h3>
-        <p>Пожелаваме ви успешна година с много креативни проекти.</p>
-        <a href="post2.html" class="btn">Виж повече</a>
+        <div class="post-card-body">
+          <h3>Честита Нова година 2026!</h3>
+          <p>Пожелаваме ви успешна година с много креативни проекти.</p>
+          <a href="post2.html" class="btn" style="font-size:0.85rem;padding:0.5rem 1rem;">Виж повече →</a>
+        </div>
       </div>
-      <div class="post">
+      <div class="post-card" style="animation-delay:0.3s">
         <img src="images/furniture.jpg" alt="3D мебели">
-        <h3>🪑 Мебели от бъдещето</h3>
-        <p>3D принтираните мебели променят начина, по който мислим за дизайн и производство у дома.</p>
-        <a href="post7.html" class="btn">Научи повече</a>
+        <div class="post-card-body">
+          <h3>🪑 Мебели от бъдещето</h3>
+          <p>3D принтираните мебели променят начина, по който мислим за дизайн.</p>
+          <a href="post7.html" class="btn" style="font-size:0.85rem;padding:0.5rem 1rem;">Научи повече →</a>
+        </div>
       </div>
-      <div class="post">
+      <div class="post-card" style="animation-delay:0.4s">
         <img src="images/logo_notext.png" alt="3D в училище">
-        <h3>3D в училище</h3>
-        <p>Училища и университети използват 3D принтери, за да развиват креативност и инженерно мислене.</p>
-        <a href="post8.html" class="btn">Разгледай</a>
+        <div class="post-card-body">
+          <h3>3D в училище</h3>
+          <p>Училища и университети използват 3D принтери за обучение.</p>
+          <a href="post8.html" class="btn" style="font-size:0.85rem;padding:0.5rem 1rem;">Разгледай →</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>🚀 Готови ли сте да започнете?</h2>
-      <p>Присъединете се към общността на DesignRealm и споделете своите 3D модели.</p>
-      <div class="cta-buttons">
-        <a href="register.html" class="btn">Регистрирай се</a>
-        <a href="catalog.html" class="btn secondary">Разгледай каталога</a>
-      </div>
+  <!-- CTA -->
+  <div class="cta-new">
+    <h2>🚀 Готови ли сте да започнете?</h2>
+    <p>Присъединете се към общността на DesignRealm и споделете своите 3D модели с хиляди ентусиасти.</p>
+    <div class="btns">
+      <a href="register.html" class="btn">Регистрирай се безплатно</a>
+      <a href="catalog.html" class="btn-outline-white">Разгледай каталога</a>
     </div>
-  </section>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
@@ -150,7 +159,8 @@
         <img src="images/facebook.svg" alt="Facebook"></a>
       <a href="https://instagram.com/DesignRealm_bg" target="_blank">
         <img src="images/instagram.svg" alt="Instagram"></a>
-      <a href="https://discord.gg/RDWZ2TC7"><img src="images/discord.svg" alt="Discord"></a>
+      <a href="https://discord.gg/RDWZ2TC7">
+        <img src="images/discord.svg" alt="Discord"></a>
     </div>
   </footer>
 
