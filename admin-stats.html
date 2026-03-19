@@ -2,84 +2,82 @@
 <html lang="bg">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Админ Статистики | DesignRealm</title>
-
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="style.css">
-
-  <!-- Икони -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_notext.png" alt="DesignRealm">
+        <span>DesignRealm</span>
+      </a>
+    </div>
+    <nav id="nav">
+      <a href="admin.html">Админ панел</a>
+      <a href="manage-users.html">Потребители</a>
+      <a href="upload.html">Качи модел</a>
+      <a href="admin-stats.html" class="active">Статистики</a>
+      <a href="pending-models.html">Одобряване</a>
+      <a href="index.html">Начало</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
+  </header>
 
-  <!-- ===== HEADER ===== -->
-  
-    <header class="dashboard-header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm">
-                <span>DesignRealm</span>
-            </a>
-        </div>
-
-        <nav class="dashboard-nav">
-            <a href="admin.html">Админ панел</a>
-            <a href="manage-users.html">Потребители</a>
-            <a href="upload.html" >Качи модел</a>
-            <a href="admin-stats.html" class="active">Статистики</a>
-            <a href="pending-models.html">Одобряване на модели</a>
-            <a href="index.html">Начало</a>
-        </nav>
-    </header>
-
-  <!-- ===== MAIN ===== -->
   <main class="admin-stats-page">
-
     <h1>📊 Статистика на платформата</h1>
     <p class="subtitle">Обща информация за потребители, роли и съдържание</p>
 
-    <!-- ===== STATS GRID ===== -->
     <section class="stats-grid">
-
       <div class="stat-card">
         <span class="material-icons">group</span>
-        <h2 id="total-users">0</h2>
+        <h2 id="total-users">—</h2>
         <p>Общо потребители</p>
       </div>
 
       <div class="stat-card">
         <span class="material-icons">view_in_ar</span>
         <h2>
-          <span id="approved-models">0</span> /
-          <a href="pending-models.html" id="pending-link">
-            <span id="pending-models">0</span>
+          <span id="approved-models">—</span> /
+          <a href="pending-models.html" id="pending-link" style="color:var(--accent)">
+            <span id="pending-models">—</span>
           </a>
         </h2>
-        <p>3D модели (Одобрени / Изчакващи)</p>
+        <p>3D модели (Одобрени / Чакащи)</p>
       </div>
 
       <div class="stat-card">
         <span class="material-icons">favorite</span>
-        <h2 id="favorites-count">0</h2>
+        <h2 id="favorites-count">—</h2>
         <p>Любими модели</p>
       </div>
-
     </section>
-
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="dashboard-footer">
-    <p>© 2025 DesignRealm • Учебен проект</p>
+  <footer>
+    <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
-  <!-- ===== SCRIPTS ===== -->
   <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
   <script type="module" src="admin-stats.js"></script>
-
 </body>
 
 </html>

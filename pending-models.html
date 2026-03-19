@@ -3,54 +3,65 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Одобряване на модели | DesignRealm</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
 <body>
-
-    <header class="dashboard-header">
+    <header>
         <div class="logo">
             <a href="index.html">
                 <img src="images/logo_notext.png" alt="DesignRealm">
                 <span>DesignRealm</span>
             </a>
         </div>
-
-        <nav class="dashboard-nav">
+        <nav id="nav">
             <a href="admin.html">Админ панел</a>
             <a href="manage-users.html">Потребители</a>
-            <a href="upload.html" >Качи модел</a>
-            <a href="admin-stats.html">Статистики</a>
-            <a href="pending-models.html" class="active">Одобряване на модели</a>
+            <a href="upload.html">Качи модел</a>
+            <a href="pending-models.html" class="active">Одобряване</a>
             <a href="index.html">Начало</a>
         </nav>
+        <button id="menu-toggle">☰</button>
+        <div id="dashboard" class="dashboard" style="display:none;">
+            <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+            <div id="dashboard-menu" class="dashboard-menu">
+                <p id="user-greeting">Здравей!</p>
+                <a href="favorites.html">❤️ Любими</a>
+                <a href="profile.html">⚙️ Профил</a>
+                <a href="upload.html">Качи модел</a>
+                <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+            </div>
+        </div>
     </header>
 
     <main style="max-width:1100px;margin:1.5rem auto;padding:0 1rem;">
         <section class="hero">
             <div class="hero-text">
-                <h1>Одобряване на постъпили модели</h1>
-                <p class="subtitle">Тук виждате всички модели в очакване — прегледайте и одобрете или отхвърлете.</p>
+                <h1>📋 Одобряване на модели</h1>
+                <p class="subtitle">Прегледайте и одобрете или отхвърлете постъпилите модели.</p>
             </div>
         </section>
 
         <section style="margin-top:1.25rem;">
-            <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
-                <input id="pm-search" class="search-field" placeholder="Търси по заглавие...">
-                <button id="pm-refresh" class="btn">Обнови</button>
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
+                <input id="pm-search" class="search-field" placeholder="Търси по заглавие..." style="max-width:300px;">
+                <button id="pm-refresh" class="btn">🔄 Обнови</button>
             </div>
-
             <div id="pending-list" class="grid"></div>
         </section>
     </main>
 
-    <footer class="dashboard-footer">
+    <footer>
         <p>© 2025 DesignRealm. Всички права запазени.</p>
     </footer>
 
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
     <script type="module" src="pending-models.js"></script>
 </body>
 
