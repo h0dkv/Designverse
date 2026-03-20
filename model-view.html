@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модел | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo">
+                <span>DesignRealm</span>
+            </a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="3dprint.html">3D принтирането</a>
+            <a href="catalog.html" class="active">Каталог</a>
+            <a href="blog.html">Блог</a>
+            <a href="about.html">За нас</a>
+            <a href="contact.html">Контакти</a>
+            <a href="favorites.html">Любими</a>
+            <a id="login-link" href="login.html">Вход</a>
+            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+        </nav>
+        <button id="menu-toggle">☰</button>
+        <div id="dashboard" class="dashboard" style="display:none;">
+            <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+            <div id="dashboard-menu" class="dashboard-menu">
+                <p id="user-greeting">Здравей!</p>
+                <a href="favorites.html">❤️ Любими</a>
+                <a href="profile.html">⚙️ Профил</a>
+                <a href="upload.html">Качи модел</a>
+                <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width:900px;margin:2rem auto;padding:0 1.5rem;">
+        <a href="catalog.html" class="back-link">← Обратно към каталога</a>
+
+        <div id="model-content">
+            <div style="text-align:center;padding:4rem;color:rgba(255,255,255,0.5);">
+                <div style="font-size:3rem;margin-bottom:1rem;">⏳</div>
+                <p>Зареждане...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 DesignRealm. Всички права запазени.</p>
+    </footer>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="firebase-favorites.js"></script>
+    <script type="module">
+        import { db } from "./firebase-init.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+        const content = document.getElementById("model-content");
+
+        function formatSize(bytes) {
+            if (!bytes) return "—";
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            return (bytes / Math.pow(1024, i)).toFixed(1) + ["B", "KB", "MB", "GB"][i];
+        }
+
+        function formatDate(ts) {
+            if (!ts) return "—";
+            const d = ts.toDate ? ts.toDate() : new Date(ts);
+            return d.toLocaleDateString("bg-BG");
+        }
+
+        async function loadModel() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
+
+            if (!id) {
+                content.innerHTML = `<div style="text-align:center;padding:3rem;color:rgba(255,255,255,0.5)"><div style="font-size:3rem">❌</div><p>Невалиден модел.</p></div>`;
+                return;
+            }
+
+            try {
+                const snap = await getDoc(doc(db, "models", id));
+
+                if (!snap.exists()) {
+                    content.innerHTML = `<div style="text-align:center;padding:3rem;color:rgba(255,255,255,0.5)"><div style="font-size:3rem">🔍</div><p>Моделът не е намерен.</p></div>`;
+                    return;
+                }
+
+                const m = snap.data();
+                const img = m.imageURL || m.imageUrl || "images/logo_notext.png";
+                const file = m.fileURL || m.fileUrl || "#";
+                const title = m.title || "Без заглавие";
+
+                // Обновяване на заглавието на страницата
+                document.title = `${title} | DesignRealm`;
+
+                content.innerHTML = `
+          <div class="model-layout">
+            <div class="model-view">
+              <img src="${img}" alt="${title}" onerror="this.src='images/logo_notext.png'">
+            </div>
+            <div class="model-details">
+              <h1>${title}</h1>
+              ${m.description ? `<p class="model-description">${m.description}</p>` : ""}
+              <div class="model-meta">
+                <div><strong>📁 Файл:</strong> ${m.fileName || "—"}</div>
+                <div><strong>📦 Размер:</strong> ${formatSize(m.fileSize)}</div>
+                <div><strong>👤 Качен от:</strong> ${m.uploaderEmail || "—"}</div>
+                <div><strong>📅 Дата:</strong> ${formatDate(m.publishedAt || m.createdAt)}</div>
+              </div>
+              <div class="model-actions">
+                <a href="${file}" download class="btn">⬇️ Изтегли STL</a>
+                <button class="fav-btn btn" data-title="${title}" data-img="${img}" data-file="${file}">❤️ Добави в любими</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+            } catch (err) {
+                console.error(err);
+                content.innerHTML = `<div style="text-align:center;padding:3rem;color:rgba(255,255,255,0.5)"><div style="font-size:3rem">⚠️</div><p>Грешка при зареждане.</p></div>`;
+            }
+        }
+
+        loadModel();
+    </script>
+</body>
+
+</html>
