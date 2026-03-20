@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
   <header>
     <div class="logo">
       <a href="index.html">
@@ -18,7 +17,6 @@
         <span>DesignRealm</span>
       </a>
     </div>
-
     <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="3dprint.html">3D принтирането</a>
@@ -30,13 +28,9 @@
       <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
     <button id="menu-toggle">☰</button>
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -48,7 +42,6 @@
   </header>
 
   <main style="max-width:800px;margin:1.5rem auto;">
-
     <section class="hero">
       <div class="hero-text">
         <h1>⬆ Качи 3D модел</h1>
@@ -70,6 +63,24 @@
         <textarea id="description" rows="3" placeholder="Кратко описание на модела..."></textarea>
       </div>
 
+      <!-- СНИМКА -->
+      <div class="form-group">
+        <label>Снимка на модела <span
+            style="color:rgba(255,255,255,0.45);font-weight:400;">(препоръчително)</span></label>
+        <div id="image-drop-zone" class="drop-zone" style="min-height:120px;">
+          <div class="drop-zone-content">
+            <div class="icon">🖼️</div>
+            <p>Пусни снимка тук или <span class="click-here">кликни за избор</span></p>
+            <input id="image-file" type="file" accept="image/*" hidden>
+          </div>
+        </div>
+        <div id="image-preview-wrap" style="display:none;margin-top:0.8rem;text-align:center;">
+          <img id="image-preview" src="" alt="Преглед"
+            style="max-height:180px;border-radius:12px;object-fit:cover;max-width:100%;">
+        </div>
+      </div>
+
+      <!-- ФАЙЛ -->
       <div class="form-group">
         <label>Файл за качване</label>
         <div id="drop-zone" class="drop-zone">
@@ -91,9 +102,7 @@
         <p id="progress-text">Качване... 0%</p>
       </div>
 
-      <button id="uploadBtn" class="btn upload-btn" disabled>
-        ⬆ Качи модел
-      </button>
+      <button id="uploadBtn" class="btn upload-btn" disabled>⬆ Качи модел</button>
     </div>
 
     <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">← Начало</a>
@@ -108,7 +117,6 @@
   <script type="module" src="script.js"></script>
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="upload.js"></script>
-
 </body>
 
 </html>

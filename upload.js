@@ -1,8 +1,6 @@
 import { auth, db } from "./firebase-init.js";
 import {
-  addDoc,
-  collection,
-  serverTimestamp
+  addDoc, collection, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 import { onAuthStateChanged } from
   "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
@@ -17,16 +15,10 @@ function showToast(message, type = "success") {
   if (existing) existing.remove();
   const toast = document.createElement("div");
   toast.className = `dr-toast dr-toast--${type}`;
-  toast.innerHTML = `
-    <span class="dr-toast__icon">${type === "success" ? "✅" : "❌"}</span>
-    <span class="dr-toast__msg">${message}</span>
-  `;
+  toast.innerHTML = `<span class="dr-toast__icon">${type === "success" ? "✅" : "❌"}</span><span class="dr-toast__msg">${message}</span>`;
   document.body.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add("dr-toast--show"));
-  setTimeout(() => {
-    toast.classList.remove("dr-toast--show");
-    setTimeout(() => toast.remove(), 400);
-  }, 3500);
+  setTimeout(() => { toast.classList.remove("dr-toast--show"); setTimeout(() => toast.remove(), 400); }, 3500);
 }
 
 /* ---------------- DOM ---------------- */
@@ -42,10 +34,17 @@ const progressContainer = document.getElementById("progress-container");
 const progressFill = document.getElementById("progress-fill");
 const progressText = document.getElementById("progress-text");
 
+// Снимка
+const imageDropZone = document.getElementById("image-drop-zone");
+const imageFileInput = document.getElementById("image-file");
+const imagePreviewWrap = document.getElementById("image-preview-wrap");
+const imagePreview = document.getElementById("image-preview");
+
 let selectedFile = null;
+let selectedImage = null;
 let currentUser = null;
 
-/* ---------------- AUTH CHECK ---------------- */
+/* ---------------- AUTH ---------------- */
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     showToast("Моля първо влезте в профила си.", "error");
@@ -55,7 +54,38 @@ onAuthStateChanged(auth, (user) => {
   currentUser = user;
 });
 
-/* ---------------- DRAG & DROP ---------------- */
+/* ---------------- IMAGE DROP ZONE ---------------- */
+imageDropZone.addEventListener("click", () => imageFileInput.click());
+imageDropZone.addEventListener("dragover", (e) => { e.preventDefault(); imageDropZone.classList.add("dragover"); });
+imageDropZone.addEventListener("dragleave", () => imageDropZone.classList.remove("dragover"));
+imageDropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  imageDropZone.classList.remove("dragover");
+  if (e.dataTransfer.files.length > 0) handleImageSelect(e.dataTransfer.files[0]);
+});
+imageFileInput.addEventListener("change", (e) => {
+  if (e.target.files.length > 0) handleImageSelect(e.target.files[0]);
+});
+
+function handleImageSelect(file) {
+  if (!file.type.startsWith("image/")) {
+    showToast("Моля изберете снимка (JPG, PNG, WEBP).", "error");
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    showToast("Снимката е над 10MB.", "error");
+    return;
+  }
+  selectedImage = file;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    imagePreview.src = e.target.result;
+    imagePreviewWrap.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---------------- FILE DROP ZONE ---------------- */
 dropZone.addEventListener("click", () => fileInput.click());
 dropZone.addEventListener("dragover", (e) => { e.preventDefault(); dropZone.classList.add("dragover"); });
 dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
@@ -68,7 +98,6 @@ fileInput.addEventListener("change", (e) => {
   if (e.target.files.length > 0) handleFileSelect(e.target.files[0]);
 });
 
-/* ---------------- FILE VALIDATION ---------------- */
 function handleFileSelect(file) {
   if (!file) return;
   const ext = file.name.toLowerCase().substring(file.name.lastIndexOf("."));
@@ -93,10 +122,41 @@ function formatFileSize(bytes) {
   return (bytes / Math.pow(1024, i)).toFixed(2) + " " + ["Bytes", "KB", "MB", "GB"][i];
 }
 
-/* ---------------- FORM CHECK ---------------- */
 titleInput.addEventListener("input", checkForm);
 function checkForm() {
   uploadBtn.disabled = !(titleInput.value.trim() && selectedFile);
+}
+
+/* ---------------- CLOUDINARY UPLOAD HELPER ---------------- */
+function uploadToCloudinary(file, resourceType = "raw") {
+  return new Promise((resolve, reject) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`);
+
+    if (resourceType === "raw") {
+      xhr.upload.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+          const percent = Math.round((e.loaded / e.total) * 100);
+          progressFill.style.width = percent + "%";
+          progressText.textContent = "Качване на файл... " + percent + "%";
+        }
+      });
+    }
+
+    xhr.addEventListener("load", () => {
+      if (xhr.status === 200) {
+        resolve(JSON.parse(xhr.responseText));
+      } else {
+        reject(new Error("Cloudinary error: " + xhr.responseText));
+      }
+    });
+    xhr.addEventListener("error", () => reject(new Error("Мрежова грешка")));
+    xhr.send(formData);
+  });
 }
 
 /* ---------------- UPLOAD ---------------- */
@@ -110,7 +170,7 @@ uploadBtn.onclick = async () => {
   const description = descInput ? descInput.value.trim() : "";
 
   if (!title || !selectedFile) {
-    showToast("Липсва име или файл.", "error");
+    showToast("Липсва ime или файл.", "error");
     return;
   }
 
@@ -118,58 +178,43 @@ uploadBtn.onclick = async () => {
   uploadBtn.textContent = "Качване...";
   progressContainer.style.display = "block";
 
-  const formData = new FormData();
-  formData.append("file", selectedFile);
-  formData.append("upload_preset", UPLOAD_PRESET);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/raw/upload`);
-
-  xhr.upload.addEventListener("progress", (e) => {
-    if (e.lengthComputable) {
-      const percent = Math.round((e.loaded / e.total) * 100);
-      progressFill.style.width = percent + "%";
-      progressText.textContent = "Качване... " + percent + "%";
+  try {
+    // 1. Качи снимката ако има
+    let imageURL = "";
+    if (selectedImage) {
+      progressText.textContent = "Качване на снимка...";
+      const imgResult = await uploadToCloudinary(selectedImage, "image");
+      imageURL = imgResult.secure_url;
     }
-  });
 
-  xhr.addEventListener("load", async () => {
-    if (xhr.status === 200) {
-      const result = JSON.parse(xhr.responseText);
-      try {
-        await addDoc(collection(db, "models"), {
-          title,
-          description,
-          fileURL: result.secure_url,
-          fileName: selectedFile.name,
-          fileSize: selectedFile.size,
-          status: "pending",
-          uploadedBy: currentUser.uid,
-          uploaderEmail: currentUser.email,
-          createdAt: serverTimestamp()
-        });
-        progressFill.style.width = "100%";
-        progressText.textContent = "Качено успешно! ✅";
-        showToast("Моделът е качен успешно! 🎉", "success");
-        setTimeout(() => resetForm(), 2000);
-      } catch (err) {
-        console.error("Firestore error:", err);
-        showToast("Файлът е качен, но грешка при записа.", "error");
-        resetForm();
-      }
-    } else {
-      console.error("Cloudinary error:", xhr.responseText);
-      showToast("Грешка при качване. Провери Upload Preset.", "error");
-      resetForm();
-    }
-  });
+    // 2. Качи файла
+    progressText.textContent = "Качване на файл... 0%";
+    const fileResult = await uploadToCloudinary(selectedFile, "raw");
 
-  xhr.addEventListener("error", () => {
-    showToast("Мрежова грешка при качването.", "error");
+    // 3. Запиши в Firestore
+    await addDoc(collection(db, "models"), {
+      title,
+      description,
+      fileURL: fileResult.secure_url,
+      imageURL,
+      fileName: selectedFile.name,
+      fileSize: selectedFile.size,
+      status: "pending",
+      uploadedBy: currentUser.uid,
+      uploaderEmail: currentUser.email,
+      createdAt: serverTimestamp()
+    });
+
+    progressFill.style.width = "100%";
+    progressText.textContent = "Качено успешно! ✅";
+    showToast("Моделът е качен успешно! 🎉", "success");
+    setTimeout(() => resetForm(), 2000);
+
+  } catch (err) {
+    console.error("Upload error:", err);
+    showToast("Грешка при качването: " + err.message, "error");
     resetForm();
-  });
-
-  xhr.send(formData);
+  }
 };
 
 /* ---------------- RESET ---------------- */
@@ -177,8 +222,12 @@ function resetForm() {
   titleInput.value = "";
   if (descInput) descInput.value = "";
   fileInput.value = "";
+  imageFileInput.value = "";
   selectedFile = null;
+  selectedImage = null;
   fileInfo.style.display = "none";
+  imagePreviewWrap.style.display = "none";
+  imagePreview.src = "";
   progressContainer.style.display = "none";
   progressFill.style.width = "0%";
   uploadBtn.disabled = true;
