@@ -28,13 +28,9 @@
       <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
     <button id="menu-toggle">☰</button>
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -45,17 +41,73 @@
     </div>
   </header>
 
-  <main class="contact-page">
-    <h1>Свържете се с нас</h1>
-    <p>Имаш въпрос, предложение или просто искаш да ни поздравиш? Изпрати ни съобщение 👇</p>
+  <div class="contact-page-new">
 
-    <form class="contact-form" id="contact-form">
-      <input type="text" name="name" placeholder="Вашето име" required>
-      <input type="email" name="email" placeholder="Имейл" required>
-      <textarea name="message" placeholder="Вашето съобщение" required></textarea>
-      <button type="submit" class="btn" id="contact-submit">Изпрати</button>
-    </form>
-  </main>
+    <div class="contact-hero">
+      <span class="contact-badge">✉️ Пиши ни</span>
+      <h1>Свържете се с <span class="contact-gradient">нас</span></h1>
+      <p>Имаш въпрос, предложение или просто искаш да ни поздравиш? Изпрати ни съобщение!</p>
+    </div>
+
+    <div class="contact-layout">
+
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📧</div>
+          <div>
+            <div class="contact-info-label">Имейл</div>
+            <div class="contact-info-value">designverseinfos@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">💬</div>
+          <div>
+            <div class="contact-info-label">Discord</div>
+            <div class="contact-info-value">
+              <a href="https://discord.gg/RDWZ2TC7" target="_blank">discord.gg/RDWZ2TC7</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📸</div>
+          <div>
+            <div class="contact-info-label">Instagram</div>
+            <div class="contact-info-value">
+              <a href="https://instagram.com/DesignRealm_bg" target="_blank">@DesignRealm_bg</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">⏰</div>
+          <div>
+            <div class="contact-info-label">Отговаряме в рамките на</div>
+            <div class="contact-info-value">24 часа</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <form class="contact-form-new" id="contact-form">
+          <div class="contact-field">
+            <label>Вашето име</label>
+            <input type="text" name="name" placeholder="Например: Иван Иванов" required>
+          </div>
+          <div class="contact-field">
+            <label>Имейл адрес</label>
+            <input type="email" name="email" placeholder="email@example.com" required>
+          </div>
+          <div class="contact-field">
+            <label>Съобщение</label>
+            <textarea name="message" placeholder="Напишете своето съобщение тук..." required rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn contact-submit-btn" id="contact-submit">
+            ✉️ Изпрати съобщение
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>

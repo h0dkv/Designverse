@@ -7,71 +7,6 @@
   <title>Любими модели | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .confirm-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 9998;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .confirm-overlay.show {
-      display: flex;
-    }
-
-    .confirm-box {
-      background: rgba(82, 29, 68, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 2rem;
-      max-width: 360px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    }
-
-    .confirm-box h3 {
-      margin: 0 0 0.7rem;
-      color: #fff;
-    }
-
-    .confirm-box p {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 1.5rem;
-    }
-
-    .confirm-actions {
-      display: flex;
-      gap: 0.8rem;
-      justify-content: center;
-    }
-
-    .btn-sm {
-      padding: 0.45rem 0.9rem;
-      font-size: 0.85rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.2s ease;
-    }
-
-    .btn-sm.danger {
-      background: rgba(180, 40, 60, 0.3);
-      color: #ffb3b3;
-      border: 1px solid rgba(180, 40, 60, 0.4);
-    }
-
-    .btn-sm.primary {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: #fff;
-    }
-  </style>
 </head>
 
 <body>
@@ -93,13 +28,9 @@
       <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
     <button id="menu-toggle">☰</button>
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html" class="active">❤️ Любими</a>
@@ -110,15 +41,32 @@
     </div>
   </header>
 
-  <main class="favorites-page">
-    <h1>❤️ Моите любими модели</h1>
-    <p>Тук са запазените ти 3D модели. Можеш да ги разгледаш или премахнеш от списъка.</p>
+  <!-- CONFIRM DIALOG -->
+  <div class="confirm-overlay" id="fav-confirm-overlay">
+    <div class="confirm-box">
+      <h3>🗑️ Изчистване</h3>
+      <p>Сигурни ли сте, че искате да изтриете всички любими?</p>
+      <div class="confirm-actions">
+        <button class="btn-sm danger" id="fav-confirm-yes">Да, изтрий</button>
+        <button class="btn-sm primary" id="fav-confirm-no">Отказ</button>
+      </div>
+    </div>
+  </div>
 
-    <div id="favorites-list" class="grid"></div>
+  <div class="fav-page">
+    <div class="fav-hero">
+      <span class="fav-badge">❤️ Твоята колекция</span>
+      <h1>Любими <span class="fav-gradient">модели</span></h1>
+      <p>Тук са запазените ти 3D модели. Можеш да ги разгледаш или премахнеш от списъка.</p>
+    </div>
 
-    <button id="clearFavorites" class="btn"
-      style="margin-top:1.5rem;background:linear-gradient(135deg,#dc3545,#c82333);">🗑️ Изчисти всички</button>
-  </main>
+    <div class="fav-toolbar">
+      <span class="small" id="fav-count"></span>
+      <button id="clearFavorites" class="btn fav-clear-btn">🗑️ Изчисти всички</button>
+    </div>
+
+    <div id="favorites-list" class="fav-grid"></div>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>

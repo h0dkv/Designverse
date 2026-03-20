@@ -16,7 +16,7 @@ async function loadApprovedModels() {
     const snap = await getDocs(q);
     if (snap.empty) return;
 
-    snap.forEach(d => {
+    snap.forEach((d, index) => {
       const m = d.data();
       const img = m.imageURL || m.imageUrl || "images/logo_notext.png";
       const file = m.fileURL || m.fileUrl || "#";
@@ -24,16 +24,21 @@ async function loadApprovedModels() {
       const description = m.description || "";
 
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "catalog-card";
+      card.style.animationDelay = `${index * 0.06}s`;
 
       card.innerHTML = `
-        <a href="model-view.html?id=${d.id}" style="text-decoration:none;color:inherit;">
-          <img src="${img}" alt="${title}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:0.8rem;" onerror="this.src='images/logo_notext.png'">
-          <h3 style="color:#000;margin:0 0 0.5rem;">${title}</h3>
-          ${description ? `<p style="color:#555;font-size:0.9rem;margin-bottom:0.8rem;">${description}</p>` : ""}
+        <a href="model-view.html?id=${d.id}">
+          <img src="${img}" alt="${title}" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>${title}</h3>
+            ${description ? `<p>${description}</p>` : ""}
+          </div>
         </a>
-        <a href="${file}" download class="btn" style="margin-bottom:0.5rem;display:block;">⬇️ Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="${file}" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       `;
 
       grid.appendChild(card);

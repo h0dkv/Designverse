@@ -16,26 +16,6 @@ function showToast(message, type = "success") {
   setTimeout(() => { toast.classList.remove("dr-toast--show"); setTimeout(() => toast.remove(), 400); }, 3500);
 }
 
-/* ---------------- CONFIRM DIALOG ---------------- */
-function showConfirm(message) {
-  return new Promise(resolve => {
-    const overlay = document.createElement("div");
-    overlay.className = "confirm-overlay show";
-    overlay.innerHTML = `
-      <div class="confirm-box">
-        <h3>⚠️ Потвърждение</h3>
-        <p>${message}</p>
-        <div class="confirm-actions">
-          <button class="btn-sm danger" id="conf-yes">Да, изтрий</button>
-          <button class="btn-sm primary" id="conf-no">Отказ</button>
-        </div>
-      </div>`;
-    document.body.appendChild(overlay);
-    overlay.querySelector("#conf-yes").onclick = () => { overlay.remove(); resolve(true); };
-    overlay.querySelector("#conf-no").onclick = () => { overlay.remove(); resolve(false); };
-  });
-}
-
 /* ---------------- FIRESTORE HELPERS ---------------- */
 async function getUserFavorites(uid) {
   const snap = await getDoc(doc(db, "users", uid));
@@ -55,33 +35,48 @@ async function clearFavorites(uid) {
   await updateDoc(doc(db, "users", uid), { favorites: [] });
 }
 
-/* ---------------- RENDER ---------------- */
+/* ---------------- DOM ---------------- */
 const favListEl = document.getElementById("favorites-list");
 const clearBtn = document.getElementById("clearFavorites");
+const countEl = document.getElementById("fav-count");
+const confirmOverlay = document.getElementById("fav-confirm-overlay");
+const confirmYes = document.getElementById("fav-confirm-yes");
+const confirmNo = document.getElementById("fav-confirm-no");
 
+/* ---------------- RENDER ---------------- */
 async function renderFavorites(favs, uid) {
   if (!favListEl) return;
   favListEl.innerHTML = "";
+
+  if (countEl) countEl.textContent = favs.length ? `${favs.length} модела` : "";
 
   if (!favs || favs.length === 0) {
     favListEl.innerHTML = `
       <div style="text-align:center;padding:3rem;color:rgba(255,255,255,0.5);grid-column:1/-1">
         <div style="font-size:3rem;margin-bottom:1rem">💔</div>
         <p>Нямате добавени любими модели.</p>
-        <a href="catalog.html" class="btn" style="margin-top:1rem">Разгледай каталога</a>
+        <a href="catalog.html" class="btn" style="margin-top:1rem;display:inline-block">Разгледай каталога</a>
       </div>`;
     return;
   }
 
   favs.forEach((item, index) => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "catalog-card";
     card.style.animationDelay = `${index * 0.07}s`;
     card.innerHTML = `
-      <img src="${item.img || 'images/logo_notext.png'}" alt="${item.title}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:0.8rem;" onerror="this.src='images/logo_notext.png'">
-      <h3>${item.title}</h3>
-      ${item.file ? `<a href="${item.file}" download class="btn" style="margin-bottom:0.5rem">⬇️ Изтегли</a>` : ""}
-      <button class="btn remove-btn" style="background:linear-gradient(135deg,#dc3545,#c82333);">🗑️ Премахни</button>
+      <div style="overflow:hidden;border-radius:20px 20px 0 0;">
+        <img src="${item.img || 'images/logo_notext.png'}" alt="${item.title}"
+          style="width:100%;height:190px;object-fit:cover;display:block;transition:transform 0.4s ease;"
+          onerror="this.src='images/logo_notext.png'">
+      </div>
+      <div class="catalog-card-body">
+        <h3>${item.title}</h3>
+      </div>
+      <div class="catalog-card-actions">
+        ${item.file ? `<a href="${item.file}" download class="btn catalog-btn-dl">⬇️ Изтегли</a>` : ""}
+        <button class="remove-btn btn-sm danger" style="flex:none;">🗑️</button>
+      </div>
     `;
 
     card.querySelector(".remove-btn").addEventListener("click", async () => {
@@ -100,8 +95,9 @@ onAuthStateChanged(auth, async (user) => {
   if (!favListEl) return;
 
   if (!user) {
-    favListEl.innerHTML = `<p>Трябва да сте <a href="login.html" style="color:var(--accent)">логнати</a>, за да виждате любимите модели.</p>`;
+    favListEl.innerHTML = `<p style="color:rgba(255,255,255,0.6)">Трябва да сте <a href="login.html" style="color:var(--accent)">логнати</a>, за да виждате любимите модели.</p>`;
     if (clearBtn) clearBtn.style.display = "none";
+    if (countEl) countEl.textContent = "";
     return;
   }
 
@@ -120,7 +116,7 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  const card = btn.closest(".card");
+  const card = btn.closest(".catalog-card, .card");
   const item = {
     title: card.querySelector("h3")?.textContent || "Без заглавие",
     img: card.querySelector("img")?.src || "",
@@ -128,19 +124,30 @@ document.addEventListener("click", async (e) => {
   };
 
   await addFavorite(user.uid, item);
-  btn.innerHTML = "💚 В любими";
+  btn.innerHTML = "💚";
   showToast(`Добавено в любими: ${item.title}`);
 });
 
 /* ---------------- CLEAR ALL ---------------- */
 if (clearBtn) {
-  clearBtn.addEventListener("click", async () => {
+  clearBtn.addEventListener("click", () => {
+    if (confirmOverlay) {
+      confirmOverlay.classList.add("show");
+    }
+  });
+}
+
+if (confirmNo) {
+  confirmNo.addEventListener("click", () => {
+    confirmOverlay?.classList.remove("show");
+  });
+}
+
+if (confirmYes) {
+  confirmYes.addEventListener("click", async () => {
+    confirmOverlay?.classList.remove("show");
     const user = auth.currentUser;
     if (!user) return;
-
-    const ok = await showConfirm("Сигурни ли сте, че искате да изтриете всички любими?");
-    if (!ok) return;
-
     await clearFavorites(user.uid);
     renderFavorites([], user.uid);
     showToast("Всички любими са изтрити.", "error");

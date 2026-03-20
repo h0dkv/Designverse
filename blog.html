@@ -17,7 +17,6 @@
         <span>DesignRealm</span>
       </a>
     </div>
-
     <nav id="nav">
       <a href="index.html">Начало</a>
       <a href="3dprint.html">3D принтирането</a>
@@ -29,16 +28,9 @@
       <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
-
     <button id="menu-toggle">☰</button>
-
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
-
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -47,83 +39,117 @@
         <button id="logout-btn" class="btn-logout">🚪 Изход</button>
       </div>
     </div>
-
   </header>
 
+  <div class="blog-page">
 
-
-  <main class="blog">
-    <h1>Блог</h1>
-    <p>Открий вдъхновение, идеи и новини от света на 3D дизайна ✨</p>
-
-    <div class="blog-grid">
-      <article class="post">
-        <img src="images/3dprint.jpg" alt="3D принтиране">
-        <h2>Как да започнеш с 3D принтиране</h2>
-        <p>Научи основите на 3D принтирането и как да подготвяш моделите си за успешен печат.</p>
-        <a href="post1.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/new year.webp" alt=" Нова година">
-        <h2>Честита Нова година 2026!</h2>
-        <p>Започваме новата година с вдъхновение и нови 3D модели!</p>
-        <a href="post2.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/3dprinters.jpg" alt="Бъдещето на 3D дизайна">
-        <h2>Бъдещето на 3D дизайна</h2>
-        <p>Как биопластмасите и рециклираните филаменти правят 3D печата по-устойчив и природосъобразен.</p>
-        <a href="post3.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/eco-materials.jpg" alt="Еко материали за 3D принтиране">
-        <h2>🌱 Еко материали в 3D принтирането</h2>
-        <p>Как биопластмасите и рециклираните филаменти правят 3D печата по-устойчив и природосъобразен.</p>
-        <a href="post4.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/ai-3d.jpg" alt="AI и 3D дизайн">
-        <h2>🤖 Изкуственият интелект в 3D дизайна</h2>
-        <p>AI вече може да създава 3D модели по описание. Как това ще промени индустрията?</p>
-        <a href="post5.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/fashion3d.jpg" alt="3D мода">
-        <h2>👗 3D принтиране в света на модата</h2>
-        <p>Дизайнерите използват 3D технологии, за да създават уникални дрехи и аксесоари.</p>
-        <a href="post6.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/furniture.jpg" alt="3D мебели">
-        <h2>🪑 Мебели от бъдещето</h2>
-        <p>3D принтираните мебели променят начина, по който мислим за дизайн и производство у дома.</p>
-        <a href="post7.html" class="btn">Прочети повече</a>
-      </article>
-
-      <article class="post">
-        <img src="images/education3d.jpg" alt="3D в училище">
-        <h2>🎓 3D принтиране в образованието</h2>
-        <p>Училища и университети използват 3D принтери, за да развиват креативност и инженерно мислене.</p>
-        <a href="post8.html" class="btn">Прочети повече</a>
-      </article>
+    <div class="blog-hero">
+      <span class="badge">📰 Последни публикации</span>
+      <h1>Блог за <span>3D дизайн</span></h1>
+      <p>Открий вдъхновение, идеи и новини от света на 3D дизайна ✨</p>
     </div>
-  </main>
+
+    <div class="blog-grid-new">
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/3dprint.jpg" alt="3D принтиране" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>Как да започнеш с 3D принтиране</h2>
+          <p>Научи основите на 3D принтирането и как да подготвяш моделите си за успешен печат.</p>
+          <a href="post1.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/new year.webp" alt="Нова година" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>Честита Нова година 2026!</h2>
+          <p>Започваме новата година с вдъхновение и нови 3D модели!</p>
+          <a href="post2.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/3dprinters.jpg" alt="Бъдещето на 3D дизайна" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>Бъдещето на 3D дизайна</h2>
+          <p>Как биопластмасите и рециклираните филаменти правят 3D печата по-устойчив.</p>
+          <a href="post3.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/eco-materials.jpg" alt="Еко материали" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>🌱 Еко материали в 3D принтирането</h2>
+          <p>Как биопластмасите и рециклираните филаменти правят 3D печата природосъобразен.</p>
+          <a href="post4.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/ai-3d.jpg" alt="AI и 3D" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>🤖 Изкуственият интелект в 3D дизайна</h2>
+          <p>AI вече може да създава 3D модели по описание. Как това ще промени индустрията?</p>
+          <a href="post5.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/fashion3d.jpg" alt="3D мода" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>👗 3D принтиране в света на модата</h2>
+          <p>Дизайнерите използват 3D технологии, за да създават уникални дрехи и аксесоари.</p>
+          <a href="post6.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/furniture.jpg" alt="3D мебели" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>🪑 Мебели от бъдещето</h2>
+          <p>3D принтираните мебели променят начина, по който мислим за дизайн и производство.</p>
+          <a href="post7.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="images/education3d.jpg" alt="3D в образованието" onerror="this.src='images/logo_notext.png'">
+        </div>
+        <div class="blog-card-body">
+          <h2>🎓 3D принтиране в образованието</h2>
+          <p>Училища и университети използват 3D принтери за развиване на креативност.</p>
+          <a href="post8.html" class="btn">Прочети →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
-
-  <script type="module" src="script.js"></script>
-  <script type="module" src="dashboard.js"></script>
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
   <script type="module" src="check.js"></script>
 </body>
 

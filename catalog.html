@@ -13,7 +13,7 @@
   <header>
     <div class="logo">
       <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo">
         <span>DesignRealm</span>
       </a>
     </div>
@@ -28,16 +28,9 @@
       <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
-
     <button id="menu-toggle">☰</button>
-
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
-
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -48,164 +41,212 @@
     </div>
   </header>
 
-  <div class="search-container">
-    <div class="input-wrapper">
+  <!-- HERO -->
+  <div class="catalog-hero">
+    <span class="catalog-badge">🖨️ Разгледай колекцията</span>
+    <h1>Каталог с <span class="catalog-gradient">3D дизайни</span></h1>
+    <p>Разгледай нашите уникални модели, създадени с внимание към детайла.</p>
 
-      <div class="effect-layer outer-glow"></div>
-      <div class="effect-layer dark-layer"></div>
-      <div class="effect-layer bright-layer"></div>
-      <div class="effect-layer primary-border"></div>
-
-      <div class="button-border-effect"></div>
-
-      <input type="text" class="search-field" placeholder="Търси модел..." id="catalogSearch">
-
-      <div class="pink-hint"></div>
-      <div class="gradient-mask"></div>
-
-      <button class="search-button" id="searchBtn">
-        <svg viewBox="0 0 24 24" fill="none">
-          <circle cx="11" cy="11" r="8" stroke="#ffffff" stroke-width="2" />
-          <line x1="16.65" y1="16.65" x2="22" y2="22" stroke="#ffffff" stroke-width="2" />
-        </svg>
-      </button>
+    <!-- ТЪРСЕНЕ -->
+    <div class="catalog-search-wrap">
+      <div class="input-wrapper">
+        <div class="effect-layer outer-glow"></div>
+        <div class="effect-layer dark-layer"></div>
+        <div class="effect-layer bright-layer"></div>
+        <div class="effect-layer primary-border"></div>
+        <div class="button-border-effect"></div>
+        <input type="text" class="search-field" placeholder="Търси модел..." id="catalogSearch">
+        <div class="pink-hint"></div>
+        <div class="gradient-mask"></div>
+        <button class="search-button" id="searchBtn">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="#ffffff" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="22" y2="22" stroke="#ffffff" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
+  <!-- GRID -->
+  <main class="catalog-main">
+    <div class="grid" id="catalog-grid">
 
-
-
-  <main class="catalog">
-    <h2>Каталог с 3D дизайни</h2>
-    <p>Разгледай някои от нашите уникални модели, създадени с внимание към детайла.</p>
-
-    <div class="grid">
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-airplane.html">
-          <img src="images/airplane.jpg" alt="Самолет">
-          <h3>Самолет (Airplane Toy)</h3>
+          <img src="images/airplane.jpg" alt="Самолет" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Самолет (Airplane Toy)</h3>
+            <p>Прост модел на играчка самолет, лесен за принтиране.</p>
+          </div>
         </a>
-        <p>Прост модел на играчка самолет, лесен за принтиране.</p>
-        <a href="files/airplane.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/airplane.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-pineapple.html">
-          <img src="images/pineapple.png" alt="Свещник на форма на ананас">
-          <h3>Свещник на форма на ананас</h3>
+          <img src="images/pineapple.png" alt="Свещник ананас" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Свещник — Ананас</h3>
+            <p>Елегантен дизайн за домашна декорация.</p>
+          </div>
         </a>
-        <p>Елегантен дизайн за домашна декорация.</p>
-        <a href="files/pinneapple.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/pinneapple.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-2025.html">
-          <img src="images/chisla.png" alt="Числа">
-          <h3>Числата на 2025</h3>
+          <img src="images/chisla.png" alt="Числа 2025" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Числата на 2025</h3>
+            <p>Едно от най-популярните неща в 2025.</p>
+          </div>
         </a>
-        <p>Едно от най-популярните неща в 2025</p>
-        <a href="files/chisla.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/chisla.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-marioplanter.html">
-          <img src="images/marioplanter.jpg" alt="Mario плантатор">
-          <h3>Mario плантатор</h3>
+          <img src="images/marioplanter.jpg" alt="Mario плантатор" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Mario плантатор</h3>
+            <p>Плантатор за вашите цветя в тема на Mario.</p>
+          </div>
         </a>
-        <p>Плантатор за вашите цветя в тема на Mario.</p>
-        <a href="files/Mario_planter.zip" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/Mario_planter.zip" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-spider.html">
-          <img src="images/spider.webp" alt="Паяк">
-          <h3>Паяк</h3>
+          <img src="images/spider.webp" alt="Паяк" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Паяк</h3>
+            <p>Емблематично животно за пещерите.</p>
+          </div>
         </a>
-        <p>Ембелатично животно за пещерите</p>
-        <a href="files/spider.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/spider.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-wolf.html">
-          <img src="images/wolf.webp" alt="Вълк">
-          <h3>Вълк</h3>
+          <img src="images/wolf.webp" alt="Вълк" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Вълк</h3>
+            <p>Животно, емблематично за нощта.</p>
+          </div>
         </a>
-        <p>Животно, което е емблематично за нощта</p>
-        <a href="files/wolf.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/wolf.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-wire-holder.html">
-          <img src="images/wire_holder.webp" alt="Държач за кабели">
-          <h3>Държач за кабели</h3>
+          <img src="images/wire_holder.webp" alt="Държач за кабели" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Държач за кабели</h3>
+            <p>Държи кабелите наредени и чисти.</p>
+          </div>
         </a>
-        <p>Държи ти кабелите за тебе, ако са пръстнати.</p>
-        <a href="files/wire_holder.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/wire_holder.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-christmas-minion.html">
-          <img src="images/christmas_Minion.webp" alt="Коледен Минион">
-          <h3>Коледен Минион</h3>
+          <img src="images/christmas_Minion.webp" alt="Коледен Минион" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Коледен Минион</h3>
+            <p>Коледната версия на героя от "Despicable Me".</p>
+          </div>
         </a>
-        <p>Коледната версия на главения герой в "Despicable Me"</p>
-        <a href="files/christmas-minion.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/christmas-minion.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-christmas-bulba.html">
-          <img src="images/christmas-bulba.webp" alt="Коледен Бълбасаур">
-          <h3>Коледен Бълбасаур</h3>
+          <img src="images/christmas-bulba.webp" alt="Коледен Бълбасаур" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Коледен Бълбасаур</h3>
+            <p>Коледен Покемон за фенове.</p>
+          </div>
         </a>
-        <p>Коледен Покемон за любители на Покемон</p>
-        <a href="files/christmas-bulba.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/christmas-bulba.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-snowflake.html">
-          <img src="images/snowflake.jpg" alt="Снежинка">
-          <h3>Снежинка</h3>
+          <img src="images/snowflake.jpg" alt="Снежинка" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Снежинка</h3>
+            <p>Уникална шестоъгълна симетрия и дантелена структура.</p>
+          </div>
         </a>
-        <p>Кристално ледено образувание с уникална шестоъгълна симетрия и фина, дантелена структура.</p>
-        <a href="files/snowflake.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/snowflake.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-fingerboard.html">
-          <img src="images/fingerboard.webp" alt="Фингърборд">
-          <h3>Фингърборд</h3>
+          <img src="images/fingerboard.webp" alt="Фингърборд" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Фингърборд</h3>
+            <p>Умален скейтборд за трикове с пръсти.</p>
+          </div>
         </a>
-        <p>Умален скейтборд, управляван с пръсти, върху който се изпълняват трикове и маневри.</p>
-        <a href="files/fingerboard.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/fingerboard.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="catalog-card">
         <a href="model-penholder.html">
-          <img src="images/penholder.webp" alt="Поставка за химикалки">
-          <h3>Поставка за химикалки</h3>
+          <img src="images/penholder.webp" alt="Поставка за химикалки" onerror="this.src='images/logo_notext.png'">
+          <div class="catalog-card-body">
+            <h3>Поставка за химикалки</h3>
+            <p>Поставка за химикали и моливи.</p>
+          </div>
         </a>
-        <p>Поставка за твойте химикали и моливи</p>
-        <a href="files/pen_tool_holder.stl" download class="btn">Изтегли</a>
-        <button class="fav-btn">❤️ Добави в любими</button>
+        <div class="catalog-card-actions">
+          <a href="files/pen_tool_holder.stl" download class="btn catalog-btn-dl">⬇️ Изтегли</a>
+          <button class="fav-btn catalog-btn-fav">❤️</button>
+        </div>
       </div>
+
     </div>
   </main>
-
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
+
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
   <script type="module" src="script.js"></script>
@@ -214,7 +255,6 @@
   <script type="module" src="catalog.js"></script>
   <script type="module" src="firebase-favorites.js"></script>
   <script type="module" src="search.js"></script>
-
 </body>
 
 </html>
