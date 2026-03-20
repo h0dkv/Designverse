@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="favicon.png">
   <title>Какво е 3D принтиране | DesignRealm</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,7 +13,7 @@
   <header>
     <div class="logo">
       <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo">
         <span>DesignRealm</span>
       </a>
     </div>
@@ -28,14 +28,9 @@
       <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
     <button id="menu-toggle">☰</button>
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
-
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -44,92 +39,87 @@
         <button id="logout-btn" class="btn-logout">🚪 Изход</button>
       </div>
     </div>
-
-
   </header>
 
+  <div class="print-page">
 
-
-  <main class="article-page">
-
-    <section class="hero-3d">
-      <h1>Какво е 3D принтиране?</h1>
+    <!-- HERO -->
+    <div class="print-hero">
+      <span class="badge">🖨️ Научи повече</span>
+      <h1>Какво е <span>3D принтиране?</span></h1>
       <p>Технология, която превръща дигиталните модели в реални физически обекти — слой по слой.</p>
-    </section>
+    </div>
 
-    <section class="content-section">
-      <h2>Как работи 3D принтирането?</h2>
-      <p>
-        3D принтирането е процес, при който даден дигитален модел (например .stl файл) се превръща
-        във физически обект чрез добавяне на материал слой по слой. За разлика от традиционното
-        производство, което премахва материал, 3D принтирането изгражда продукта от нулата.
-      </p>
-    </section>
+    <!-- КАК РАБОТИ -->
+    <div class="print-card" style="animation-delay:0.1s">
+      <h2>⚙️ Как работи 3D принтирането?</h2>
+      <p>3D принтирането е процес, при който даден дигитален модел (например .stl файл) се превръща във физически обект чрез добавяне на материал слой по слой. За разлика от традиционното производство, което премахва материал, 3D принтирането изгражда продукта от нулата.</p>
+    </div>
 
-    <h2>Видео демонстрация</h2>
-
-    <div class="video-container">
+    <!-- ВИДЕО -->
+    <div class="video-card">
+      <h2>🎬 Видео демонстрация</h2>
       <video controls>
         <source src="videos/3dprint.mp4" type="video/mp4">
-        </vide </div>
+        Браузърът ти не поддържа видео.
+      </video>
+    </div>
 
-        <section class="content-section">
-          <h2>Най-популярните методи за 3D принтиране</h2>
+    <!-- МЕТОДИ -->
+    <div class="print-card" style="animation-delay:0.2s">
+      <h2>🔬 Най-популярните методи</h2>
+      <div class="methods-grid">
+        <div class="method-item">
+          <h3>🧵 FDM</h3>
+          <p>Fused Deposition Modeling — най-честа технология. Разтопена пластмаса се нанася слой по слой.</p>
+        </div>
+        <div class="method-item">
+          <h3>💎 SLA</h3>
+          <p>Stereolithography — течна смола се втвърдява чрез UV лазер за висока детайлност.</p>
+        </div>
+        <div class="method-item">
+          <h3>🏭 SLS</h3>
+          <p>Selective Laser Sintering — лазер синтерова прах от пластмаса или метал за индустриални цели.</p>
+        </div>
+      </div>
+    </div>
 
-          <div class="info-box">
-            <h3>🧵 FDM (Fused Deposition Modeling)</h3>
-            <p>Най-често срещаната технология. Разтопена пластмаса се поставя слой по слой.</p>
-          </div>
+    <!-- КАКВО МОЖЕМ -->
+    <div class="print-card" style="animation-delay:0.3s">
+      <h2>🎨 Какво можем да създадем?</h2>
+      <ul class="benefits-list">
+        <li>📦 Прототипи и тестови модели</li>
+        <li>🏠 Декорации и интериор</li>
+        <li>🧩 Играчки и фигурки</li>
+        <li>⚙️ Механични части</li>
+        <li>🎁 Персонализирани подаръци</li>
+        <li>🔧 Инструменти и аксесоари</li>
+      </ul>
+    </div>
 
-          <div class="info-box">
-            <h3>💎 SLA (Stereolithography)</h3>
-            <p>Използва течна смола, която се втвърдява чрез UV лазер за много висока детайлност.</p>
-          </div>
+    <!-- ЗАЩО -->
+    <div class="print-card" style="animation-delay:0.35s">
+      <h2>🚀 Защо е толкова популярно?</h2>
+      <p>Защото позволява на всеки да превърне идеите си в реалност — бързо, евтино и без скъпи машини. Благодарение на достъпните 3D принтери и богатите онлайн каталози, създаването на модел е по-лесно от всякога.</p>
+    </div>
 
-          <div class="info-box">
-            <h3>🔬 SLS (Selective Laser Sintering)</h3>
-            <p>Лазер синтерова прах от пластмаса или метал — използва се за индустриални цели.</p>
-          </div>
-        </section>
+    <!-- CTA -->
+    <div class="print-cta">
+      <h2>🖨️ Искаш да започнеш да принтираш?</h2>
+      <p>Разгледай нашия каталог от готови .stl файлове и избери своя първи модел!</p>
+      <a href="catalog.html" class="btn">→ Към каталога</a>
+    </div>
 
-        <section class="content-section">
-          <h2>Какво можем да създадем?</h2>
-
-          <ul class="list-benefits">
-            <li>📦 Прототипи и тестови модели</li>
-            <li>🏠 Декорации и интериорни аксесоари</li>
-            <li>🧩 Играчки, пъзели и фигурки</li>
-            <li>⚙ Механични части и инструменти</li>
-            <li>🎁 Персонализирани подаръци</li>
-          </ul>
-        </section>
-
-        <section class="content-section">
-          <h2>Защо 3D принтирането е толкова популярно?</h2>
-          <p>
-            Защото позволява на всеки да превърне идеите си в реалност — бързо, евтино и без скъпи машини.
-            Благодарение на достъпните 3D принтери и богатите онлайн каталози, създаването на модел е по-лесно от
-            всякога.
-          </p>
-        </section>
-
-        <section class="content-section highlighted">
-          <h2>Искаш да започнеш да принтираш?</h2>
-          <p>Разгледай нашия каталог от готови .stl файлове и избери своя първи модел!</p>
-
-          <a href="catalog.html" class="btn">→ Към каталога</a>
-        </section>
-
-  </main>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
-  <script type="module" src="script.js"></script>
-  <script type="module" src="dashboard.js"></script>
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
   <script type="module" src="check.js"></script>
 </body>
 
