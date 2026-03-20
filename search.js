@@ -1,40 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ===================== Мобилно меню =====================
-    const menuBtn = document.getElementById("menu-toggle");
-    const nav = document.getElementById("nav") || document.querySelector("nav");
-
-    if (menuBtn && nav) {
-        menuBtn.addEventListener("click", () => {
-            nav.classList.toggle("show");
-            menuBtn.textContent = nav.classList.contains("show") ? "✖" : "☰";
-        });
-
-        const links = nav.querySelectorAll ? nav.querySelectorAll("a") : [];
-        links.forEach((link) => {
-            link.addEventListener("click", () => {
-                nav.classList.remove("show");
-                menuBtn.textContent = "☰";
-            });
+    // ===================== ФИЛТРИРАНЕ =====================
+    function filterCards(term) {
+        const q = term.toLowerCase().trim();
+        document.querySelectorAll(".catalog-card, .card").forEach((card) => {
+            const title = card.querySelector("h3")?.textContent?.toLowerCase() || "";
+            card.style.display = title.includes(q) ? "" : "none";
         });
     }
 
-    // theme toggle removed (button and countdown were deleted)
-
-    // ===================== Обикновена търсачка (#catalogSearch) =====================
+    // Обикновена търсачка (#catalogSearch)
     const search = document.getElementById("catalogSearch");
     if (search) {
-        search.addEventListener("input", (e) => {
-            const term = e.target.value.toLowerCase();
-            document.querySelectorAll(".card").forEach((card) => {
-                const title =
-                    card.querySelector("h3")?.textContent?.toLowerCase() || "";
-                card.style.display = title.includes(term) ? "" : "none";
-            });
-        });
+        search.addEventListener("input", (e) => filterCards(e.target.value));
     }
 
-    // ===================== Въртяща се търсачка (input-wrapper) =====================
+    // ===================== ВЪРТЯЩА СЕ ТЪРСАЧКА =====================
     const inputWrapper = document.querySelector(".input-wrapper");
     const searchField = document.querySelector(".search-field");
     const searchButton = document.querySelector(".search-button");
@@ -50,33 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const diff = targetDuration - currentDuration;
             if (Math.abs(diff) > 10) {
                 currentDuration += diff * 0.015;
-                inputWrapper.style.setProperty(
-                    "--spin-duration",
-                    `${currentDuration}ms`
-                );
+                inputWrapper.style.setProperty("--spin-duration", `${currentDuration}ms`);
                 animationFrame = requestAnimationFrame(smoothTransition);
             } else {
                 currentDuration = targetDuration;
-                inputWrapper.style.setProperty(
-                    "--spin-duration",
-                    `${currentDuration}ms`
-                );
+                inputWrapper.style.setProperty("--spin-duration", `${currentDuration}ms`);
                 animationFrame = null;
             }
         }
 
         searchField.addEventListener("input", () => {
+            filterCards(searchField.value);
+
             if (!isTyping && !isSearching) {
                 isTyping = true;
                 targetDuration = 60000;
                 if (!animationFrame) smoothTransition();
             }
-            // Добавяне на филтриране
-            const term = searchField.value.toLowerCase();
-            document.querySelectorAll(".card").forEach((card) => {
-                const title = card.querySelector("h3")?.textContent?.toLowerCase() || "";
-                card.style.display = title.includes(term) ? "" : "none";
-            });
         });
 
         searchField.addEventListener("focus", () => {
@@ -85,10 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (animationFrame) cancelAnimationFrame(animationFrame);
                 animationFrame = null;
                 currentDuration = 4000;
-                inputWrapper.style.setProperty(
-                    "--spin-duration",
-                    `${currentDuration}ms`
-                );
+                inputWrapper.style.setProperty("--spin-duration", `${currentDuration}ms`);
             }
         });
 
