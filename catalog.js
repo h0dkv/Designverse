@@ -31,7 +31,7 @@ async function loadApprovedModels() {
       card.innerHTML = `
         <img src="${img}" alt="${title}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:0.8rem;" onerror="this.src='images/logo_notext.png'">
         <h3>${title}</h3>
-        ${description ? `<p style="color:rgba(255,255,255,0.65);font-size:0.9rem;margin-bottom:0.8rem;">${description}</p>` : ""}
+        ${description ? `<p style="color:#555;font-size:0.9rem;margin-bottom:0.8rem;">${description}</p>` : ""}
         <a href="${file}" download class="btn" style="margin-bottom:0.5rem;">⬇️ Изтегли</a>
         <button class="fav-btn">❤️ Добави в любими</button>
       `;
