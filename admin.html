@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="bg">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +7,11 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm">
-        <span>DesignRealm</span>
-      </a>
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm"><span>DesignRealm</span></a>
     </div>
-
     <nav id="nav">
       <a href="admin.html" class="active">Админ панел</a>
       <a href="manage-users.html">Потребители</a>
@@ -27,9 +21,7 @@
       <a href="index.html">Начало</a>
       <a id="login-link" href="login.html">Вход</a>
     </nav>
-
     <button id="menu-toggle">☰</button>
-
     <div id="dashboard" class="dashboard" style="display:none;">
       <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
@@ -42,31 +34,41 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-text">
-        <h1>🛠️ Админ панел</h1>
-        <p class="subtitle">Бърз достъп до управление на потребители, модели и статистики.</p>
-      </div>
-    </section>
+  <div class="admin-page">
+    <div class="admin-hero">
+      <span class="admin-badge">🔐 Административна зона</span>
+      <h1>Админ <span>панел</span></h1>
+      <p>Бърз достъп до управление на потребители, модели и статистики.</p>
+    </div>
+    <div class="admin-grid">
+      <a href="manage-users.html" class="admin-card">
+        <span class="admin-icon">👥</span>
+        <h3>Потребители</h3>
+        <p>Управление на акаунти и роли</p>
+      </a>
+      <a href="upload.html" class="admin-card">
+        <span class="admin-icon">⬆️</span>
+        <h3>Качи модел</h3>
+        <p>Добави нов 3D модел</p>
+      </a>
+      <a href="pending-models.html" class="admin-card">
+        <span class="admin-icon">✅</span>
+        <h3>Одобри модели</h3>
+        <p>Прегледай чакащите модели</p>
+      </a>
+      <a href="admin-stats.html" class="admin-card">
+        <span class="admin-icon">📊</span>
+        <h3>Статистики</h3>
+        <p>Преглед на данните</p>
+      </a>
+    </div>
+  </div>
 
-    <section class="grid" style="margin-top:1.5rem;max-width:1000px;margin-left:auto;margin-right:auto;padding:0 1.5rem;">
-      <a href="manage-users.html" class="card btn">👥 Управление на потребители</a>
-      <a href="upload.html" class="card btn">⬆️ Качи модел</a>
-      <a href="pending-models.html" class="card btn">✅ Одобри модели</a>
-      <a href="admin-stats.html" class="card btn">📊 Статистики</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 DesignRealm. Всички права запазени.</p>
-  </footer>
-
+  <footer><p>© 2025 DesignRealm. Всички права запазени.</p></footer>
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="admin.js"></script>
 </body>
-
 </html>

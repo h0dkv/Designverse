@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="bg">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Управление на потребители | DesignRealm</title>
+  <title>Потребители | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm">
-        <span>DesignRealm</span>
-      </a>
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm"><span>DesignRealm</span></a>
     </div>
     <nav id="nav">
       <a href="admin.html">Админ панел</a>
@@ -24,6 +19,7 @@
       <a href="admin-stats.html">Статистики</a>
       <a href="pending-models.html">Одобряване</a>
       <a href="index.html">Начало</a>
+      <a id="login-link" href="login.html">Вход</a>
     </nav>
     <button id="menu-toggle">☰</button>
     <div id="dashboard" class="dashboard" style="display:none;">
@@ -38,32 +34,27 @@
     </div>
   </header>
 
-  <main style="max-width:1100px;margin:1.5rem auto;padding:0 1rem;">
-    <section class="hero">
-      <div class="hero-text">
-        <h1>👥 Управление на потребители</h1>
-        <p class="subtitle">Търсене, филтриране и бързи действия върху акаунти.</p>
-      </div>
-    </section>
+  <div class="users-page">
+    <div class="users-hero">
+      <span class="users-badge">👥 Управление</span>
+      <h1>Потребители на <span>платформата</span></h1>
+      <p>Търсене, филтриране и бързи действия върху акаунти.</p>
+    </div>
 
-    <div style="display:flex;gap:1rem;align-items:center;margin:1rem 0;flex-wrap:wrap;">
-      <input class="search-field" id="userSearch" placeholder="Търси по имейл..." style="flex:1;max-width:400px;">
+    <div class="users-toolbar">
+      <input class="search-field" id="userSearch" placeholder="Търси по имейл или име...">
       <button id="refreshUsers" class="btn">🔄 Обнови</button>
       <span id="users-count" class="small"></span>
     </div>
 
     <div id="users-list" class="grid"></div>
-  </main>
+  </div>
 
-  <footer>
-    <p>© 2025 DesignRealm. Всички права запазени.</p>
-  </footer>
-
+  <footer><p>© 2025 DesignRealm. Всички права запазени.</p></footer>
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="manage-users.js"></script>
 </body>
-
 </html>

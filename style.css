@@ -5324,4 +5324,241 @@ body.admin #admin-panel {
 .btn-sm.primary {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #fff;
-} 
+}
+
+.admin-page {
+  position: relative;
+}
+
+.admin-page::before {
+  content: '';
+  position: fixed;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(168, 102, 131, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.admin-page::after {
+  content: '';
+  position: fixed;
+  bottom: -80px;
+  left: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(137, 207, 240, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.admin-hero,
+.admin-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 193, 69, 0.15);
+  border: 1px solid rgba(255, 193, 69, 0.35);
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.admin-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.8rem;
+}
+
+.admin-hero h1 span {
+  background: linear-gradient(135deg, var(--accent), #ff9de2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.admin-hero p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.admin-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.5s ease-out both;
+  display: block;
+}
+
+.admin-card:nth-child(1) {
+  animation-delay: .1s
+}
+
+.admin-card:nth-child(2) {
+  animation-delay: .2s
+}
+
+.admin-card:nth-child(3) {
+  animation-delay: .3s
+}
+
+.admin-card:nth-child(4) {
+  animation-delay: .4s
+}
+
+.admin-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.admin-card .admin-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.admin-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.admin-card p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0.4rem 0 0;
+}
+
+.users-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.users-hero {
+  text-align: center;
+  padding: 4rem 2rem 2.5rem;
+}
+
+.users-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 193, 69, 0.15);
+  border: 1px solid rgba(255, 193, 69, 0.35);
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.users-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.8rem;
+}
+
+.users-hero h1 span {
+  background: linear-gradient(135deg, var(--accent), #ff9de2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.users-hero p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.users-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.users-toolbar input {
+  flex: 1;
+  max-width: 400px;
+}
+
+.pending-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.pending-hero {
+  text-align: center;
+  padding: 4rem 2rem 2.5rem;
+}
+
+.pending-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 193, 69, 0.15);
+  border: 1px solid rgba(255, 193, 69, 0.35);
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.pending-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.8rem;
+}
+
+.pending-hero h1 span {
+  background: linear-gradient(135deg, var(--accent), #ff9de2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pending-hero p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.pending-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pending-toolbar input {
+  max-width: 320px;
+}
