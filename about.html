@@ -13,7 +13,7 @@
   <header>
     <div class="logo">
       <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+        <img src="images/logo_notext.png" alt="DesignRealm Logo">
         <span>DesignRealm</span>
       </a>
     </div>
@@ -22,22 +22,15 @@
       <a href="3dprint.html">3D принтирането</a>
       <a href="catalog.html">Каталог</a>
       <a href="blog.html">Блог</a>
-      <a href="about.html">За нас</a>
+      <a href="about.html" class="active">За нас</a>
       <a href="contact.html">Контакти</a>
       <a href="favorites.html">Любими</a>
-      <a id="login-link" href="login.html" class="active">Вход</a>
+      <a id="login-link" href="login.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
-
     <button id="menu-toggle">☰</button>
-
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
-
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -46,56 +39,72 @@
         <button id="logout-btn" class="btn-logout">🚪 Изход</button>
       </div>
     </div>
-
-
   </header>
 
+  <div class="about-page">
 
+    <!-- HERO -->
+    <div class="about-hero">
+      <span class="badge">👋 Запознай се с нас</span>
+      <h1>Ние сме <span>DesignRealm</span></h1>
+      <p>Платформа, която обединява креативността и технологиите за да помогне на младите хора да изразяват себе си чрез 3D моделиране.</p>
+    </div>
 
-  <main class="about">
-    <section class="intro">
-      <h1>За нас</h1>
-      <p>DesignRealm е платформа, която обединява креативността и технологиите. Създадохме я с цел да помогнем на
-        младите хора да изразяват своята креативност чрез 3D моделиране и дизайнерски инструменти. Напълно безплатна е
-        за българските ученици
-        и студенти, които се занимават с 3D дизайн и принтиране.
-      </p>
-    </section>
+    <!-- STATS -->
+    <div class="about-stats">
+      <div class="about-stat">
+        <span class="num">Множество</span>
+        <span class="lbl">3D Модела</span>
+      </div>
+      <div class="about-stat">
+        <span class="num">20+</span>
+        <span class="lbl">Потребители</span>
+      </div>
+      <div class="about-stat">
+        <span class="num">2025</span>
+        <span class="lbl">Година на създаване</span>
+      </div>
+    </div>
 
-    <section class="mission">
-      <h2>Нашата мисия</h2>
-      <p>Мисията на този проект е да покажем, че и с малко инструменти и знания, може да се създаде нещо подпомагащо за
-        креативността и иновациите.
-        Колкото и да е трудно, ние вярваме, че всеки човек може да се научи да създава 3D модели и да ги превърне в
-        реални обекти чрез 3D принтиране.
-      </p>
-    </section>
+    <!-- ЗА НАС -->
+    <div class="about-card">
+      <h2>🌐 Кои сме ние</h2>
+      <p>DesignRealm е платформа, която обединява креативността и технологиите. Създадохме я с цел да помогнем на младите хора да изразяват своята креативност чрез 3D моделиране и дизайнерски инструменти. Напълно безплатна е за българските ученици и студенти, които се занимават с 3D дизайн и принтиране.</p>
+    </div>
 
-    <section class="team">
-      <h2>Нашият екип</h2>
-      <section class="team-grid">
-        <div class="member">
-          <img src="images/hrischo.jpg" alt="Христиан">
+    <!-- МИСИЯ -->
+    <div class="about-card">
+      <h2>🎯 Нашата мисия</h2>
+      <p>Мисията на този проект е да покажем, че и с малко инструменти и знания, може да се създаде нещо подпомагащо за креативността и иновациите. Колкото и да е трудно, ние вярваме, че всеки човек може да се научи да създава 3D модели и да ги превърне в реални обекти чрез 3D принтиране.</p>
+    </div>
+
+    <!-- ЕКИП -->
+    <div class="about-card">
+      <h2>👥 Нашият екип</h2>
+      <div class="team-grid-new">
+        <div class="member-card">
+          <img src="images/hrischo.jpg" alt="Христиан" class="avatar" onerror="this.style.display='none'">
           <h3>Христиан Денков</h3>
-          <p>Програмист</p>
+          <span class="role">💻 Програмист</span>
         </div>
-        <div class="member">
-          <img src="images/stoicho.png" alt="Стоян">
+        <div class="member-card">
+          <img src="images/stoicho.png" alt="Стоян" class="avatar" onerror="this.style.display='none'">
           <h3>Стоян Шойлев</h3>
-          <p>Графичен дизайнер</p>
+          <span class="role">🎨 Графичен дизайнер</span>
         </div>
-      </section>
-    </section>
-  </main>
+      </div>
+    </div>
+
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
-  <script type="module" src="script.js"></script>
-  <script type="module" src="dashboard.js"></script>
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
   <script type="module" src="check.js"></script>
 </body>
 
