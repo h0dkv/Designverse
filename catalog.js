@@ -29,8 +29,8 @@ async function loadApprovedModels() {
       card.innerHTML = `
         <a href="model-view.html?id=${d.id}" style="text-decoration:none;color:inherit;">
           <img src="${img}" alt="${title}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:0.8rem;" onerror="this.src='images/logo_notext.png'">
-          <h3 style="color:#fff;margin:0 0 0.5rem;">${title}</h3>
-          ${description ? `<p style="color:rgba(255,255,255,0.6);font-size:0.9rem;margin-bottom:0.8rem;">${description}</p>` : ""}
+          <h3 style="color:#000;margin:0 0 0.5rem;">${title}</h3>
+          ${description ? `<p style="color:#555;font-size:0.9rem;margin-bottom:0.8rem;">${description}</p>` : ""}
         </a>
         <a href="${file}" download class="btn" style="margin-bottom:0.5rem;display:block;">⬇️ Изтегли</a>
         <button class="fav-btn">❤️ Добави в любими</button>
