@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ].filter(Boolean);
 
     const githubProvider = new GithubAuthProvider();
+    githubProvider.addScope('read:user');
 
     githubButtons.forEach(btn => {
         btn.addEventListener('click', async (e) => {
@@ -175,16 +176,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 await signInWithPopup(auth, githubProvider);
                 window.location.href = 'profile.html';
             } catch (err) {
+                console.error('GitHub sign-in failed', err);
                 if (err.code === 'auth/popup-closed-by-user') {
                     showToast('Затворихте прозореца. Опитайте отново.', 'error');
+                } else if (
+                    err.code === 'auth/popup-blocked' ||
+                    err.code === 'auth/cancelled-popup-request' ||
+                    err.code === 'auth/operation-not-supported-in-this-environment'
+                ) {
+                    try {
+                        await signInWithRedirect(auth, githubProvider);
+                    } catch (rerr) {
+                        console.error('GitHub redirect fallback failed', rerr);
+                        showToast('Грешка при пренасочване за вход с GitHub.', 'error');
+                    }
                 } else if (err.code === 'auth/account-exists-with-different-credential') {
                     showToast('Вече имате акаунт с този имейл чрез друг доставчик.', 'error');
                 } else {
-                    showToast('Неуспешен вход с GitHub.', 'error');
+                    showToast('Неуспешен вход с GitHub. Опитайте отново.', 'error');
                 }
             } finally {
                 btn.disabled = false;
             }
         });
-    }); 
+    });
+
 });

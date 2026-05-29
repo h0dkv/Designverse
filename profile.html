@@ -189,6 +189,100 @@
       border-color: rgba(255, 255, 255, 0.4);
     }
 
+    .services-section {
+      margin-top: 1.8rem;
+      animation: fadeInUp 0.6s ease-out 0.5s both;
+    }
+
+    .services-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .services-section-header h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+
+    .services-section-header p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 540px;
+      font-size: 0.95rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      border-radius: 22px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .service-card h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .service-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .service-card ul li {
+      margin-bottom: 0.45rem;
+    }
+
+    .service-card a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #a86683, #ffc145);
+      color: #111;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      margin-top: auto;
+    }
+
+    .service-card a:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    @media (max-width: 940px) {
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (max-width: 640px) {
       .profile-grid {
         grid-template-columns: 1fr;
@@ -324,6 +418,51 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- УСЛУГИ -->
+    <div class="services-section">
+      <div class="services-section-header">
+        <div>
+          <h3>Услуги за 3D принтиране</h3>
+          <p>Поръчайте професионално 3D принтиране на прототипи, персонализирани модели или малки серии директно от
+            вашия профил.</p>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h4>Прототипиране и дизайн</h4>
+          <p>Бързо превръщане на вашите идеи в готови 3D модели с прецизно принтиране и фино довършване.</p>
+          <ul>
+            <li>Консултация за материал и качество</li>
+            <li>Стандартни и детайлни прототипи</li>
+            <li>Поддръжка за STL/OBJ файлове</li>
+          </ul>
+          <a href="contact.html">Запитване</a>
+        </div>
+        <div class="service-card">
+          <h4>Персонализирани подаръци</h4>
+          <p>Идеални подаръци и сувенири, изработени по мярка за специални поводи, ученици и хоби проекти.</p>
+          <ul>
+            <li>Персонализирани фигурки</li>
+            <li>Маркери, стойки и декорации</li>
+            <li>Изпълнение в различни цветове</li>
+          </ul>
+          <a href="contact.html">Поръчай</a>
+        </div>
+        <div class="service-card">
+          <h4>Малки серии и функционални части</h4>
+          <p>Производство на ограничени серии за училищни проекти или бизнес нужди с внимание към здравината и финеса.
+          </p>
+          <ul>
+            <li>Цялостна подготовка на файлове</li>
+            <li>Окота и пост-обработка</li>
+            <li>Доставка и вземане от място</li>
+          </ul>
+          <a href="contact.html">Свържи се</a>
+        </div>
+      </div>
     </div>
 
     <!-- ACTIONS -->
