@@ -296,6 +296,190 @@
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ORDER MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      border-radius: 28px;
+      width: 100%;
+      max-width: 580px;
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      animation: slideUp 0.4s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .modal-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      color: #fff;
+      font-size: 0.92rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(168, 102, 131, 0.55);
+      box-shadow: 0 0 0 3px rgba(168, 102, 131, 0.12);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        width: 90%;
+        padding: 1.5rem;
+      }
+    }
+
+    .modal-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #a86683, #ffc145);
+      color: #111;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.95rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 18px rgba(168, 102, 131, 0.3);
+      margin-top: 1rem;
+    }
+
+    .modal-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(168, 102, 131, 0.45);
+      filter: brightness(1.08);
+    }
+
+    .modal-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -439,7 +623,7 @@
             <li>Стандартни и детайлни прототипи</li>
             <li>Поддръжка за STL/OBJ файлове</li>
           </ul>
-          <a href="contact.html">Запитване</a>
+          <button class="service-card a order-btn" data-service="Прототипиране и дизайн">Запитване</button>
         </div>
         <div class="service-card">
           <h4>Персонализирани подаръци</h4>
@@ -449,7 +633,7 @@
             <li>Маркери, стойки и декорации</li>
             <li>Изпълнение в различни цветове</li>
           </ul>
-          <a href="contact.html">Поръчай</a>
+          <button class="service-card a order-btn" data-service="Персонализирани подаръци">Поръчай</button>
         </div>
         <div class="service-card">
           <h4>Малки серии и функционални части</h4>
@@ -460,7 +644,7 @@
             <li>Окота и пост-обработка</li>
             <li>Доставка и вземане от място</li>
           </ul>
-          <a href="contact.html">Свържи се</a>
+          <button class="service-card a order-btn" data-service="Малки серии">Свържи се</button>
         </div>
       </div>
     </div>
@@ -474,15 +658,76 @@
 
   </div>
 
+  <!-- ORDER MODAL -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Поръчай услугата</h2>
+        <button class="modal-close"
+          onclick="document.getElementById('orderModal').classList.remove('active');">✕</button>
+      </div>
+
+      <form id="orderForm">
+        <div class="form-group">
+          <label>Услуга</label>
+          <input type="text" id="serviceType" readonly>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Име</label>
+            <input type="text" id="orderName" placeholder="Вашето име" required>
+          </div>
+          <div class="form-group">
+            <label>Имейл</label>
+            <input type="email" id="orderEmail" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Телефон</label>
+            <input type="tel" id="orderPhone" placeholder="+359 ..." required>
+          </div>
+          <div class="form-group">
+            <label>Материал</label>
+            <select id="orderMaterial" required>
+              <option value="">Изберете материал</option>
+              <option value="PLA">PLA (Стандартен)</option>
+              <option value="PETG">PETG (Издръжлив)</option>
+              <option value="ABS">ABS (Гъвкав)</option>
+              <option value="TPU">TPU (Еластичен)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Описание на проекта</label>
+          <textarea id="orderDescription" placeholder="Опишете вашия проект, размер, нужди и други детайли..."
+            required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Приложи файл (STL/OBJ)</label>
+          <input type="file" id="orderFile" accept=".stl,.obj,.zip">
+        </div>
+
+        <button type="submit" class="modal-submit">Изпрати поръчка</button>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
 
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
+  <script type="module" src="theme.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="profile.js"></script>
+  <script type="module" src="profile-services.js"></script>
   <script type="module" src="monitor.js"></script>
   <script type="module" src="notifications.js"></script>
 </body>

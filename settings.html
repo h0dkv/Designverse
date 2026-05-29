@@ -199,6 +199,25 @@
     </div>
 
     <div class="set-card">
+      <h3>🎨 Тема и цветни схеми</h3>
+
+      <div class="set-field">
+        <label>Избери тема</label>
+        <div class="theme-options">
+          <button type="button" class="theme-option-btn" data-theme="light" id="themeLight">☀️ Светла</button>
+          <button type="button" class="theme-option-btn" data-theme="dark" id="themeDark">🌙 Тьмна</button>
+        </div>
+      </div>
+
+      <div class="set-field">
+        <label>Избери акцентен цвят</label>
+        <div class="color-picker-group" id="colorPickerGroup"></div>
+      </div>
+
+      <p class="set-hint">Твоите предпочитания ще бъдат запазени в профила и синхронизирани на всички устройства.</p>
+    </div>
+
+    <div class="set-card">
       <h3>👤 Лична информация</h3>
       <form id="settings-form">
         <div class="set-field">
@@ -223,11 +242,12 @@
   </footer>
 
   <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="theme.js"></script>
   <script type="module" src="auth.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="check.js"></script>
-  <script type="module" src="profile.js"></script>
+  <script type="module" src="settings-ui.js"></script>
   <script type="module" src="notifications.js"></script>
   <script type="module">
     import { auth, db } from './firebase-init.js';
